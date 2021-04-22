@@ -2,6 +2,7 @@ import PyQt5
 import PyQt5.QtWidgets
 import sys
 
+
 # класс главного окна
 class Window(PyQt5.QtWidgets.QMainWindow):
     # описание главного окна
@@ -31,19 +32,22 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.app_window_main_btn2.setText('EXIT')
         self.app_window_main_btn2.move(250, 250)
         self.app_window_main_btn2.setFixedWidth(50)
-        self.app_window_main_btn2.clicked.connect(self.click_on_btn_exit)
+        self.app_window_main_btn2.clicked.connect(self.click_on_btn2_exit)
+
 
     # событие нажатие на кнопку EXIT
-    def click_on_btn_exit(self):
+    def click_on_btn2_exit(self):
         exit()
+
 
     # событие нажатие на кнопку OK
     def change_label_text(self):
-        x = input('дай текст для надписи : ')
+        x = input('Введите новый текст для надписи на форме : ')
         self.app_window_main_text.setText(x)
         self.app_window_main_text.move(70, 70)
         self.app_window_main_text.adjustSize()
         self.setGeometry(300+100, 300+100, 400+100, 300+100)
+
 
 # создание основного окна
 def main_app():
