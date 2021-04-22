@@ -34,11 +34,9 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.app_window_main_btn2.setFixedWidth(50)
         self.app_window_main_btn2.clicked.connect(self.click_on_btn2_exit)
 
-
     # событие нажатие на кнопку EXIT
     def click_on_btn2_exit(self):
         exit()
-
 
     # событие нажатие на кнопку OK
     def change_label_text(self):
