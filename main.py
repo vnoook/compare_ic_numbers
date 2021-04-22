@@ -34,9 +34,8 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.app_window_main_btn2.clicked.connect(self.click_on_btn_exit)
 
     # событие нажатие на кнопку EXIT
-    def click_on_btn_exit(selfself):
+    def click_on_btn_exit(self):
         exit()
-        pass
 
     # событие нажатие на кнопку OK
     def change_label_text(self):
@@ -58,4 +57,3 @@ def main_app():
 # запуск основного окна
 if __name__ == '__main__':
     main_app()
-
