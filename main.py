@@ -40,8 +40,8 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
     # событие нажатие на кнопку OK
     def change_label_text(self):
-        newText = input('Введите новый текст для надписи на форме : ')
-        self.app_window_main_text.setText(newText)
+        new_text = input('Введите новый текст для надписи на форме : ')
+        self.app_window_main_text.setText(new_text)
         self.app_window_main_text.move(70, 70)
         self.app_window_main_text.adjustSize()
         self.setGeometry(300+100, 300+100, 400+100, 300+100)
