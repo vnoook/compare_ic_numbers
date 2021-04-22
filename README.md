@@ -1,3 +1,3 @@
-# qt5_first_gui
+# QT5 first gui
 
-My first qt5 GUI
+My first QT5 GUI programm
