@@ -106,14 +106,22 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
     # событие нажатие на кнопку выбора файла
     def select_file(self):
-        print(f'выбрать файл с кнопки {self.sender().objectName()}')
-        file_name = PyQt5.QtWidgets.QFileDialog.getOpenFileName(self,
+        pushed_button = self.sender().objectName()
+        print(f'выбрать файл с кнопки {pushed_button}\n')
+
+        data_of_open_file_name = PyQt5.QtWidgets.QFileDialog.getOpenFileName(self,
                                                                 'Выберите файл Excel версии старше 2007 года (.XLSX)',
                                                                 r'd:\downloads\2020_09_29\1em\1 em 09-2020\'',
                                                                 'Файлы Excel xlsx (*.xlsx)'
                                                                 )
-        print(f'{file_name[0] = }')
+        file_name = data_of_open_file_name[0]
 
+        if pushed_button == 'toolButton_select_file_IC':
+            pass
+        elif pushed_button == 'toolButton_select_file_GASPS':
+            pass
+        else:
+            pass
 
 
     # событие нажатие на кнопку заполнения файла из ИЦ
