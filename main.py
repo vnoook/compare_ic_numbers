@@ -1,3 +1,4 @@
+
 import PyQt5
 import PyQt5.QtWidgets
 import sys
@@ -17,8 +18,8 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # label_select_file_IC 'Выберите файл ИЦ'
         self.label_select_file_IC = PyQt5.QtWidgets.QLabel(self)
         self.label_select_file_IC.setObjectName('label_select_file_IC')
-        self.label_select_file_IC.setText('Выберите файл ИЦ')
-        self.label_select_file_IC.setGeometry(PyQt5.QtCore.QRect(10, 10, 170, 30))
+        self.label_select_file_IC.setText('1. Выберите файл ИЦ')
+        self.label_select_file_IC.setGeometry(PyQt5.QtCore.QRect(10, 10, 150, 40))
         font = PyQt5.QtGui.QFont()
         font.setPointSize(12)
         self.label_select_file_IC.setFont(font)
@@ -27,8 +28,8 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # label_select_file_GASPS 'Выберите файл ГАСПС'
         self.label_select_file_GASPS = PyQt5.QtWidgets.QLabel(self)
         self.label_select_file_GASPS.setObjectName('label_select_file_GASPS')
-        self.label_select_file_GASPS.setText('Выберите файл ГАС ПС')
-        self.label_select_file_GASPS.setGeometry(PyQt5.QtCore.QRect(10, 70, 210, 40))
+        self.label_select_file_GASPS.setText('2. Выберите файл ГАС ПС')
+        self.label_select_file_GASPS.setGeometry(PyQt5.QtCore.QRect(10, 80, 150, 40))
         font = PyQt5.QtGui.QFont()
         font.setPointSize(12)
         self.label_select_file_GASPS.setFont(font)
@@ -37,8 +38,8 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # label_path_file_IC
         self.label_path_file_IC = PyQt5.QtWidgets.QLabel(self)
         self.label_path_file_IC.setObjectName('label_path_file_IC')
-        self.label_path_file_IC.setText('label_select_file_GASPS')
-        self.label_path_file_IC.setGeometry(PyQt5.QtCore.QRect(70, 44, 820, 16))
+        self.label_path_file_IC.setText('пока файл не выбран')
+        self.label_path_file_IC.setGeometry(PyQt5.QtCore.QRect(70, 42, 820, 16))
         font = PyQt5.QtGui.QFont()
         font.setPointSize(10)
         self.label_path_file_IC.setFont(font)
@@ -47,8 +48,8 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # label_path_file_GASPS
         self.label_path_file_GASPS = PyQt5.QtWidgets.QLabel(self)
         self.label_path_file_GASPS.setObjectName('label_path_file_GASPS')
-        self.label_path_file_GASPS.setText('label_path_file_GASPS')
-        self.label_path_file_GASPS.setGeometry(PyQt5.QtCore.QRect(70, 110, 820, 20))
+        self.label_path_file_GASPS.setText('пока файл не выбран')
+        self.label_path_file_GASPS.setGeometry(PyQt5.QtCore.QRect(70, 112, 820, 20))
         font = PyQt5.QtGui.QFont()
         font.setPointSize(10)
         self.label_path_file_GASPS.setFont(font)
@@ -106,6 +107,14 @@ class Window(PyQt5.QtWidgets.QMainWindow):
     # событие нажатие на кнопку выбора файла
     def select_file(self):
         print(f'выбрать файл с кнопки {self.sender().objectName()}')
+        file_name = PyQt5.QtWidgets.QFileDialog.getOpenFileName(self,
+                                                                'Выберите файл Excel версии старше 2007 года (.XLSX)',
+                                                                r'd:\downloads\2020_09_29\1em\1 em 09-2020\'',
+                                                                'Файлы Excel xlsx (*.xlsx)'
+                                                                )
+        print(f'{file_name[0] = }')
+
+
 
     # событие нажатие на кнопку заполнения файла из ИЦ
     def do_fill_data(self):
