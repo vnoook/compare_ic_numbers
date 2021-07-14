@@ -4,6 +4,10 @@
 # pushButton_do_fill_data
 #
 # Произвести заполнение
+#
+#
+#
+# self.pushButton_do_fill_data.setGeometry(PyQt5.QtCore.QRect(10, 150, 180, 25))
 
 import PyQt5
 import PyQt5.QtWidgets
@@ -23,22 +27,53 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # объекты на главном окне
         # label_select_file_IC 'Выберите файл ИЦ'
         self.label_select_file_IC = PyQt5.QtWidgets.QLabel(self)
-        self.label_select_file_IC.setObjectName("label_select_file_IC")
+        self.label_select_file_IC.setObjectName('label_select_file_IC')
         self.label_select_file_IC.setText('Выберите файл ИЦ')
+        self.label_select_file_IC.setGeometry(PyQt5.QtCore.QRect(10, 10, 170, 30))
         font = PyQt5.QtGui.QFont()
         font.setPointSize(12)
         self.label_select_file_IC.setFont(font)
         self.label_select_file_IC.adjustSize()
-        self.label_select_file_IC.move(10, 10)
 
         # label_select_file_GASPS 'Выберите файл ГАСПС'
         self.label_select_file_GASPS = PyQt5.QtWidgets.QLabel(self)
-        self.label_select_file_GASPS.setObjectName("label_select_file_GASPS")
-        self.label_select_file_GASPS.setText('Выберите файл ГАСПС')
-        self.label_select_file_GASPS.move(10, 30)
+        self.label_select_file_GASPS.setObjectName('label_select_file_GASPS')
+        self.label_select_file_GASPS.setText('Выберите файл ГАС ПС')
+        self.label_select_file_GASPS.setGeometry(PyQt5.QtCore.QRect(10, 70, 210, 40))
+        font = PyQt5.QtGui.QFont()
+        font.setPointSize(12)
+        self.label_select_file_GASPS.setFont(font)
         self.label_select_file_GASPS.adjustSize()
+
         # label_path_file_IC
+        self.label_path_file_IC = PyQt5.QtWidgets.QLabel(self)
+        self.label_path_file_IC.setObjectName('label_path_file_IC')
+        self.label_path_file_IC.setText('label_select_file_GASPS')
+        self.label_path_file_IC.setGeometry(PyQt5.QtCore.QRect(70, 44, 820, 16))
+        font = PyQt5.QtGui.QFont()
+        font.setPointSize(10)
+        self.label_path_file_IC.setFont(font)
+        self.label_path_file_IC.adjustSize()
+
         # label_path_file_GASPS
+        self.label_path_file_GASPS = PyQt5.QtWidgets.QLabel(self)
+        self.label_path_file_GASPS.setObjectName('label_path_file_GASPS')
+        self.label_path_file_GASPS.setText('label_path_file_GASPS')
+        self.label_path_file_GASPS.setGeometry(PyQt5.QtCore.QRect(70, 110, 820, 20))
+        font = PyQt5.QtGui.QFont()
+        font.setPointSize(10)
+        self.label_path_file_GASPS.setFont(font)
+        self.label_path_file_GASPS.adjustSize()
+
+        # toolButton_select_file_IC
+        self.toolButton_select_file_IC = PyQt5.QtWidgets.QPushButton(self)
+        self.toolButton_select_file_IC.setObjectName('label_path_file_GASPS')
+        self.toolButton_select_file_IC.setText('...')
+        self.toolButton_select_file_IC.setGeometry(PyQt5.QtCore.QRect(10, 40, 50, 20))
+        self.toolButton_select_file_IC.setFixedWidth(50)
+        self.toolButton_select_file_IC.clicked.connect(self.select_file)
+
+        # self.toolButton_select_file_GASPS.setGeometry(QtCore.QRect(10, 110, 50, 20))
 
         # кнопка button btn1
         self.app_window_main_btn1 = PyQt5.QtWidgets.QPushButton(self)
@@ -63,6 +98,9 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         new_text = input('Введите новый текст для надписи на форме : ')
         self.label_select_file_IC.setText(new_text)
 
+    # событие нажатие на кнопку OK
+    def select_file(self):
+        print(f'выбрать файл с кнопки {self.sender().objectName()}')
 
 # создание основного окна
 def main_app():
