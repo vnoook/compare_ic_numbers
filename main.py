@@ -90,7 +90,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.button_exit = PyQt5.QtWidgets.QPushButton(self)
         self.button_exit.setObjectName('button_exit')
         self.button_exit.setText('EXIT')
-        self.button_exit.setGeometry(PyQt5.QtCore.QRect(250, 250, 180, 25))
+        self.button_exit.setGeometry(PyQt5.QtCore.QRect(10, 200, 180, 25))
         self.button_exit.setFixedWidth(50)
         self.button_exit.clicked.connect(self.click_on_btn_exit)
 
@@ -98,16 +98,9 @@ class Window(PyQt5.QtWidgets.QMainWindow):
     def click_on_btn_exit(self):
         exit()
 
-    # # событие нажатие на кнопку OK
-    # def change_label_text(self):
-    #     print(f'нажата кнопка {self.sender().objectName()}')
-    #     new_text = input('Введите новый текст для надписи на форме : ')
-    #     self.label_select_file_IC.setText(new_text)
-
     # событие нажатие на кнопку выбора файла
     def select_file(self):
-        pushed_button = self.sender().objectName()
-        print(f'выбрать файл с кнопки {pushed_button}\n')
+        print(f'\nвыбрать файл с кнопки {self.sender().objectName()}')
 
         data_of_open_file_name = PyQt5.QtWidgets.QFileDialog.getOpenFileName(self,
                                                                 'Выберите файл Excel версии старше 2007 года (.XLSX)',
@@ -115,18 +108,21 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                                                                 'Файлы Excel xlsx (*.xlsx)'
                                                                 )
         file_name = data_of_open_file_name[0]
+        print(file_name)
 
-        if pushed_button == 'toolButton_select_file_IC':
-            pass
-        elif pushed_button == 'toolButton_select_file_GASPS':
-            pass
+        if self.sender().objectName() == self.toolButton_select_file_IC.objectName():
+            self.label_path_file_IC.setText(file_name)
+            self.label_path_file_IC.adjustSize()
+        elif self.sender().objectName() == self.toolButton_select_file_GASPS.objectName():
+            self.label_path_file_GASPS.setText(file_name)
+            self.label_path_file_GASPS.adjustSize()
         else:
             pass
 
 
     # событие нажатие на кнопку заполнения файла из ИЦ
     def do_fill_data(self):
-        print(f'нажата кнопка {self.sender().objectName()}')
+        print(f'\nнажата кнопка {self.sender().objectName()}')
 
 
 # создание основного окна
