@@ -1,14 +1,3 @@
-# button_select_file_IC
-# button_select_file_GASPS
-#
-# pushButton_do_fill_data
-#
-# Произвести заполнение
-#
-#
-#
-# self.pushButton_do_fill_data.setGeometry(PyQt5.QtCore.QRect(10, 150, 180, 25))
-
 import PyQt5
 import PyQt5.QtWidgets
 import sys
@@ -81,32 +70,47 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.toolButton_select_file_GASPS.setFixedWidth(50)
         self.toolButton_select_file_GASPS.clicked.connect(self.select_file)
 
-        # кнопка button btn1
-        self.app_window_main_btn1 = PyQt5.QtWidgets.QPushButton(self)
-        self.app_window_main_btn1.setText('ok')
-        self.app_window_main_btn1.move(150, 150)
-        self.app_window_main_btn1.setFixedWidth(50)
-        self.app_window_main_btn1.clicked.connect(self.change_label_text)
+        # pushButton_do_fill_data
+        self.pushButton_do_fill_data = PyQt5.QtWidgets.QPushButton(self)
+        self.pushButton_do_fill_data.setObjectName('pushButton_do_fill_data')
+        self.pushButton_do_fill_data.setText('Произвести заполнение')
+        self.pushButton_do_fill_data.setGeometry(PyQt5.QtCore.QRect(10, 150, 180, 25))
+        self.pushButton_do_fill_data.setFixedWidth(130)
+        self.pushButton_do_fill_data.clicked.connect(self.do_fill_data)
 
-        # кнопка button btn2
-        self.app_window_main_btn2 = PyQt5.QtWidgets.QPushButton(self)
-        self.app_window_main_btn2.setText('EXIT')
-        self.app_window_main_btn2.move(250, 250)
-        self.app_window_main_btn2.setFixedWidth(50)
-        self.app_window_main_btn2.clicked.connect(self.click_on_btn2_exit)
+        # # кнопка button btn1
+        # self.app_window_main_btn1 = PyQt5.QtWidgets.QPushButton(self)
+        # self.app_window_main_btn1.setText('ok')
+        # self.app_window_main_btn1.move(150, 150)
+        # self.app_window_main_btn1.setFixedWidth(50)
+        # self.app_window_main_btn1.clicked.connect(self.change_label_text)
+
+        # кнопка button_exit
+        self.button_exit = PyQt5.QtWidgets.QPushButton(self)
+        self.button_exit.setObjectName('button_exit')
+        self.button_exit.setText('EXIT')
+        self.button_exit.setGeometry(PyQt5.QtCore.QRect(250, 250, 180, 25))
+        self.button_exit.setFixedWidth(50)
+        self.button_exit.clicked.connect(self.click_on_btn_exit)
 
     # событие нажатие на кнопку EXIT
-    def click_on_btn2_exit(self):
+    def click_on_btn_exit(self):
         exit()
 
-    # событие нажатие на кнопку OK
-    def change_label_text(self):
-        new_text = input('Введите новый текст для надписи на форме : ')
-        self.label_select_file_IC.setText(new_text)
+    # # событие нажатие на кнопку OK
+    # def change_label_text(self):
+    #     print(f'нажата кнопка {self.sender().objectName()}')
+    #     new_text = input('Введите новый текст для надписи на форме : ')
+    #     self.label_select_file_IC.setText(new_text)
 
-    # событие нажатие на кнопку OK
+    # событие нажатие на кнопку выбора файла
     def select_file(self):
         print(f'выбрать файл с кнопки {self.sender().objectName()}')
+
+    # событие нажатие на кнопку заполнения файла из ИЦ
+    def do_fill_data(self):
+        print(f'нажата кнопка {self.sender().objectName()}')
+
 
 # создание основного окна
 def main_app():
