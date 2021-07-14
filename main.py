@@ -1,3 +1,13 @@
+# button_select_file_IC
+# button_select_file_GASPS
+#
+# pushButton_do_fill_data
+#
+#
+#
+# Произвести заполнение
+
+
 import PyQt5
 import PyQt5.QtWidgets
 import sys
@@ -10,15 +20,34 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         super(Window, self).__init__()
 
         # главное окно, надпись на нём и размеры
-        self.setWindowTitle('first exp in QT5')
+        self.setWindowTitle('Сравнение номеров дел')
         self.setGeometry(300, 300, 400, 300)
 
         # объекты на главном окне
-        # текст label
-        self.app_window_main_text = PyQt5.QtWidgets.QLabel(self)
-        self.app_window_main_text.setText(' __ proverka __ sdfsdfsdfsdfsdfsdfsdfsdf')
-        self.app_window_main_text.move(50, 50)
-        self.app_window_main_text.adjustSize()
+        # label_select_file_IC
+        self.label_select_file_IC = PyQt5.QtWidgets.QLabel(self)
+        self.label_select_file_IC.setObjectName("label_select_file_IC")
+        self.label_select_file_IC.setText('Выберите файл ИЦ')
+        self.label_select_file_IC.move(10, 10)
+        self.label_select_file_IC.adjustSize()
+        # label_select_file_GASPS
+        self.label_select_file_GASPS = PyQt5.QtWidgets.QLabel(self)
+        self.label_select_file_GASPS.setObjectName("label_select_file_GASPS")
+        self.label_select_file_GASPS.setText('Выберите файл ГАСПС')
+        self.label_select_file_GASPS.move(10, 30)
+        self.label_select_file_GASPS.adjustSize()
+        # label_path_file_IC
+        self.label_path_file_IC = PyQt5.QtWidgets.QLabel(self)
+        self.label_path_file_IC.setObjectName("label_path_file_IC")
+        self.label_path_file_IC.setText('label_path_file_IC')
+        self.label_path_file_IC.move(10, 50)
+        self.label_path_file_IC.adjustSize()
+        # label_path_file_GASPS
+        self.label_path_file_GASPS = PyQt5.QtWidgets.QLabel(self)
+        self.label_path_file_GASPS.setObjectName("label_path_file_GASPS")
+        self.label_path_file_GASPS.setText('label_path_file_GASPS')
+        self.label_path_file_GASPS.move(10, 70)
+        self.label_path_file_GASPS.adjustSize()
 
         # кнопка button btn1
         self.app_window_main_btn1 = PyQt5.QtWidgets.QPushButton(self)
@@ -41,10 +70,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
     # событие нажатие на кнопку OK
     def change_label_text(self):
         new_text = input('Введите новый текст для надписи на форме : ')
-        self.app_window_main_text.setText(new_text)
-        self.app_window_main_text.move(70, 70)
-        self.app_window_main_text.adjustSize()
-        self.setGeometry(300+100, 300+100, 400+100, 300+100)
+        self.label_select_file_IC.setText(new_text)
 
 
 # создание основного окна
