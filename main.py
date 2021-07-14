@@ -3,10 +3,7 @@
 #
 # pushButton_do_fill_data
 #
-#
-#
 # Произвести заполнение
-
 
 import PyQt5
 import PyQt5.QtWidgets
@@ -21,33 +18,27 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
         # главное окно, надпись на нём и размеры
         self.setWindowTitle('Сравнение номеров дел')
-        self.setGeometry(300, 300, 400, 300)
+        self.setGeometry(300, 300, 900, 300)
 
         # объекты на главном окне
-        # label_select_file_IC
+        # label_select_file_IC 'Выберите файл ИЦ'
         self.label_select_file_IC = PyQt5.QtWidgets.QLabel(self)
         self.label_select_file_IC.setObjectName("label_select_file_IC")
         self.label_select_file_IC.setText('Выберите файл ИЦ')
-        self.label_select_file_IC.move(10, 10)
+        font = PyQt5.QtGui.QFont()
+        font.setPointSize(12)
+        self.label_select_file_IC.setFont(font)
         self.label_select_file_IC.adjustSize()
-        # label_select_file_GASPS
+        self.label_select_file_IC.move(10, 10)
+
+        # label_select_file_GASPS 'Выберите файл ГАСПС'
         self.label_select_file_GASPS = PyQt5.QtWidgets.QLabel(self)
         self.label_select_file_GASPS.setObjectName("label_select_file_GASPS")
         self.label_select_file_GASPS.setText('Выберите файл ГАСПС')
         self.label_select_file_GASPS.move(10, 30)
         self.label_select_file_GASPS.adjustSize()
         # label_path_file_IC
-        self.label_path_file_IC = PyQt5.QtWidgets.QLabel(self)
-        self.label_path_file_IC.setObjectName("label_path_file_IC")
-        self.label_path_file_IC.setText('label_path_file_IC')
-        self.label_path_file_IC.move(10, 50)
-        self.label_path_file_IC.adjustSize()
         # label_path_file_GASPS
-        self.label_path_file_GASPS = PyQt5.QtWidgets.QLabel(self)
-        self.label_path_file_GASPS.setObjectName("label_path_file_GASPS")
-        self.label_path_file_GASPS.setText('label_path_file_GASPS')
-        self.label_path_file_GASPS.move(10, 70)
-        self.label_path_file_GASPS.adjustSize()
 
         # кнопка button btn1
         self.app_window_main_btn1 = PyQt5.QtWidgets.QPushButton(self)
