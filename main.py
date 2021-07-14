@@ -67,13 +67,19 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
         # toolButton_select_file_IC
         self.toolButton_select_file_IC = PyQt5.QtWidgets.QPushButton(self)
-        self.toolButton_select_file_IC.setObjectName('label_path_file_GASPS')
+        self.toolButton_select_file_IC.setObjectName('toolButton_select_file_IC')
         self.toolButton_select_file_IC.setText('...')
         self.toolButton_select_file_IC.setGeometry(PyQt5.QtCore.QRect(10, 40, 50, 20))
         self.toolButton_select_file_IC.setFixedWidth(50)
         self.toolButton_select_file_IC.clicked.connect(self.select_file)
 
-        # self.toolButton_select_file_GASPS.setGeometry(QtCore.QRect(10, 110, 50, 20))
+        # toolButton_select_file_GASPS
+        self.toolButton_select_file_GASPS = PyQt5.QtWidgets.QPushButton(self)
+        self.toolButton_select_file_GASPS.setObjectName('toolButton_select_file_GASPS')
+        self.toolButton_select_file_GASPS.setText('...')
+        self.toolButton_select_file_GASPS.setGeometry(PyQt5.QtCore.QRect(10, 110, 50, 20))
+        self.toolButton_select_file_GASPS.setFixedWidth(50)
+        self.toolButton_select_file_GASPS.clicked.connect(self.select_file)
 
         # кнопка button btn1
         self.app_window_main_btn1 = PyQt5.QtWidgets.QPushButton(self)
