@@ -3,6 +3,8 @@ import PyQt5
 import PyQt5.QtWidgets
 import sys
 
+info_path_open_file = r'd:\downloads\2020_09_29\1em\1 em 09-2020'
+info_path_open_file = ''
 
 # класс главного окна
 class Window(PyQt5.QtWidgets.QMainWindow):
@@ -38,7 +40,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # label_path_file_IC
         self.label_path_file_IC = PyQt5.QtWidgets.QLabel(self)
         self.label_path_file_IC.setObjectName('label_path_file_IC')
-        self.label_path_file_IC.setText('пока файл не выбран')
+        self.label_path_file_IC.setText('файл пока не выбран')
         self.label_path_file_IC.setGeometry(PyQt5.QtCore.QRect(70, 42, 820, 16))
         font = PyQt5.QtGui.QFont()
         font.setPointSize(10)
@@ -48,7 +50,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # label_path_file_GASPS
         self.label_path_file_GASPS = PyQt5.QtWidgets.QLabel(self)
         self.label_path_file_GASPS.setObjectName('label_path_file_GASPS')
-        self.label_path_file_GASPS.setText('пока файл не выбран')
+        self.label_path_file_GASPS.setText('файл пока не выбран')
         self.label_path_file_GASPS.setGeometry(PyQt5.QtCore.QRect(70, 112, 820, 20))
         font = PyQt5.QtGui.QFont()
         font.setPointSize(10)
@@ -97,24 +99,54 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
     # событие нажатие на кнопку выбора файла
     def select_file(self):
-        print(f'\nвыбрать файл с кнопки {self.sender().objectName()}')
+        print(f'выбрать файл с кнопки {self.sender().objectName()}')
+        print()
 
+        # определение какая кнопка выбора файла нажата
+        # если ИЦ, то выдать в окно про ИЦ
+        if self.sender().objectName() == self.toolButton_select_file_IC.objectName():
+            info_for_open_file = 'Выберите файл ИЦ формата Excel, версии старше 2007 года (.XLSX)'
+        # если ГАСПС, то выдать в окно про ГАСПС
+        elif self.sender().objectName() == self.toolButton_select_file_GASPS.objectName():
+            info_for_open_file = 'Выберите файл ГАС ПС формата Excel, версии старше 2007 года (.XLSX)'
+
+        # непосредственное окно выбора файла и переменная для хранения пути файла
         data_of_open_file_name = PyQt5.QtWidgets.QFileDialog.getOpenFileName(self,
-                                                                'Выберите файл Excel версии старше 2007 года (.XLSX)',
-                                                                r'd:\downloads\2020_09_29\1em\1 em 09-2020\'',
+                                                                info_for_open_file,
+                                                                info_path_open_file,
                                                                 'Файлы Excel xlsx (*.xlsx)'
                                                                 )
         file_name = data_of_open_file_name[0]
-        print(file_name)
+        print(f'выбран файл {file_name = }')
+        print()
 
+        # запоминание старого значения пути выбора файлов
+        # old_path_of_selected_file_IC = self.label_path_file_IC.text()
+        # old_path_of_selected_file_GASPS = self.label_path_file_GASPS.text()
+        print(f'путь до выбора файла {old_path_of_selected_file_IC = }')
+        print(f'путь до выбора файла {old_path_of_selected_file_GASPS = }')
+        print()
+
+        # выбор где и что менять исходя из выбора пользователя
         if self.sender().objectName() == self.toolButton_select_file_IC.objectName():
             self.label_path_file_IC.setText(file_name)
             self.label_path_file_IC.adjustSize()
+
         elif self.sender().objectName() == self.toolButton_select_file_GASPS.objectName():
             self.label_path_file_GASPS.setText(file_name)
             self.label_path_file_GASPS.adjustSize()
+
+        elif file_name == '':
+            if self.sender().objectName() == self.toolButton_select_file_IC.objectName():
+                self.label_path_file_IC.setText(old_path_of_selected_file_IC)
+            elif self.sender().objectName() == self.toolButton_select_file_GASPS.objectName():
+                self.label_path_file_GASPS.setText(old_path_of_selected_file_GASPS)
         else:
-            pass
+            self.sender().objectName() == old_path_of_selected_file
+
+        print(f'путь после выбора файла {old_path_of_selected_file_IC = }')
+        print(f'путь после выбора файла {old_path_of_selected_file_GASPS = }')
+        print()
 
 
     # событие нажатие на кнопку заполнения файла из ИЦ
