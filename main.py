@@ -94,9 +94,6 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.button_exit.setFixedWidth(50)
         self.button_exit.clicked.connect(self.click_on_btn_exit)
 
-    # событие нажатие на кнопку EXIT
-    def click_on_btn_exit(self):
-        exit()
 
     # событие нажатие на кнопку выбора файла
     def select_file(self):
@@ -123,6 +120,11 @@ class Window(PyQt5.QtWidgets.QMainWindow):
     # событие нажатие на кнопку заполнения файла из ИЦ
     def do_fill_data(self):
         print(f'\nнажата кнопка {self.sender().objectName()}')
+
+
+    # событие нажатие на кнопку EXIT
+    def click_on_btn_exit(self):
+        exit()
 
 
 # создание основного окна
