@@ -5,6 +5,7 @@ import sys
 
 info_path_open_file = r'd:\downloads\2020_09_29\1em\1 em 09-2020'
 info_path_open_file = ''
+info_extentions_open_file = 'Файлы Excel xlsx (*.xlsx)'
 
 # класс главного окна
 class Window(PyQt5.QtWidgets.QMainWindow):
@@ -122,7 +123,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         data_of_open_file_name = PyQt5.QtWidgets.QFileDialog.getOpenFileName(self,
                                                                 info_for_open_file,
                                                                 info_path_open_file,
-                                                                'Файлы Excel xlsx (*.xlsx)'
+                                                                info_extentions_open_file
                                                                 )
         # вычленение пути файла из data_of_open_file_name
         file_name = data_of_open_file_name[0]
@@ -130,24 +131,25 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         print()
 
         # выбор где и что менять исходя из выбора пользователя
+        # нажата кнопка выбора ИЦ
         if self.sender().objectName() == self.toolButton_select_file_IC.objectName():
-            self.label_path_file_IC.setText(file_name)
-            self.label_path_file_IC.adjustSize()
-
-        elif self.sender().objectName() == self.toolButton_select_file_GASPS.objectName():
-            self.label_path_file_GASPS.setText(file_name)
-            self.label_path_file_GASPS.adjustSize()
-
-        elif file_name == '':
-            if self.sender().objectName() == self.toolButton_select_file_IC.objectName():
+            if file_name == '':
                 self.label_path_file_IC.setText(old_path_of_selected_file_IC)
                 self.label_path_file_IC.adjustSize()
-            elif self.sender().objectName() == self.toolButton_select_file_GASPS.objectName():
+            else:
+                self.label_path_file_IC.setText(file_name)
+                self.label_path_file_IC.adjustSize()
+                old_path_of_selected_file_IC = file_name
+
+        # нажата кнопка выбора ГАСПС
+        elif self.sender().objectName() == self.toolButton_select_file_GASPS.objectName():
+            if file_name == '':
                 self.label_path_file_GASPS.setText(old_path_of_selected_file_GASPS)
                 self.label_path_file_GASPS.adjustSize()
-        else:
-            # self.sender().objectName() == old_path_of_selected_file
-            pass
+            else:
+                self.label_path_file_GASPS.setText(file_name)
+                self.label_path_file_GASPS.adjustSize()
+                old_path_of_selected_file_IC = file_name
 
         print(f'путь после выбора файла {old_path_of_selected_file_IC = }')
         print(f'путь после выбора файла {old_path_of_selected_file_GASPS = }')
