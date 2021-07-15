@@ -1,11 +1,11 @@
-
 import PyQt5
 import PyQt5.QtWidgets
 import sys
 
-info_path_open_file = r'd:\downloads\2020_09_29\1em\1 em 09-2020'
+info_for_open_file = ''
 info_path_open_file = ''
-info_extentions_open_file = 'Файлы Excel xlsx (*.xlsx)'
+info_extention_open_file = 'Файлы Excel xlsx (*.xlsx)'
+
 
 # класс главного окна
 class Window(PyQt5.QtWidgets.QMainWindow):
@@ -82,34 +82,19 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.pushButton_do_fill_data.setFixedWidth(130)
         self.pushButton_do_fill_data.clicked.connect(self.do_fill_data)
 
-        # # кнопка button btn1
-        # self.app_window_main_btn1 = PyQt5.QtWidgets.QPushButton(self)
-        # self.app_window_main_btn1.setText('ok')
-        # self.app_window_main_btn1.move(150, 150)
-        # self.app_window_main_btn1.setFixedWidth(50)
-        # self.app_window_main_btn1.clicked.connect(self.change_label_text)
-
         # кнопка button_exit
         self.button_exit = PyQt5.QtWidgets.QPushButton(self)
         self.button_exit.setObjectName('button_exit')
-        self.button_exit.setText('EXIT')
+        self.button_exit.setText('Выход')
         self.button_exit.setGeometry(PyQt5.QtCore.QRect(10, 200, 180, 25))
         self.button_exit.setFixedWidth(50)
         self.button_exit.clicked.connect(self.click_on_btn_exit)
 
-
-    # событие нажатие на кнопку выбора файла
+    # событие - нажатие на кнопку выбора файла
     def select_file(self):
-        print()
-        print(f'выбрать файл с кнопки {self.sender().objectName()}')
-        print()
-
         # запоминание старого значения пути выбора файлов
         old_path_of_selected_file_IC = self.label_path_file_IC.text()
         old_path_of_selected_file_GASPS = self.label_path_file_GASPS.text()
-        print(f'путь до выбора файла {old_path_of_selected_file_IC = }')
-        print(f'путь до выбора файла {old_path_of_selected_file_GASPS = }')
-        print()
 
         # определение какая кнопка выбора файла нажата
         # если ИЦ, то выдать в окно про ИЦ
@@ -121,14 +106,11 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
         # непосредственное окно выбора файла и переменная для хранения пути файла
         data_of_open_file_name = PyQt5.QtWidgets.QFileDialog.getOpenFileName(self,
-                                                                info_for_open_file,
-                                                                info_path_open_file,
-                                                                info_extentions_open_file
-                                                                )
+                                                                             info_for_open_file,
+                                                                             info_path_open_file,
+                                                                             info_extention_open_file)
         # вычленение пути файла из data_of_open_file_name
         file_name = data_of_open_file_name[0]
-        print(f'выбран файл {file_name = }')
-        print()
 
         # выбор где и что менять исходя из выбора пользователя
         # нажата кнопка выбора ИЦ
@@ -151,17 +133,13 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 self.label_path_file_GASPS.adjustSize()
                 old_path_of_selected_file_IC = file_name
 
-        print(f'путь после выбора файла {old_path_of_selected_file_IC = }')
-        print(f'путь после выбора файла {old_path_of_selected_file_GASPS = }')
-        print()
 
-
-    # событие нажатие на кнопку заполнения файла из ИЦ
+    # событие - нажатие на кнопку заполнения файла ИЦ
     def do_fill_data(self):
-        print(f'\nнажата кнопка {self.sender().objectName()}')
+        print(f'нажата кнопка {self.sender().objectName()}')
 
 
-    # событие нажатие на кнопку EXIT
+    # событие - нажатие на кнопку Выход
     def click_on_btn_exit(self):
         exit()
 
