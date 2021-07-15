@@ -99,7 +99,15 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
     # событие нажатие на кнопку выбора файла
     def select_file(self):
+        print()
         print(f'выбрать файл с кнопки {self.sender().objectName()}')
+        print()
+
+        # запоминание старого значения пути выбора файлов
+        old_path_of_selected_file_IC = self.label_path_file_IC.text()
+        old_path_of_selected_file_GASPS = self.label_path_file_GASPS.text()
+        print(f'путь до выбора файла {old_path_of_selected_file_IC = }')
+        print(f'путь до выбора файла {old_path_of_selected_file_GASPS = }')
         print()
 
         # определение какая кнопка выбора файла нажата
@@ -116,15 +124,9 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                                                                 info_path_open_file,
                                                                 'Файлы Excel xlsx (*.xlsx)'
                                                                 )
+        # вычленение пути файла из data_of_open_file_name
         file_name = data_of_open_file_name[0]
         print(f'выбран файл {file_name = }')
-        print()
-
-        # запоминание старого значения пути выбора файлов
-        # old_path_of_selected_file_IC = self.label_path_file_IC.text()
-        # old_path_of_selected_file_GASPS = self.label_path_file_GASPS.text()
-        print(f'путь до выбора файла {old_path_of_selected_file_IC = }')
-        print(f'путь до выбора файла {old_path_of_selected_file_GASPS = }')
         print()
 
         # выбор где и что менять исходя из выбора пользователя
@@ -139,10 +141,13 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         elif file_name == '':
             if self.sender().objectName() == self.toolButton_select_file_IC.objectName():
                 self.label_path_file_IC.setText(old_path_of_selected_file_IC)
+                self.label_path_file_IC.adjustSize()
             elif self.sender().objectName() == self.toolButton_select_file_GASPS.objectName():
                 self.label_path_file_GASPS.setText(old_path_of_selected_file_GASPS)
+                self.label_path_file_GASPS.adjustSize()
         else:
-            self.sender().objectName() == old_path_of_selected_file
+            # self.sender().objectName() == old_path_of_selected_file
+            pass
 
         print(f'путь после выбора файла {old_path_of_selected_file_IC = }')
         print(f'путь после выбора файла {old_path_of_selected_file_GASPS = }')
