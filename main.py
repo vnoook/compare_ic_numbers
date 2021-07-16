@@ -1,14 +1,14 @@
 import PyQt5
 import PyQt5.QtWidgets
 import sys
-# import openpyxl
-# import openpyxl.styles
+import openpyxl
+import openpyxl.styles
 
 info_for_open_file = ''
 info_path_open_file = ''
 info_extention_open_file = 'Файлы Excel xlsx (*.xlsx)'
-# flag_selected_file_IC = False
-# flag_selected_file_GASPS = False
+flag_selected_file_IC = False
+flag_selected_file_GASPS = False
 
 
 # класс главного окна
@@ -81,11 +81,11 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # pushButton_do_fill_data
         self.pushButton_do_fill_data = PyQt5.QtWidgets.QPushButton(self)
         self.pushButton_do_fill_data.setObjectName('pushButton_do_fill_data')
+        self.pushButton_do_fill_data.setEnabled(False)
         self.pushButton_do_fill_data.setText('Произвести заполнение')
         self.pushButton_do_fill_data.setGeometry(PyQt5.QtCore.QRect(10, 150, 180, 25))
         self.pushButton_do_fill_data.setFixedWidth(130)
         self.pushButton_do_fill_data.clicked.connect(self.do_fill_data)
-        # self.pushButton_do_fill_data.setEnabled(False)
 
         # кнопка button_exit
         self.button_exit = PyQt5.QtWidgets.QPushButton(self)
@@ -121,34 +121,30 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # нажата кнопка выбора ИЦ
         if self.sender().objectName() == self.toolButton_select_file_IC.objectName():
             if file_name == '':
-                self.sender().label_path_file_IC.setText(old_path_of_selected_file_IC)
-                self.sender().label_path_file_IC.adjustSize()
-                # flag_selected_file_IC = False
+                self.label_path_file_IC.setText(old_path_of_selected_file_IC)
+                self.label_path_file_IC.adjustSize()
+                flag_selected_file_IC = False
             else:
-                self.sender().label_path_file_IC.setText(file_name)
-                self.sender().label_path_file_IC.adjustSize()
+                self.label_path_file_IC.setText(file_name)
+                self.label_path_file_IC.adjustSize()
                 old_path_of_selected_file_IC = file_name
-                # flag_selected_file_IC = True
+                flag_selected_file_IC = True
 
         # нажата кнопка выбора ГАСПС
         elif self.sender().objectName() == self.toolButton_select_file_GASPS.objectName():
             if file_name == '':
-                self.sender().label_path_file_GASPS.setText(old_path_of_selected_file_GASPS)
-                self.sender().label_path_file_GASPS.adjustSize()
-                # flag_selected_file_GASPS = False
+                self.label_path_file_GASPS.setText(old_path_of_selected_file_GASPS)
+                self.label_path_file_GASPS.adjustSize()
+                flag_selected_file_GASPS = False
             else:
-                self.sender().label_path_file_GASPS.setText(file_name)
-                self.sender().label_path_file_GASPS.adjustSize()
+                self.label_path_file_GASPS.setText(file_name)
+                self.label_path_file_GASPS.adjustSize()
                 old_path_of_selected_file_GASPS = file_name
-                # flag_selected_file_GASPS = True
+                flag_selected_file_GASPS = True
 
-        # print(flag_selected_file_IC)
-        # print(flag_selected_file_GASPS)
+        # if flag_selected_file_IC == True and flag_selected_file_GASPS == True:
+        #     self.pushButton_do_fill_data.setEnabled(True)
 
-        # if flag_selected_file_IC + flag_selected_file_GASPS == 2:
-        #     print(111)
-        #
-        # self.sender().pushButton_do_fill_data.setEnabled(True)
 
 
     # событие - нажатие на кнопку заполнения файла ИЦ
