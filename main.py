@@ -121,24 +121,24 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # нажата кнопка выбора ИЦ
         if self.sender().objectName() == self.toolButton_select_file_IC.objectName():
             if file_name == '':
-                self.sender().label_path_file_IC.setText(old_path_of_selected_file_IC)
-                self.sender().label_path_file_IC.adjustSize()
+                self.label_path_file_IC.setText(old_path_of_selected_file_IC)
+                self.label_path_file_IC.adjustSize()
                 # flag_selected_file_IC = False
             else:
-                self.sender().label_path_file_IC.setText(file_name)
-                self.sender().label_path_file_IC.adjustSize()
+                self.label_path_file_IC.setText(file_name)
+                self.label_path_file_IC.adjustSize()
                 old_path_of_selected_file_IC = file_name
                 # flag_selected_file_IC = True
 
         # нажата кнопка выбора ГАСПС
         elif self.sender().objectName() == self.toolButton_select_file_GASPS.objectName():
             if file_name == '':
-                self.sender().label_path_file_GASPS.setText(old_path_of_selected_file_GASPS)
-                self.sender().label_path_file_GASPS.adjustSize()
+                self.label_path_file_GASPS.setText(old_path_of_selected_file_GASPS)
+                self.label_path_file_GASPS.adjustSize()
                 # flag_selected_file_GASPS = False
             else:
-                self.sender().label_path_file_GASPS.setText(file_name)
-                self.sender().label_path_file_GASPS.adjustSize()
+                self.label_path_file_GASPS.setText(file_name)
+                self.label_path_file_GASPS.adjustSize()
                 old_path_of_selected_file_GASPS = file_name
                 # flag_selected_file_GASPS = True
 
