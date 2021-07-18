@@ -7,8 +7,6 @@ import openpyxl.styles
 info_for_open_file = ''
 info_path_open_file = ''
 info_extention_open_file = 'Файлы Excel xlsx (*.xlsx)'
-flag_selected_file_IC = False
-flag_selected_file_GASPS = False
 
 
 # класс главного окна
@@ -20,6 +18,9 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # главное окно, надпись на нём и размеры
         self.setWindowTitle('Сравнение номеров дел')
         self.setGeometry(300, 300, 900, 300)
+
+        self.flag_selected_file_IC = False
+        self.flag_selected_file_GASPS = False
 
         # объекты на главном окне
         # label_select_file_IC
@@ -123,27 +124,29 @@ class Window(PyQt5.QtWidgets.QMainWindow):
             if file_name == '':
                 self.label_path_file_IC.setText(old_path_of_selected_file_IC)
                 self.label_path_file_IC.adjustSize()
-                flag_selected_file_IC = False
+                self.flag_selected_file_IC = False
             else:
                 self.label_path_file_IC.setText(file_name)
                 self.label_path_file_IC.adjustSize()
                 old_path_of_selected_file_IC = file_name
-                flag_selected_file_IC = True
+                self.flag_selected_file_IC = True
+            print(f'{self.label_path_file_IC.text() = }')
 
         # нажата кнопка выбора ГАСПС
         elif self.sender().objectName() == self.toolButton_select_file_GASPS.objectName():
             if file_name == '':
                 self.label_path_file_GASPS.setText(old_path_of_selected_file_GASPS)
                 self.label_path_file_GASPS.adjustSize()
-                flag_selected_file_GASPS = False
+                self.flag_selected_file_GASPS = False
             else:
                 self.label_path_file_GASPS.setText(file_name)
                 self.label_path_file_GASPS.adjustSize()
                 old_path_of_selected_file_GASPS = file_name
-                flag_selected_file_GASPS = True
+                self.flag_selected_file_GASPS = True
+            print(f'{self.label_path_file_GASPS.text() = }')
 
-        # if flag_selected_file_IC == True and flag_selected_file_GASPS == True:
-        #     self.pushButton_do_fill_data.setEnabled(True)
+        if (self.flag_selected_file_IC) and (self.label_path_file_GASPS):
+            self.pushButton_do_fill_data.setEnabled(True)
 
 
 
