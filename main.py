@@ -130,7 +130,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 self.label_path_file_IC.adjustSize()
                 old_path_of_selected_file_IC = file_name
                 self.flag_selected_file_IC = True
-            print(f'{self.label_path_file_IC.text() = }')
+            # print(f'{self.label_path_file_IC.text() = }')
 
         # нажата кнопка выбора ГАСПС
         elif self.sender().objectName() == self.toolButton_select_file_GASPS.objectName():
@@ -143,7 +143,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 self.label_path_file_GASPS.adjustSize()
                 old_path_of_selected_file_GASPS = file_name
                 self.flag_selected_file_GASPS = True
-            print(f'{self.label_path_file_GASPS.text() = }')
+            # print(f'{self.label_path_file_GASPS.text() = }')
 
         if (self.flag_selected_file_IC) and (self.label_path_file_GASPS):
             self.pushButton_do_fill_data.setEnabled(True)
