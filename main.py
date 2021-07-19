@@ -105,6 +105,16 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         old_path_of_selected_file_IC = self.label_path_file_IC.text()
         old_path_of_selected_file_GASPS = self.label_path_file_GASPS.text()
 
+        print(f'{self.flag_selected_file_IC = }')
+        print(f'{old_path_of_selected_file_IC = }')
+        print(f'{self.label_path_file_IC.text() = }')
+
+        print(f'{self.flag_selected_file_GASPS = }')
+        print(f'{old_path_of_selected_file_GASPS = }')
+        print(f'{self.label_path_file_GASPS.text() = }')
+        print()
+
+
         # определение какая кнопка выбора файла нажата
         # если ИЦ, то выдать в окно про ИЦ
         if self.sender().objectName() == self.toolButton_select_file_IC.objectName():
@@ -133,7 +143,6 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 self.label_path_file_IC.adjustSize()
                 old_path_of_selected_file_IC = file_name
                 self.flag_selected_file_IC = True
-
         # нажата кнопка выбора ГАСПС
         elif self.sender().objectName() == self.toolButton_select_file_GASPS.objectName():
             if file_name == '':
@@ -149,20 +158,27 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         if (self.flag_selected_file_IC) and (self.label_path_file_GASPS):
             self.pushButton_do_fill_data.setEnabled(True)
 
+        print(f'{self.flag_selected_file_IC = }')
+        print(f'{old_path_of_selected_file_IC = }')
+        print(f'{self.label_path_file_IC.text() = }')
+
+        print(f'{self.flag_selected_file_GASPS = }')
+        print(f'{old_path_of_selected_file_GASPS = }')
+        print(f'{self.label_path_file_GASPS.text() = }')
+        print()
+
 
     # событие - нажатие на кнопку заполнения файла
     def do_fill_data(self):
         # os.path.split()
         # os.path.basename()
-        # file_IC = self.label_path_file_IC.text()
-        # file_GASPS = self.label_path_file_GASPS.text()
 
-        print(f'файл {self.label_path_file_IC.text() = }')
-        print(f'файл {self.label_path_file_GASPS.text() = }')
+        file_IC = self.label_path_file_IC.text()
+        file_GASPS = self.label_path_file_GASPS.text()
+
         print(f'файл {file_IC = }')
         print(f'файл {file_GASPS = }')
         print(f'нажата кнопка {self.sender().objectName() = }')
-        pass
 
 
     # событие - нажатие на кнопку Выход
