@@ -8,6 +8,9 @@ info_for_open_file = ''
 info_path_open_file = ''
 info_extention_open_file = 'Файлы Excel xlsx (*.xlsx)'
 
+file_IC = ''
+file_GASPS = ''
+
 
 # класс главного окна
 class Window(PyQt5.QtWidgets.QMainWindow):
@@ -130,7 +133,6 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 self.label_path_file_IC.adjustSize()
                 old_path_of_selected_file_IC = file_name
                 self.flag_selected_file_IC = True
-            # print(f'{self.label_path_file_IC.text() = }')
 
         # нажата кнопка выбора ГАСПС
         elif self.sender().objectName() == self.toolButton_select_file_GASPS.objectName():
@@ -143,16 +145,24 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 self.label_path_file_GASPS.adjustSize()
                 old_path_of_selected_file_GASPS = file_name
                 self.flag_selected_file_GASPS = True
-            # print(f'{self.label_path_file_GASPS.text() = }')
 
         if (self.flag_selected_file_IC) and (self.label_path_file_GASPS):
             self.pushButton_do_fill_data.setEnabled(True)
 
 
-
-    # событие - нажатие на кнопку заполнения файла ИЦ
+    # событие - нажатие на кнопку заполнения файла
     def do_fill_data(self):
-        print(f'нажата кнопка {self.sender().objectName()}')
+        # os.path.split()
+        # os.path.basename()
+        # file_IC = self.label_path_file_IC.text()
+        # file_GASPS = self.label_path_file_GASPS.text()
+
+        print(f'файл {self.label_path_file_IC.text() = }')
+        print(f'файл {self.label_path_file_GASPS.text() = }')
+        print(f'файл {file_IC = }')
+        print(f'файл {file_GASPS = }')
+        print(f'нажата кнопка {self.sender().objectName() = }')
+        pass
 
 
     # событие - нажатие на кнопку Выход
@@ -164,7 +174,6 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 def main_app():
     app = PyQt5.QtWidgets.QApplication(sys.argv)
     app_window_main = Window()
-
     app_window_main.show()
     sys.exit(app.exec_())
 
