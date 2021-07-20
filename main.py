@@ -116,7 +116,6 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # print(f'{self.label_path_file_GASPS.text() = }')
         print()
 
-
         # определение какая кнопка выбора файла нажата
         # если ИЦ, то выдать в окно про ИЦ
         if self.sender().objectName() == self.toolButton_select_file_IC.objectName():
@@ -164,7 +163,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 else:
                     self.flag_selected_file_GASPS = False
 
-        if (self.flag_selected_file_IC) and (self.label_path_file_GASPS):
+        if self.flag_selected_file_IC and self.flag_selected_file_GASPS:
             self.pushButton_do_fill_data.setEnabled(True)
 
         print(f'{self.flag_selected_file_IC = }')
@@ -175,7 +174,6 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # print(f'{old_path_of_selected_file_GASPS = }')
         # print(f'{self.label_path_file_GASPS.text() = }')
         print()
-
 
     # событие - нажатие на кнопку заполнения файла
     def do_fill_data(self):
@@ -188,7 +186,6 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         print(f'файл {file_IC = }')
         print(f'файл {file_GASPS = }')
         print(f'нажата кнопка {self.sender().objectName() = }')
-
 
     # событие - нажатие на кнопку Выход
     def click_on_btn_exit(self):
