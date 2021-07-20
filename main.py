@@ -4,21 +4,19 @@ import sys
 import openpyxl
 import openpyxl.styles
 
-info_for_open_file = ''
-info_path_open_file = ''
-info_extention_open_file = 'Файлы Excel xlsx (*.xlsx)'
-
-text_on_btn_select_file = 'файл пока не выбран'
-
-file_IC = ''
-file_GASPS = ''
-
-
 # класс главного окна
 class Window(PyQt5.QtWidgets.QMainWindow):
     # описание главного окна
     def __init__(self):
         super(Window, self).__init__()
+
+        # переменные
+        self.info_for_open_file = ''
+        self.info_path_open_file = ''
+        self.info_extention_open_file = 'Файлы Excel xlsx (*.xlsx)'
+        self.text_on_btn_select_file = 'файл пока не выбран'
+        self.file_IC = ''
+        self.file_GASPS = ''
 
         # главное окно, надпись на нём и размеры
         self.setWindowTitle('Сравнение номеров дел')
@@ -51,7 +49,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # label_path_file_IC
         self.label_path_file_IC = PyQt5.QtWidgets.QLabel(self)
         self.label_path_file_IC.setObjectName('label_path_file_IC')
-        self.label_path_file_IC.setText(text_on_btn_select_file)
+        self.label_path_file_IC.setText(self.text_on_btn_select_file)
         self.label_path_file_IC.setGeometry(PyQt5.QtCore.QRect(70, 42, 820, 16))
         font = PyQt5.QtGui.QFont()
         font.setPointSize(10)
@@ -61,7 +59,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # label_path_file_GASPS
         self.label_path_file_GASPS = PyQt5.QtWidgets.QLabel(self)
         self.label_path_file_GASPS.setObjectName('label_path_file_GASPS')
-        self.label_path_file_GASPS.setText(text_on_btn_select_file)
+        self.label_path_file_GASPS.setText(self.text_on_btn_select_file)
         self.label_path_file_GASPS.setGeometry(PyQt5.QtCore.QRect(70, 112, 820, 20))
         font = PyQt5.QtGui.QFont()
         font.setPointSize(10)
@@ -119,16 +117,16 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # определение какая кнопка выбора файла нажата
         # если ИЦ, то выдать в окно про ИЦ
         if self.sender().objectName() == self.toolButton_select_file_IC.objectName():
-            info_for_open_file = 'Выберите файл ИЦ формата Excel, версии старше 2007 года (.XLSX)'
+            self.info_for_open_file = 'Выберите файл ИЦ формата Excel, версии старше 2007 года (.XLSX)'
         # если ГАСПС, то выдать в окно про ГАСПС
         elif self.sender().objectName() == self.toolButton_select_file_GASPS.objectName():
-            info_for_open_file = 'Выберите файл ГАС ПС формата Excel, версии старше 2007 года (.XLSX)'
+            self.info_for_open_file = 'Выберите файл ГАС ПС формата Excel, версии старше 2007 года (.XLSX)'
 
         # непосредственное окно выбора файла и переменная для хранения пути файла
         data_of_open_file_name = PyQt5.QtWidgets.QFileDialog.getOpenFileName(self,
-                                                                             info_for_open_file,
-                                                                             info_path_open_file,
-                                                                             info_extention_open_file)
+                                                                             self.info_for_open_file,
+                                                                             self.info_path_open_file,
+                                                                             self.info_extention_open_file)
         # вычленение пути файла из data_of_open_file_name
         file_name = data_of_open_file_name[0]
 
@@ -143,7 +141,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 self.label_path_file_IC.setText(file_name)
                 self.label_path_file_IC.adjustSize()
                 old_path_of_selected_file_IC = file_name
-                if self.label_select_file_IC != text_on_btn_select_file:
+                if self.label_select_file_IC != self.text_on_btn_select_file:
                     self.flag_selected_file_IC = True
                 else:
                     self.flag_selected_file_IC = False
@@ -158,7 +156,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 self.label_path_file_GASPS.setText(file_name)
                 self.label_path_file_GASPS.adjustSize()
                 old_path_of_selected_file_GASPS = file_name
-                if self.label_select_file_GASPS != text_on_btn_select_file:
+                if self.label_select_file_GASPS != self.text_on_btn_select_file:
                     self.flag_selected_file_GASPS = True
                 else:
                     self.flag_selected_file_GASPS = False
@@ -180,11 +178,11 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # os.path.split()
         # os.path.basename()
 
-        file_IC = self.label_path_file_IC.text()
-        file_GASPS = self.label_path_file_GASPS.text()
+        self.file_IC = self.label_path_file_IC.text()
+        self.file_GASPS = self.label_path_file_GASPS.text()
 
-        print(f'файл {file_IC = }')
-        print(f'файл {file_GASPS = }')
+        print(f'файл {self.file_IC = }')
+        print(f'файл {self.file_GASPS = }')
         print(f'нажата кнопка {self.sender().objectName() = }')
 
     # событие - нажатие на кнопку Выход
