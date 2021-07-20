@@ -108,12 +108,12 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         old_path_of_selected_file_GASPS = self.label_path_file_GASPS.text()
 
         print(f'{self.flag_selected_file_IC = }')
-        print(f'{old_path_of_selected_file_IC = }')
-        print(f'{self.label_path_file_IC.text() = }')
+        # print(f'{old_path_of_selected_file_IC = }')
+        # print(f'{self.label_path_file_IC.text() = }')
 
         print(f'{self.flag_selected_file_GASPS = }')
-        print(f'{old_path_of_selected_file_GASPS = }')
-        print(f'{self.label_path_file_GASPS.text() = }')
+        # print(f'{old_path_of_selected_file_GASPS = }')
+        # print(f'{self.label_path_file_GASPS.text() = }')
         print()
 
 
@@ -168,12 +168,12 @@ class Window(PyQt5.QtWidgets.QMainWindow):
             self.pushButton_do_fill_data.setEnabled(True)
 
         print(f'{self.flag_selected_file_IC = }')
-        print(f'{old_path_of_selected_file_IC = }')
-        print(f'{self.label_path_file_IC.text() = }')
+        # print(f'{old_path_of_selected_file_IC = }')
+        # print(f'{self.label_path_file_IC.text() = }')
 
         print(f'{self.flag_selected_file_GASPS = }')
-        print(f'{old_path_of_selected_file_GASPS = }')
-        print(f'{self.label_path_file_GASPS.text() = }')
+        # print(f'{old_path_of_selected_file_GASPS = }')
+        # print(f'{self.label_path_file_GASPS.text() = }')
         print()
 
 
