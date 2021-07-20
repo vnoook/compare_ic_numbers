@@ -8,6 +8,8 @@ info_for_open_file = ''
 info_path_open_file = ''
 info_extention_open_file = 'Файлы Excel xlsx (*.xlsx)'
 
+text_on_btn_select_file = 'файл пока не выбран'
+
 file_IC = ''
 file_GASPS = ''
 
@@ -49,7 +51,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # label_path_file_IC
         self.label_path_file_IC = PyQt5.QtWidgets.QLabel(self)
         self.label_path_file_IC.setObjectName('label_path_file_IC')
-        self.label_path_file_IC.setText('файл пока не выбран')
+        self.label_path_file_IC.setText(text_on_btn_select_file)
         self.label_path_file_IC.setGeometry(PyQt5.QtCore.QRect(70, 42, 820, 16))
         font = PyQt5.QtGui.QFont()
         font.setPointSize(10)
@@ -59,7 +61,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # label_path_file_GASPS
         self.label_path_file_GASPS = PyQt5.QtWidgets.QLabel(self)
         self.label_path_file_GASPS.setObjectName('label_path_file_GASPS')
-        self.label_path_file_GASPS.setText('файл пока не выбран')
+        self.label_path_file_GASPS.setText(text_on_btn_select_file)
         self.label_path_file_GASPS.setGeometry(PyQt5.QtCore.QRect(70, 112, 820, 20))
         font = PyQt5.QtGui.QFont()
         font.setPointSize(10)
@@ -137,23 +139,30 @@ class Window(PyQt5.QtWidgets.QMainWindow):
             if file_name == '':
                 self.label_path_file_IC.setText(old_path_of_selected_file_IC)
                 self.label_path_file_IC.adjustSize()
-                self.flag_selected_file_IC = False
+                # self.flag_selected_file_IC = False
             else:
                 self.label_path_file_IC.setText(file_name)
                 self.label_path_file_IC.adjustSize()
                 old_path_of_selected_file_IC = file_name
-                self.flag_selected_file_IC = True
+                if self.label_select_file_IC != text_on_btn_select_file:
+                    self.flag_selected_file_IC = True
+                else:
+                    self.flag_selected_file_IC = False
+
         # нажата кнопка выбора ГАСПС
         elif self.sender().objectName() == self.toolButton_select_file_GASPS.objectName():
             if file_name == '':
                 self.label_path_file_GASPS.setText(old_path_of_selected_file_GASPS)
                 self.label_path_file_GASPS.adjustSize()
-                self.flag_selected_file_GASPS = False
+                # self.flag_selected_file_GASPS = False
             else:
                 self.label_path_file_GASPS.setText(file_name)
                 self.label_path_file_GASPS.adjustSize()
                 old_path_of_selected_file_GASPS = file_name
-                self.flag_selected_file_GASPS = True
+                if self.label_select_file_GASPS != text_on_btn_select_file:
+                    self.flag_selected_file_GASPS = True
+                else:
+                    self.flag_selected_file_GASPS = False
 
         if (self.flag_selected_file_IC) and (self.label_path_file_GASPS):
             self.pushButton_do_fill_data.setEnabled(True)
