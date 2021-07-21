@@ -151,23 +151,18 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 self.label_path_file_IC.setText(file_name)
                 self.label_path_file_IC.adjustSize()
 
-                # if (self.label_path_file_IC.text() != self.text_empty_path_file) and (self.label_path_file_IC.text() != self.label_path_file_GASPS.text()):
                 if self.label_path_file_IC.text() != self.label_path_file_GASPS.text():
                     print(self.flag_selected_file_IC)
-                    if self.label_path_file_IC.text() != self.text_empty_path_file:
-                        self.flag_selected_file_IC = True
-                    else:
-                        self.flag_selected_file_IC = False
+                    self.flag_selected_file_IC = True
                 else:
                     print(self.flag_selected_file_IC)
                     self.flag_selected_file_IC = False
                     self.pushButton_do_fill_data.setEnabled(False)
 
-
-
-
-
-
+                if self.flag_selected_file_IC and self.flag_selected_file_GASPS:
+                    self.pushButton_do_fill_data.setEnabled(True)
+                else:
+                    self.pushButton_do_fill_data.setEnabled(False)
 
         # нажата кнопка выбора ГАСПС
         if self.sender().objectName() == self.toolButton_select_file_GASPS.objectName():
@@ -175,19 +170,22 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 self.label_path_file_GASPS.setText(old_path_of_selected_file_GASPS)
                 self.label_path_file_GASPS.adjustSize()
             else:
+                old_path_of_selected_file_GASPS = self.label_path_file_GASPS.text()
+
                 self.label_path_file_GASPS.setText(file_name)
                 self.label_path_file_GASPS.adjustSize()
-                old_path_of_selected_file_GASPS = file_name
-                # if (self.label_path_file_GASPS.text() != self.text_empty_path_file) and (self.label_path_file_GASPS.text() != self.label_path_file_IC.text()):
+
                 if self.label_path_file_GASPS.text() != self.label_path_file_IC.text():
-                    print(3)
-                    if self.label_path_file_GASPS.text() != self.text_empty_path_file:
-                        self.flag_selected_file_GASPS = True
-                    else:
-                        self.pushButton_do_fill_data.setEnabled(False)
+                    print(self.flag_selected_file_GASPS)
+                    self.flag_selected_file_GASPS = True
                 else:
-                    print(4)
+                    print(self.flag_selected_file_GASPS)
                     self.flag_selected_file_GASPS = False
+                    self.pushButton_do_fill_data.setEnabled(False)
+
+                if self.flag_selected_file_GASPS and self.flag_selected_file_IC:
+                    self.pushButton_do_fill_data.setEnabled(True)
+                else:
                     self.pushButton_do_fill_data.setEnabled(False)
 
         if self.flag_selected_file_IC and self.flag_selected_file_GASPS:
