@@ -1,3 +1,8 @@
+# ...
+# INSTALL
+# pip install openpyxl
+# ...
+
 import PyQt5
 import PyQt5.QtWidgets
 import sys
@@ -129,6 +134,11 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # вычленение пути файла из data_of_open_file_name
         file_name = data_of_open_file_name[0]
 
+
+
+
+
+
         # выбор где и что менять исходя из выбора пользователя
         # нажата кнопка выбора ИЦ
         if self.sender().objectName() == self.toolButton_select_file_IC.objectName():
@@ -136,20 +146,28 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 self.label_path_file_IC.setText(old_path_of_selected_file_IC)
                 self.label_path_file_IC.adjustSize()
             else:
+                old_path_of_selected_file_IC = self.label_path_file_IC.text()
+
                 self.label_path_file_IC.setText(file_name)
                 self.label_path_file_IC.adjustSize()
-                old_path_of_selected_file_IC = file_name
+
                 # if (self.label_path_file_IC.text() != self.text_empty_path_file) and (self.label_path_file_IC.text() != self.label_path_file_GASPS.text()):
                 if self.label_path_file_IC.text() != self.label_path_file_GASPS.text():
-                    print(1)
+                    print(self.flag_selected_file_IC)
                     if self.label_path_file_IC.text() != self.text_empty_path_file:
                         self.flag_selected_file_IC = True
                     else:
                         self.flag_selected_file_IC = False
                 else:
-                    print(2)
+                    print(self.flag_selected_file_IC)
                     self.flag_selected_file_IC = False
                     self.pushButton_do_fill_data.setEnabled(False)
+
+
+
+
+
+
 
         # нажата кнопка выбора ГАСПС
         if self.sender().objectName() == self.toolButton_select_file_GASPS.objectName():
@@ -182,11 +200,15 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.file_IC = self.label_path_file_IC.text()
         self.file_GASPS = self.label_path_file_GASPS.text()
 
-        # if self.label_path_file_IC != self.label_path_file_GASPS:
-
-        print()
-        print(f'файл {self.file_IC    = }')
-        print(f'файл {self.file_GASPS = }')
+        # TODO
+        # открывается файл "приёмник", назначается активный лист, выбирается диапазон ячеек
+        # wb_narush = openpyxl.load_workbook(file_template_xl)
+        # wb_narush_s = wb_narush.active
+        # wb_narush_cells_range = wb_narush_s[template_cells_range]
+        #
+        # print()
+        # print(f'файл {self.file_IC    = }')
+        # print(f'файл {self.file_GASPS = }')
         # print(f'нажата кнопка {self.sender().objectName() = }')
 
     # событие - нажатие на кнопку Выход
