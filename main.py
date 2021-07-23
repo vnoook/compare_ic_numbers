@@ -212,15 +212,43 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         print(f'{self.file_IC = }')
         print(f'{self.file_GASPS = }')
 
-        # TODO
         # открывается файл "приёмник", назначается активный лист, выбирается диапазон ячеек
-        wb_file_IC = openpyxl.load_workbook(self.file_IC)
+        wb_file_IC = openpyxl.load_workbook(self.file_IC)  #, read_only=True, data_only=True)
         wb_file_IC_s = wb_file_IC.active
 
         wb_file_GASPS = openpyxl.load_workbook(self.file_GASPS)
         wb_file_GASPS_s = wb_file_GASPS.active
 
+        # TODO
+        max_row_IC = wb_file_IC_s.max_row
+        max_row_GASPS = wb_file_GASPS_s.max_row
+        print(f'{max_row_IC = }')
+        print(f'{max_row_GASPS = }')
+
+        # for row in range(start_row, max_row + 1):
+        #     cell = ws.cell(row, data_col1)
+        #     content_cell = str(cell.value)
+        #
+        # template_cells_range = 'E7:V33'
+        # for row_in_range in wb_narush_cells_range:
+        #     for cell_in_row in row_in_range:
+        #         indexR = wb_narush_cells_range.index(row_in_range)
+        #         indexC = row_in_range.index(cell_in_row)
+        #         wb_narush_cells_range[indexR][indexC].value = 0
+
+
+
+        # сохраняю файлы и закрываю их
+        # wb_file_IC.save(self.file_IC)
+        # wb_file_IC.save(self.file_GASPS)
+        # wb_file_IC.close()
+        # wb_file_GASPS.close()
+
         pass
+
+
+
+
 
 
     # событие - нажатие на кнопку Выход
