@@ -148,19 +148,6 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 self.label_path_file_IC.setText(file_name)
                 self.label_path_file_IC.adjustSize()
 
-                # if self.label_path_file_IC.text() != self.label_path_file_GASPS.text():
-                #     print(self.flag_selected_file_IC)
-                #     self.flag_selected_file_IC = True
-                # else:
-                #     print(self.flag_selected_file_IC)
-                #     self.flag_selected_file_IC = False
-                #     self.pushButton_do_fill_data.setEnabled(False)
-                #
-                # if self.flag_selected_file_IC and self.flag_selected_file_GASPS:
-                #     self.pushButton_do_fill_data.setEnabled(True)
-                # else:
-                #     self.pushButton_do_fill_data.setEnabled(False)
-
         # нажата кнопка выбора ГАСПС
         if self.sender().objectName() == self.toolButton_select_file_GASPS.objectName():
             if file_name == '':
@@ -172,23 +159,11 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 self.label_path_file_GASPS.setText(file_name)
                 self.label_path_file_GASPS.adjustSize()
 
-                # if self.label_path_file_GASPS.text() != self.label_path_file_IC.text():
-                #     print(self.flag_selected_file_GASPS)
-                #     self.flag_selected_file_GASPS = True
-                # else:
-                #     print(self.flag_selected_file_GASPS)
-                #     self.flag_selected_file_GASPS = False
-                #     self.pushButton_do_fill_data.setEnabled(False)
-
-                # if self.flag_selected_file_GASPS and self.flag_selected_file_IC:
-                #     self.pushButton_do_fill_data.setEnabled(True)
-                # else:
-                #     self.pushButton_do_fill_data.setEnabled(False)
-
-        # if self.flag_selected_file_IC and self.flag_selected_file_GASPS:
-        #     self.pushButton_do_fill_data.setEnabled(True)
-        # else:
-        #     self.pushButton_do_fill_data.setEnabled(False)
+        if self.label_path_file_IC.text() != self.label_path_file_GASPS.text():
+            if self.text_empty_path_file not in (self.label_path_file_IC.text(), self.label_path_file_GASPS.text()):
+                self.pushButton_do_fill_data.setEnabled(True)
+        else:
+            self.pushButton_do_fill_data.setEnabled(False)
 
     # событие - нажатие на кнопку заполнения файла
     def do_fill_data(self):
