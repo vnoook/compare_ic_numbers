@@ -1,6 +1,8 @@
 # ...
 # INSTALL
 # pip install openpyxl
+# INSTALL
+# pip install PyQt5
 # ...
 
 import PyQt5
