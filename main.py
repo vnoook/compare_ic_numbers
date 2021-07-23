@@ -1,7 +1,6 @@
 # ...
 # INSTALL
 # pip install openpyxl
-# INSTALL
 # pip install PyQt5
 # ...
 
@@ -206,24 +205,31 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
     # событие - нажатие на кнопку заполнения файла
     def do_fill_data(self):
+        # self.file_IC = 'C:/soft/python3/__programki__/qt5_first_gui/111.xlsx'
+        # self.file_GASPS = 'C:/soft/python3/__programki__/qt5_first_gui/222.xlsx'
         self.file_IC = self.label_path_file_IC.text()
         self.file_GASPS = self.label_path_file_GASPS.text()
+        print(f'{self.file_IC = }')
+        print(f'{self.file_GASPS = }')
 
         # TODO
         # открывается файл "приёмник", назначается активный лист, выбирается диапазон ячеек
-        # wb_narush = openpyxl.load_workbook(file_template_xl)
-        # wb_narush_s = wb_narush.active
-        # wb_narush_cells_range = wb_narush_s[template_cells_range]
-        #
-        # print()
-        # print(f'файл {self.file_IC    = }')
-        # print(f'файл {self.file_GASPS = }')
-        # print(f'нажата кнопка {self.sender().objectName() = }')
+        wb_file_IC = openpyxl.load_workbook(self.file_IC)
+        wb_file_IC_s = wb_file_IC.active
+
+        wb_file_GASPS = openpyxl.load_workbook(self.file_GASPS)
+        wb_file_GASPS_s = wb_file_GASPS.active
+
+        pass
+
 
     # событие - нажатие на кнопку Выход
     def click_on_btn_exit(self):
         exit()
 
+def complite_combobox():
+    print('заполняю комбобоксы')
+    pass
 
 # создание основного окна
 def main_app():
