@@ -225,10 +225,11 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         print(f'{max_row_IC = }')
         print(f'{max_row_GASPS = }')
 
-        # for row in range(start_row, max_row + 1):
-        #     cell = ws.cell(row, data_col1)
-        #     content_cell = str(cell.value)
-        #
+        # for row_IC in range(1, max_row_IC + 1):
+        #     cell_IC = wb_file_GASPS_s.cell(row_IC, data_col1)
+        #     content_cell_IC = cell_IC.value
+        #     print(f'{content_cell_IC = }')
+
         # template_cells_range = 'E7:V33'
         # for row_in_range in wb_narush_cells_range:
         #     for cell_in_row in row_in_range:
