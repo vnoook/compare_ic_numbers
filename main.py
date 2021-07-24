@@ -205,15 +205,13 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
     # событие - нажатие на кнопку заполнения файла
     def do_fill_data(self):
-        # self.file_IC = 'C:/soft/python3/__programki__/qt5_first_gui/111.xlsx'
-        # self.file_GASPS = 'C:/soft/python3/__programki__/qt5_first_gui/222.xlsx'
         self.file_IC = self.label_path_file_IC.text()
         self.file_GASPS = self.label_path_file_GASPS.text()
         print(f'{self.file_IC = }')
         print(f'{self.file_GASPS = }')
 
         # открывается файл "приёмник", назначается активный лист, выбирается диапазон ячеек
-        wb_file_IC = openpyxl.load_workbook(self.file_IC)  #, read_only=True, data_only=True)
+        wb_file_IC = openpyxl.load_workbook(self.file_IC)
         wb_file_IC_s = wb_file_IC.active
 
         wb_file_GASPS = openpyxl.load_workbook(self.file_GASPS)
@@ -227,20 +225,35 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         print(f'{max_row_IC = }  {max_col_IC = }')
         print(f'{max_row_GASPS = }  {max_col_GASPS = }')
 
-        for row_IC in range(1, max_row_IC + 1):
-            for col_IC in range(1, max_col_IC + 1):
-                cell_IC = wb_file_IC_s.cell(row_IC, col_IC)
-                content_cell_IC = cell_IC.value
-                print(f'[{row_IC},{col_IC}]=[{content_cell_IC}]', sep='', end=' ... ')
-            print()
-        print()
-        print()
-        for row_GASPS in range(1, max_row_GASPS + 1):
-            for col_GASPS in range(1, max_col_GASPS + 1):
-                cell_GASPS = wb_file_GASPS_s.cell(row_GASPS, col_GASPS)
-                content_cell_GASPS = cell_GASPS.value
-                print(f'[{row_GASPS},{col_GASPS}]=[{content_cell_GASPS}]', sep='', end=' ... ')
-            print()
+        for col_IC in range(1, max_col_IC + 1):
+            cell_IC = wb_file_IC_s.cell(1, col_IC)
+            cell_liter_IC = cell_IC.column_letter
+            cell_digit_IC = cell_IC.col_idx
+            self.comboBox_liter_IC.addItem(cell_liter_IC)
+            self.comboBox_digit_IC.addItem(str(cell_digit_IC))
+        #     content_cell_IC = cell_IC.value
+        #     print(f'[{row_IC},{col_IC}]=[{content_cell_IC}]')
+
+        # for row_IC in range(1, max_row_IC + 1):
+        #     for col_IC in range(1, max_col_IC + 1):
+        #         cell_IC = wb_file_IC_s.cell(row_IC, col_IC)
+        #
+        #         cell_adr_IC1 = cell_IC.col_idx
+        #         cell_adr_IC2 = cell_IC.column_letter
+        #         print(f'{cell_adr_IC1 = }', sep='', end=' ... ')
+        #         print(f'{cell_adr_IC2 = }', sep='', end=' ... ')
+        #
+        #         content_cell_IC = cell_IC.value
+        #         print(f'[{row_IC},{col_IC}]=[{content_cell_IC}]')
+        #     print()
+        # print()
+        # print()
+        # for row_GASPS in range(1, max_row_GASPS + 1):
+        #     for col_GASPS in range(1, max_col_GASPS + 1):
+        #         cell_GASPS = wb_file_GASPS_s.cell(row_GASPS, col_GASPS)
+        #         content_cell_GASPS = cell_GASPS.value
+        #         print(f'[{row_GASPS},{col_GASPS}]=[{content_cell_GASPS}]', sep='', end=' ... ')
+        #     print()
 
         # template_cells_range = 'E7:V33'
         # for row_in_range in wb_narush_cells_range:
@@ -249,15 +262,11 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         #         indexC = row_in_range.index(cell_in_row)
         #         wb_narush_cells_range[indexR][indexC].value = 0
 
-
-
         # сохраняю файлы и закрываю их
         # wb_file_IC.save(self.file_IC)
         # wb_file_IC.save(self.file_GASPS)
         # wb_file_IC.close()
         # wb_file_GASPS.close()
-
-        pass
 
 
 
