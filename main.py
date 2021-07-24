@@ -221,14 +221,26 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
         # TODO
         max_row_IC = wb_file_IC_s.max_row
+        max_col_IC = wb_file_IC_s.max_column
         max_row_GASPS = wb_file_GASPS_s.max_row
-        print(f'{max_row_IC = }')
-        print(f'{max_row_GASPS = }')
+        max_col_GASPS = wb_file_GASPS_s.max_column
+        print(f'{max_row_IC = }  {max_col_IC = }')
+        print(f'{max_row_GASPS = }  {max_col_GASPS = }')
 
-        # for row_IC in range(1, max_row_IC + 1):
-        #     cell_IC = wb_file_GASPS_s.cell(row_IC, data_col1)
-        #     content_cell_IC = cell_IC.value
-        #     print(f'{content_cell_IC = }')
+        for row_IC in range(1, max_row_IC + 1):
+            for col_IC in range(1, max_col_IC + 1):
+                cell_IC = wb_file_IC_s.cell(row_IC, col_IC)
+                content_cell_IC = cell_IC.value
+                print(f'[{row_IC},{col_IC}]=[{content_cell_IC}]', sep='', end=' ... ')
+            print()
+        print()
+        print()
+        for row_GASPS in range(1, max_row_GASPS + 1):
+            for col_GASPS in range(1, max_col_GASPS + 1):
+                cell_GASPS = wb_file_GASPS_s.cell(row_GASPS, col_GASPS)
+                content_cell_GASPS = cell_GASPS.value
+                print(f'[{row_GASPS},{col_GASPS}]=[{content_cell_GASPS}]', sep='', end=' ... ')
+            print()
 
         # template_cells_range = 'E7:V33'
         # for row_in_range in wb_narush_cells_range:
