@@ -195,6 +195,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 self.comboBox_digit_IC.setEnabled(True)
                 self.comboBox_liter_GASPS.setEnabled(True)
                 self.comboBox_digit_GASPS.setEnabled(True)
+                self.do_fill_comboboxes()
         else:
             self.pushButton_do_fill_data.setEnabled(False)
             self.comboBox_liter_IC.setEnabled(False)
@@ -202,8 +203,8 @@ class Window(PyQt5.QtWidgets.QMainWindow):
             self.comboBox_liter_GASPS.setEnabled(False)
             self.comboBox_digit_GASPS.setEnabled(False)
 
-    # событие - нажатие на кнопку заполнения файла
-    def do_fill_data(self):
+    # заполнение комбобоксов
+    def do_fill_comboboxes(self):
         self.file_IC = self.label_path_file_IC.text()
         self.file_GASPS = self.label_path_file_GASPS.text()
 
@@ -231,53 +232,13 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         for row_GASPS in range(1, max_row_GASPS + 1):
             self.comboBox_digit_GASPS.addItem(str(wb_file_GASPS_s.cell(row_GASPS, 1).row))
 
-        # TODO
-
-        #     content_cell_IC = cell_IC.value
-        #     print(f'[{row_IC},{col_IC}]=[{content_cell_IC}]')
-
-        # for row_IC in range(1, max_row_IC + 1):
-        #     for col_IC in range(1, max_col_IC + 1):
-        #         cell_IC = wb_file_IC_s.cell(row_IC, col_IC)
-        #
-        #         cell_adr_IC1 = cell_IC.col_idx
-        #         cell_adr_IC2 = cell_IC.column_letter
-        #         print(f'{cell_adr_IC1 = }', sep='', end=' ... ')
-        #         print(f'{cell_adr_IC2 = }', sep='', end=' ... ')
-        #
-        #         content_cell_IC = cell_IC.value
-        #         print(f'[{row_IC},{col_IC}]=[{content_cell_IC}]')
-        #     print()
-        # print()
-        # print()
-        # for row_GASPS in range(1, max_row_GASPS + 1):
-        #     for col_GASPS in range(1, max_col_GASPS + 1):
-        #         cell_GASPS = wb_file_GASPS_s.cell(row_GASPS, col_GASPS)
-        #         content_cell_GASPS = cell_GASPS.value
-        #         print(f'[{row_GASPS},{col_GASPS}]=[{content_cell_GASPS}]', sep='', end=' ... ')
-        #     print()
-
-        # template_cells_range = 'E7:V33'
-        # for row_in_range in wb_narush_cells_range:
-        #     for cell_in_row in row_in_range:
-        #         indexR = wb_narush_cells_range.index(row_in_range)
-        #         indexC = row_in_range.index(cell_in_row)
-        #         wb_narush_cells_range[indexR][indexC].value = 0
-
-        # сохраняю файлы и закрываю их
-        # wb_file_IC.save(self.file_IC)
-        # wb_file_IC.save(self.file_GASPS)
-        # wb_file_IC.close()
-        # wb_file_GASPS.close()
+    # событие - нажатие на кнопку заполнения файла
+    def do_fill_data(self):
+        pass
 
     # событие - нажатие на кнопку Выход
     def click_on_btn_exit(self):
         exit()
-
-
-def complite_combobox():
-    print('заполняю комбобоксы')
-    pass
 
 
 # создание основного окна
@@ -291,3 +252,43 @@ def main_app():
 # запуск основного окна
 if __name__ == '__main__':
     main_app()
+
+# TODO
+#
+#     content_cell_IC = cell_IC.value
+#     print(f'[{row_IC},{col_IC}]=[{content_cell_IC}]')
+#
+# for row_IC in range(1, max_row_IC + 1):
+#     for col_IC in range(1, max_col_IC + 1):
+#         cell_IC = wb_file_IC_s.cell(row_IC, col_IC)
+#
+#         cell_adr_IC1 = cell_IC.col_idx
+#         cell_adr_IC2 = cell_IC.column_letter
+#         print(f'{cell_adr_IC1 = }', sep='', end=' ... ')
+#         print(f'{cell_adr_IC2 = }', sep='', end=' ... ')
+#
+#         content_cell_IC = cell_IC.value
+#         print(f'[{row_IC},{col_IC}]=[{content_cell_IC}]')
+#     print()
+# print()
+# print()
+# for row_GASPS in range(1, max_row_GASPS + 1):
+#     for col_GASPS in range(1, max_col_GASPS + 1):
+#         cell_GASPS = wb_file_GASPS_s.cell(row_GASPS, col_GASPS)
+#         content_cell_GASPS = cell_GASPS.value
+#         print(f'[{row_GASPS},{col_GASPS}]=[{content_cell_GASPS}]', sep='', end=' ... ')
+#     print()
+#
+# template_cells_range = 'E7:V33'
+# for row_in_range in wb_narush_cells_range:
+#     for cell_in_row in row_in_range:
+#         indexR = wb_narush_cells_range.index(row_in_range)
+#         indexC = row_in_range.index(cell_in_row)
+#         wb_narush_cells_range[indexR][indexC].value = 0
+#
+# сохраняю файлы и закрываю их
+# wb_file_IC.save(self.file_IC)
+# wb_file_IC.save(self.file_GASPS)
+# wb_file_IC.close()
+# wb_file_GASPS.close()
+
