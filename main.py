@@ -65,16 +65,18 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.comboBox_liter_IC = PyQt5.QtWidgets.QComboBox(self)
         self.comboBox_liter_IC.setObjectName('comboBox_liter_IC')
         self.comboBox_liter_IC.setGeometry(PyQt5.QtCore.QRect(10, 70, 70, 20))
-        self.comboBox_liter_IC.addItem('Колонка')
+        self.comboBox_liter_IC.addItem('пусто')
         self.comboBox_liter_IC.setEnabled(False)
+        self.comboBox_liter_IC.adjustSize()
         self.comboBox_liter_IC.setToolTip(self.comboBox_liter_IC.objectName())
 
         # comboBox_digit_IC
         self.comboBox_digit_IC = PyQt5.QtWidgets.QComboBox(self)
         self.comboBox_digit_IC.setObjectName('comboBox_digit_IC')
         self.comboBox_digit_IC.setGeometry(PyQt5.QtCore.QRect(90, 70, 70, 20))
-        self.comboBox_digit_IC.addItem('Строка')
+        self.comboBox_digit_IC.addItem('пусто')
         self.comboBox_digit_IC.setEnabled(False)
+        self.comboBox_digit_IC.adjustSize()
         self.comboBox_digit_IC.setToolTip(self.comboBox_digit_IC.objectName())
 
         # label_select_file_GASPS
@@ -112,16 +114,18 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.comboBox_liter_GASPS = PyQt5.QtWidgets.QComboBox(self)
         self.comboBox_liter_GASPS.setObjectName('comboBox_liter_GASPS')
         self.comboBox_liter_GASPS.setGeometry(PyQt5.QtCore.QRect(10, 180, 70, 20))
-        self.comboBox_liter_GASPS.addItem('Колонка')
+        self.comboBox_liter_GASPS.addItem('пусто')
         self.comboBox_liter_GASPS.setEnabled(False)
+        self.comboBox_liter_GASPS.adjustSize()
         self.comboBox_liter_GASPS.setToolTip(self.comboBox_liter_GASPS.objectName())
 
         # comboBox_digit_GASPS
         self.comboBox_digit_GASPS = PyQt5.QtWidgets.QComboBox(self)
         self.comboBox_digit_GASPS.setObjectName('comboBox_digit_GASPS')
         self.comboBox_digit_GASPS.setGeometry(PyQt5.QtCore.QRect(90, 180, 70, 20))
-        self.comboBox_digit_GASPS.addItem('Строка')
+        self.comboBox_digit_GASPS.addItem('пусто')
         self.comboBox_digit_GASPS.setEnabled(False)
+        self.comboBox_digit_GASPS.adjustSize()
         self.comboBox_digit_GASPS.setToolTip(self.comboBox_digit_GASPS.objectName())
 
         # pushButton_do_fill_data
@@ -234,6 +238,19 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
     # событие - нажатие на кнопку заполнения файла
     def do_fill_data(self):
+        print()
+        print(f'{self.comboBox_liter_IC.currentIndex() = }  {self.comboBox_digit_IC.currentIndex() = }')
+        print(f'{self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex())}'
+              f'{self.comboBox_digit_IC.itemText(self.comboBox_digit_IC.currentIndex())}')
+        print()
+        print(f'{self.comboBox_liter_GASPS.currentIndex() = }  {self.comboBox_digit_GASPS.currentIndex() = }')
+        print(f'{self.comboBox_liter_GASPS.itemText(self.comboBox_liter_GASPS.currentIndex())}'
+              f'{self.comboBox_digit_GASPS.itemText(self.comboBox_digit_GASPS.currentIndex())}')
+
+        # print(f'{self.sender().comboBox_liter_IC.itemText() = }')
+        # print(f'{self.sender().comboBox_digit_IC.itemText() = }')
+        # print(f'{self.sender().comboBox_liter_GASPS.itemText() = }')
+        # print(f'{self.sender().comboBox_digit_GASPS.itemText() = }')
         pass
 
     # событие - нажатие на кнопку Выход
