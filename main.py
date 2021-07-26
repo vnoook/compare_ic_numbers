@@ -152,10 +152,10 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
         # определение какая кнопка выбора файла нажата
         # если ИЦ, то выдать в окно про ИЦ
-        if self.sender().objectName() == self.toolButton_select_file_IC.objectName():
+        if self.objectName() == self.toolButton_select_file_IC.objectName():
             self.info_for_open_file = 'Выберите файл ИЦ формата Excel, версии старше 2007 года (.XLSX)'
         # если ГАСПС, то выдать в окно про ГАСПС
-        elif self.sender().objectName() == self.toolButton_select_file_GASPS.objectName():
+        elif self.objectName() == self.toolButton_select_file_GASPS.objectName():
             self.info_for_open_file = 'Выберите файл ГАС ПС формата Excel, версии старше 2007 года (.XLSX)'
 
         # непосредственное окно выбора файла и переменная для хранения пути файла
@@ -168,7 +168,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
         # выбор где и что менять исходя из выбора пользователя
         # нажата кнопка выбора ИЦ
-        if self.sender().objectName() == self.toolButton_select_file_IC.objectName():
+        if self.objectName() == self.toolButton_select_file_IC.objectName():
             if file_name == '':
                 self.label_path_file_IC.setText(old_path_of_selected_file_IC)
                 self.label_path_file_IC.adjustSize()
@@ -179,7 +179,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 self.label_path_file_IC.adjustSize()
 
         # нажата кнопка выбора ГАСПС
-        if self.sender().objectName() == self.toolButton_select_file_GASPS.objectName():
+        if self.objectName() == self.toolButton_select_file_GASPS.objectName():
             if file_name == '':
                 self.label_path_file_GASPS.setText(old_path_of_selected_file_GASPS)
                 self.label_path_file_GASPS.adjustSize()
@@ -215,30 +215,24 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         wb_file_GASPS = openpyxl.load_workbook(self.file_GASPS)
         wb_file_GASPS_s = wb_file_GASPS.active
 
-        # TODO
         max_row_IC = wb_file_IC_s.max_row
         max_col_IC = wb_file_IC_s.max_column
         max_row_GASPS = wb_file_GASPS_s.max_row
         max_col_GASPS = wb_file_GASPS_s.max_column
-        print(f'{max_row_IC = }  {max_col_IC = }  {self.file_IC = }')
-        print(f'{max_row_GASPS = }  {max_col_GASPS = }  {self.file_GASPS = }')
 
         for col_IC in range(1, max_col_IC + 1):
-            cell_IC = wb_file_IC_s.cell(1, col_IC)
-            cell_liter_IC = cell_IC.column_letter
-            self.comboBox_liter_IC.addItem(cell_liter_IC)
+            self.comboBox_liter_IC.addItem(wb_file_IC_s.cell(1, col_IC).column_letter)
 
         for row_IC in range(1, max_row_IC + 1):
-            cell_IC = wb_file_IC_s.cell(row_IC, 1)
-            cell_digit_IC = cell_IC.col_idx
-            cell_digit_IC = cell_IC.column
-            self.comboBox_digit_IC.addItem(str(cell_digit_IC))
+            self.comboBox_digit_IC.addItem(str(wb_file_IC_s.cell(row_IC, 1).row))
 
+        for col_GASPS in range(1, max_col_GASPS + 1):
+            self.comboBox_liter_GASPS.addItem(wb_file_GASPS_s.cell(1, col_GASPS).column_letter)
 
+        for row_GASPS in range(1, max_row_GASPS + 1):
+            self.comboBox_digit_GASPS.addItem(str(wb_file_GASPS_s.cell(row_GASPS, 1).row))
 
-
-
-
+        # TODO
 
 
 
