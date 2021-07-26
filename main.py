@@ -10,6 +10,7 @@ import sys
 import openpyxl
 import openpyxl.styles
 
+
 # класс главного окна
 class Window(PyQt5.QtWidgets.QMainWindow):
     # описание главного окна
@@ -107,8 +108,6 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.toolButton_select_file_GASPS.clicked.connect(self.select_file)
         self.toolButton_select_file_GASPS.setToolTip(self.toolButton_select_file_GASPS.objectName())
 
-
-
         # comboBox_liter_GASPS
         self.comboBox_liter_GASPS = PyQt5.QtWidgets.QComboBox(self)
         self.comboBox_liter_GASPS.setObjectName('comboBox_liter_GASPS')
@@ -168,7 +167,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
         # выбор где и что менять исходя из выбора пользователя
         # нажата кнопка выбора ИЦ
-        if self.objectName() == self.toolButton_select_file_IC.objectName():
+        if self.sender().objectName() == self.toolButton_select_file_IC.objectName():
             if file_name == '':
                 self.label_path_file_IC.setText(old_path_of_selected_file_IC)
                 self.label_path_file_IC.adjustSize()
@@ -179,7 +178,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 self.label_path_file_IC.adjustSize()
 
         # нажата кнопка выбора ГАСПС
-        if self.objectName() == self.toolButton_select_file_GASPS.objectName():
+        if self.sender().objectName() == self.toolButton_select_file_GASPS.objectName():
             if file_name == '':
                 self.label_path_file_GASPS.setText(old_path_of_selected_file_GASPS)
                 self.label_path_file_GASPS.adjustSize()
@@ -234,8 +233,6 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
         # TODO
 
-
-
         #     content_cell_IC = cell_IC.value
         #     print(f'[{row_IC},{col_IC}]=[{content_cell_IC}]')
 
@@ -273,18 +270,15 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # wb_file_IC.close()
         # wb_file_GASPS.close()
 
-
-
-
-
-
     # событие - нажатие на кнопку Выход
     def click_on_btn_exit(self):
         exit()
 
+
 def complite_combobox():
     print('заполняю комбобоксы')
     pass
+
 
 # создание основного окна
 def main_app():
