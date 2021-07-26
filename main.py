@@ -65,7 +65,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.comboBox_liter_IC = PyQt5.QtWidgets.QComboBox(self)
         self.comboBox_liter_IC.setObjectName('comboBox_liter_IC')
         self.comboBox_liter_IC.setGeometry(PyQt5.QtCore.QRect(10, 70, 70, 20))
-        self.comboBox_liter_IC.addItem('пусто')
+        self.comboBox_liter_IC.addItem('            ')
         self.comboBox_liter_IC.setEnabled(False)
         self.comboBox_liter_IC.adjustSize()
         self.comboBox_liter_IC.setToolTip(self.comboBox_liter_IC.objectName())
@@ -74,7 +74,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.comboBox_digit_IC = PyQt5.QtWidgets.QComboBox(self)
         self.comboBox_digit_IC.setObjectName('comboBox_digit_IC')
         self.comboBox_digit_IC.setGeometry(PyQt5.QtCore.QRect(90, 70, 70, 20))
-        self.comboBox_digit_IC.addItem('пусто')
+        self.comboBox_digit_IC.addItem('            ')
         self.comboBox_digit_IC.setEnabled(False)
         self.comboBox_digit_IC.adjustSize()
         self.comboBox_digit_IC.setToolTip(self.comboBox_digit_IC.objectName())
@@ -114,7 +114,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.comboBox_liter_GASPS = PyQt5.QtWidgets.QComboBox(self)
         self.comboBox_liter_GASPS.setObjectName('comboBox_liter_GASPS')
         self.comboBox_liter_GASPS.setGeometry(PyQt5.QtCore.QRect(10, 180, 70, 20))
-        self.comboBox_liter_GASPS.addItem('пусто')
+        self.comboBox_liter_GASPS.addItem('            ')
         self.comboBox_liter_GASPS.setEnabled(False)
         self.comboBox_liter_GASPS.adjustSize()
         self.comboBox_liter_GASPS.setToolTip(self.comboBox_liter_GASPS.objectName())
@@ -123,7 +123,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.comboBox_digit_GASPS = PyQt5.QtWidgets.QComboBox(self)
         self.comboBox_digit_GASPS.setObjectName('comboBox_digit_GASPS')
         self.comboBox_digit_GASPS.setGeometry(PyQt5.QtCore.QRect(90, 180, 70, 20))
-        self.comboBox_digit_GASPS.addItem('пусто')
+        self.comboBox_digit_GASPS.addItem('            ')
         self.comboBox_digit_GASPS.setEnabled(False)
         self.comboBox_digit_GASPS.adjustSize()
         self.comboBox_digit_GASPS.setToolTip(self.comboBox_digit_GASPS.objectName())
@@ -224,19 +224,19 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         max_row_GASPS = wb_file_GASPS_s.max_row
         max_col_GASPS = wb_file_GASPS_s.max_column
 
-        self.comboBox_liter_IC.removeItem(0)
+        # self.comboBox_liter_IC.removeItem(0)
         for col_IC in range(1, max_col_IC + 1):
             self.comboBox_liter_IC.addItem(wb_file_IC_s.cell(1, col_IC).column_letter)
 
-        self.comboBox_digit_IC.removeItem(0)
+        # self.comboBox_digit_IC.removeItem(0)
         for row_IC in range(1, max_row_IC + 1):
             self.comboBox_digit_IC.addItem(str(wb_file_IC_s.cell(row_IC, 1).row))
 
-        self.comboBox_liter_GASPS.removeItem(0)
+        # self.comboBox_liter_GASPS.removeItem(0)
         for col_GASPS in range(1, max_col_GASPS + 1):
             self.comboBox_liter_GASPS.addItem(wb_file_GASPS_s.cell(1, col_GASPS).column_letter)
 
-        self.comboBox_digit_GASPS.removeItem(0)
+        # self.comboBox_digit_GASPS.removeItem(0)
         for row_GASPS in range(1, max_row_GASPS + 1):
             self.comboBox_digit_GASPS.addItem(str(wb_file_GASPS_s.cell(row_GASPS, 1).row))
 
