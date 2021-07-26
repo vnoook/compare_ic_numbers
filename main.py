@@ -224,28 +224,50 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         max_row_GASPS = wb_file_GASPS_s.max_row
         max_col_GASPS = wb_file_GASPS_s.max_column
 
+        self.comboBox_liter_IC.removeItem(0)
         for col_IC in range(1, max_col_IC + 1):
             self.comboBox_liter_IC.addItem(wb_file_IC_s.cell(1, col_IC).column_letter)
 
+        self.comboBox_digit_IC.removeItem(0)
         for row_IC in range(1, max_row_IC + 1):
             self.comboBox_digit_IC.addItem(str(wb_file_IC_s.cell(row_IC, 1).row))
 
+        self.comboBox_liter_GASPS.removeItem(0)
         for col_GASPS in range(1, max_col_GASPS + 1):
             self.comboBox_liter_GASPS.addItem(wb_file_GASPS_s.cell(1, col_GASPS).column_letter)
 
+        self.comboBox_digit_GASPS.removeItem(0)
         for row_GASPS in range(1, max_row_GASPS + 1):
             self.comboBox_digit_GASPS.addItem(str(wb_file_GASPS_s.cell(row_GASPS, 1).row))
 
     # событие - нажатие на кнопку заполнения файла
     def do_fill_data(self):
-        print()
-        print(f'{self.comboBox_liter_IC.currentIndex() = }  {self.comboBox_digit_IC.currentIndex() = }')
-        print(f'{self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex())}'
-              f'{self.comboBox_digit_IC.itemText(self.comboBox_digit_IC.currentIndex())}')
-        print()
-        print(f'{self.comboBox_liter_GASPS.currentIndex() = }  {self.comboBox_digit_GASPS.currentIndex() = }')
-        print(f'{self.comboBox_liter_GASPS.itemText(self.comboBox_liter_GASPS.currentIndex())}'
-              f'{self.comboBox_digit_GASPS.itemText(self.comboBox_digit_GASPS.currentIndex())}')
+        # диапазон для обработки данных во всех файлах
+        range_file_IC = self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex()) +\
+                        self.comboBox_digit_IC.itemText(self.comboBox_digit_IC.currentIndex()) +\
+                        ':' +\
+                        self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex()) +\
+                        self.comboBox_digit_IC.itemText(self.comboBox_digit_IC.count()-1)
+
+        range_file_GASPS = self.comboBox_liter_GASPS.itemText(self.comboBox_liter_GASPS.currentIndex()) +\
+                        self.comboBox_digit_GASPS.itemText(self.comboBox_digit_GASPS.currentIndex()) +\
+                        ':' +\
+                        self.comboBox_liter_GASPS.itemText(self.comboBox_liter_GASPS.currentIndex()) +\
+                        self.comboBox_digit_GASPS.itemText(self.comboBox_digit_GASPS.count()-1)
+
+        print(f'{range_file_IC}')
+        print(f'{range_file_GASPS}')
+
+        # print(f'{self.comboBox_digit_IC.count() = }')
+        # print(f'{self.comboBox_digit_GASPS.Count() = }')
+
+
+
+
+
+
+        # print(f'{self.comboBox_liter_GASPS.itemText(self.comboBox_liter_GASPS.currentIndex())}'
+        #       f'{self.comboBox_digit_GASPS.itemText(self.comboBox_digit_GASPS.currentIndex())}')
 
         # print(f'{self.sender().comboBox_liter_IC.itemText() = }')
         # print(f'{self.sender().comboBox_digit_IC.itemText() = }')
@@ -303,6 +325,7 @@ if __name__ == '__main__':
 #         indexC = row_in_range.index(cell_in_row)
 #         wb_narush_cells_range[indexR][indexC].value = 0
 #
+
 # сохраняю файлы и закрываю их
 # wb_file_IC.save(self.file_IC)
 # wb_file_IC.save(self.file_GASPS)
