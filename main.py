@@ -207,8 +207,6 @@ class Window(PyQt5.QtWidgets.QMainWindow):
     def do_fill_data(self):
         self.file_IC = self.label_path_file_IC.text()
         self.file_GASPS = self.label_path_file_GASPS.text()
-        print(f'{self.file_IC = }')
-        print(f'{self.file_GASPS = }')
 
         # открывается файл "приёмник", назначается активный лист, выбирается диапазон ячеек
         wb_file_IC = openpyxl.load_workbook(self.file_IC)
@@ -222,15 +220,28 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         max_col_IC = wb_file_IC_s.max_column
         max_row_GASPS = wb_file_GASPS_s.max_row
         max_col_GASPS = wb_file_GASPS_s.max_column
-        print(f'{max_row_IC = }  {max_col_IC = }')
-        print(f'{max_row_GASPS = }  {max_col_GASPS = }')
+        print(f'{max_row_IC = }  {max_col_IC = }  {self.file_IC = }')
+        print(f'{max_row_GASPS = }  {max_col_GASPS = }  {self.file_GASPS = }')
 
         for col_IC in range(1, max_col_IC + 1):
             cell_IC = wb_file_IC_s.cell(1, col_IC)
             cell_liter_IC = cell_IC.column_letter
-            cell_digit_IC = cell_IC.col_idx
             self.comboBox_liter_IC.addItem(cell_liter_IC)
+
+        for row_IC in range(1, max_row_IC + 1):
+            cell_IC = wb_file_IC_s.cell(row_IC, 1)
+            cell_digit_IC = cell_IC.col_idx
+            cell_digit_IC = cell_IC.column
             self.comboBox_digit_IC.addItem(str(cell_digit_IC))
+
+
+
+
+
+
+
+
+
         #     content_cell_IC = cell_IC.value
         #     print(f'[{row_IC},{col_IC}]=[{content_cell_IC}]')
 
