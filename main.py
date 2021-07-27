@@ -22,6 +22,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.info_path_open_file = ''
         self.info_extention_open_file = 'Файлы Excel xlsx (*.xlsx)'
         self.text_empty_path_file = 'файл пока не выбран'
+        self.text_empty_combobox = 'не выбрано'
         self.file_IC = ''
         self.file_GASPS = ''
 
@@ -225,31 +226,32 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         max_col_GASPS = wb_file_GASPS_s.max_column
 
         self.comboBox_liter_IC.clear()
-        self.comboBox_liter_IC.addItem('не выбрано')
+        self.comboBox_liter_IC.addItem(self.text_empty_combobox)
         self.comboBox_liter_IC.adjustSize()
         for col_IC in range(1, max_col_IC + 1):
             self.comboBox_liter_IC.addItem(wb_file_IC_s.cell(1, col_IC).column_letter)
 
         self.comboBox_digit_IC.clear()
-        self.comboBox_digit_IC.addItem('не выбрано')
+        self.comboBox_digit_IC.addItem(self.text_empty_combobox)
         self.comboBox_digit_IC.adjustSize()
         for row_IC in range(1, max_row_IC + 1):
             self.comboBox_digit_IC.addItem(str(wb_file_IC_s.cell(row_IC, 1).row))
 
         self.comboBox_liter_GASPS.clear()
-        self.comboBox_liter_GASPS.addItem('не выбрано')
+        self.comboBox_liter_GASPS.addItem(self.text_empty_combobox)
         self.comboBox_liter_GASPS.adjustSize()
         for col_GASPS in range(1, max_col_GASPS + 1):
             self.comboBox_liter_GASPS.addItem(wb_file_GASPS_s.cell(1, col_GASPS).column_letter)
 
         self.comboBox_digit_GASPS.clear()
-        self.comboBox_digit_GASPS.addItem('не выбрано')
+        self.comboBox_digit_GASPS.addItem(self.text_empty_combobox)
         self.comboBox_digit_GASPS.adjustSize()
         for row_GASPS in range(1, max_row_GASPS + 1):
             self.comboBox_digit_GASPS.addItem(str(wb_file_GASPS_s.cell(row_GASPS, 1).row))
 
     # событие - нажатие на кнопку заполнения файла
     def do_fill_data(self):
+        print()
         # диапазон для обработки данных во всех файлах
         range_file_IC = self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex()) +\
                         self.comboBox_digit_IC.itemText(self.comboBox_digit_IC.currentIndex()) +\
@@ -269,7 +271,9 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # print(f'{self.comboBox_digit_IC.count() = }')
         # print(f'{self.comboBox_digit_GASPS.Count() = }')
 
-
+        # if self.text_empty_combobox in (range_file_IC, range_file_GASPS, 'не выбран комбобокс', 'не выбрано'):
+        if self.text_empty_combobox in ('не выбрано'):
+            print('не выбран комбобокс')
 
 
 
