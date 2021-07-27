@@ -251,41 +251,29 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
     # событие - нажатие на кнопку заполнения файла
     def do_fill_data(self):
-        print()
-        # диапазон для обработки данных во всех файлах
-        range_file_IC = self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex()) +\
-                        self.comboBox_digit_IC.itemText(self.comboBox_digit_IC.currentIndex()) +\
-                        ':' +\
-                        self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex()) +\
-                        self.comboBox_digit_IC.itemText(self.comboBox_digit_IC.count()-1)
+        if self.text_empty_combobox not in (self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex()),
+                                            self.comboBox_digit_IC.itemText(self.comboBox_digit_IC.currentIndex()),
+                                            self.comboBox_liter_GASPS.itemText(self.comboBox_liter_GASPS.currentIndex()),
+                                            self.comboBox_digit_GASPS.itemText(self.comboBox_digit_GASPS.currentIndex())):
+            # диапазоны для обработки данных в файлах
+            range_file_IC = self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex()) +\
+                            self.comboBox_digit_IC.itemText(self.comboBox_digit_IC.currentIndex()) +\
+                            ':' +\
+                            self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex()) +\
+                            self.comboBox_digit_IC.itemText(self.comboBox_digit_IC.count()-1)
 
-        range_file_GASPS = self.comboBox_liter_GASPS.itemText(self.comboBox_liter_GASPS.currentIndex()) +\
-                        self.comboBox_digit_GASPS.itemText(self.comboBox_digit_GASPS.currentIndex()) +\
-                        ':' +\
-                        self.comboBox_liter_GASPS.itemText(self.comboBox_liter_GASPS.currentIndex()) +\
-                        self.comboBox_digit_GASPS.itemText(self.comboBox_digit_GASPS.count()-1)
+            range_file_GASPS = self.comboBox_liter_GASPS.itemText(self.comboBox_liter_GASPS.currentIndex()) +\
+                            self.comboBox_digit_GASPS.itemText(self.comboBox_digit_GASPS.currentIndex()) +\
+                            ':' +\
+                            self.comboBox_liter_GASPS.itemText(self.comboBox_liter_GASPS.currentIndex()) +\
+                            self.comboBox_digit_GASPS.itemText(self.comboBox_digit_GASPS.count()-1)
+            print()
+            print(f'{range_file_IC}')
+            print(f'{range_file_GASPS}')
+        else:
+            print()
+            print(f'выберите все поля')
 
-        print(f'{range_file_IC}')
-        print(f'{range_file_GASPS}')
-
-        # print(f'{self.comboBox_digit_IC.count() = }')
-        # print(f'{self.comboBox_digit_GASPS.Count() = }')
-
-        # if self.text_empty_combobox in (range_file_IC, range_file_GASPS, 'не выбран комбобокс', 'не выбрано'):
-        if self.text_empty_combobox in ('не выбрано'):
-            print('не выбран комбобокс')
-
-
-
-
-        # print(f'{self.comboBox_liter_GASPS.itemText(self.comboBox_liter_GASPS.currentIndex())}'
-        #       f'{self.comboBox_digit_GASPS.itemText(self.comboBox_digit_GASPS.currentIndex())}')
-
-        # print(f'{self.sender().comboBox_liter_IC.itemText() = }')
-        # print(f'{self.sender().comboBox_digit_IC.itemText() = }')
-        # print(f'{self.sender().comboBox_liter_GASPS.itemText() = }')
-        # print(f'{self.sender().comboBox_digit_GASPS.itemText() = }')
-        pass
 
     # событие - нажатие на кнопку Выход
     def click_on_btn_exit(self):
