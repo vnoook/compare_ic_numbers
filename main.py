@@ -17,7 +17,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
     def __init__(self):
         super(Window, self).__init__()
 
-        # переменные
+        # переменные, атрибуты
         self.info_for_open_file = ''
         self.info_path_open_file = ''
         self.info_extention_open_file = 'Файлы Excel xlsx (*.xlsx)'
@@ -25,6 +25,10 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.text_empty_combobox = 'не выбрано'
         self.file_IC = ''
         self.file_GASPS = ''
+        self.wb_file_IC = ''
+        self.wb_file_IC_s = ''
+        self.wb_file_GASPS = ''
+        self.wb_file_GASPS_s = ''
 
         # главное окно, надпись на нём и размеры
         self.setWindowTitle('Сравнение номеров дел')
@@ -156,10 +160,10 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
         # определение какая кнопка выбора файла нажата
         # если ИЦ, то выдать в окно про ИЦ
-        if self.objectName() == self.toolButton_select_file_IC.objectName():
+        if self.sender().objectName() == self.toolButton_select_file_IC.objectName():
             self.info_for_open_file = 'Выберите файл ИЦ формата Excel, версии старше 2007 года (.XLSX)'
         # если ГАСПС, то выдать в окно про ГАСПС
-        elif self.objectName() == self.toolButton_select_file_GASPS.objectName():
+        elif self.sender().objectName() == self.toolButton_select_file_GASPS.objectName():
             self.info_for_open_file = 'Выберите файл ГАС ПС формата Excel, версии старше 2007 года (.XLSX)'
 
         # непосредственное окно выбора файла и переменная для хранения пути файла
@@ -214,40 +218,40 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.file_GASPS = self.label_path_file_GASPS.text()
 
         # открывается файл "приёмник", назначается активный лист, выбирается диапазон ячеек
-        wb_file_IC = openpyxl.load_workbook(self.file_IC)
-        wb_file_IC_s = wb_file_IC.active
+        self.wb_file_IC = openpyxl.load_workbook(self.file_IC)
+        self.wb_file_IC_s = self.wb_file_IC.active
 
-        wb_file_GASPS = openpyxl.load_workbook(self.file_GASPS)
-        wb_file_GASPS_s = wb_file_GASPS.active
+        self.wb_file_GASPS = openpyxl.load_workbook(self.file_GASPS)
+        self.wb_file_GASPS_s = self.wb_file_GASPS.active
 
-        max_row_IC = wb_file_IC_s.max_row
-        max_col_IC = wb_file_IC_s.max_column
-        max_row_GASPS = wb_file_GASPS_s.max_row
-        max_col_GASPS = wb_file_GASPS_s.max_column
+        max_row_IC = self.wb_file_IC_s.max_row
+        max_col_IC = self.wb_file_IC_s.max_column
+        max_row_GASPS = self.wb_file_GASPS_s.max_row
+        max_col_GASPS = self.wb_file_GASPS_s.max_column
 
         self.comboBox_liter_IC.clear()
         self.comboBox_liter_IC.addItem(self.text_empty_combobox)
         self.comboBox_liter_IC.adjustSize()
         for col_IC in range(1, max_col_IC + 1):
-            self.comboBox_liter_IC.addItem(wb_file_IC_s.cell(1, col_IC).column_letter)
+            self.comboBox_liter_IC.addItem(self.wb_file_IC_s.cell(1, col_IC).column_letter)
 
         self.comboBox_digit_IC.clear()
         self.comboBox_digit_IC.addItem(self.text_empty_combobox)
         self.comboBox_digit_IC.adjustSize()
         for row_IC in range(1, max_row_IC + 1):
-            self.comboBox_digit_IC.addItem(str(wb_file_IC_s.cell(row_IC, 1).row))
+            self.comboBox_digit_IC.addItem(str(self.wb_file_IC_s.cell(row_IC, 1).row))
 
         self.comboBox_liter_GASPS.clear()
         self.comboBox_liter_GASPS.addItem(self.text_empty_combobox)
         self.comboBox_liter_GASPS.adjustSize()
         for col_GASPS in range(1, max_col_GASPS + 1):
-            self.comboBox_liter_GASPS.addItem(wb_file_GASPS_s.cell(1, col_GASPS).column_letter)
+            self.comboBox_liter_GASPS.addItem(self.wb_file_GASPS_s.cell(1, col_GASPS).column_letter)
 
         self.comboBox_digit_GASPS.clear()
         self.comboBox_digit_GASPS.addItem(self.text_empty_combobox)
         self.comboBox_digit_GASPS.adjustSize()
         for row_GASPS in range(1, max_row_GASPS + 1):
-            self.comboBox_digit_GASPS.addItem(str(wb_file_GASPS_s.cell(row_GASPS, 1).row))
+            self.comboBox_digit_GASPS.addItem(str(self.wb_file_GASPS_s.cell(row_GASPS, 1).row))
 
     # событие - нажатие на кнопку заполнения файла
     def do_fill_data(self):
@@ -267,9 +271,30 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                             ':' +\
                             self.comboBox_liter_GASPS.itemText(self.comboBox_liter_GASPS.currentIndex()) +\
                             self.comboBox_digit_GASPS.itemText(self.comboBox_digit_GASPS.count()-1)
+
+            wb_IC_cells_range = self.wb_file_IC_s[range_file_IC]
+            wb_GASPS_cells_range = self.wb_file_GASPS_s[range_file_GASPS]
+
             print()
-            print(f'{range_file_IC}')
-            print(f'{range_file_GASPS}')
+            print(f'{range_file_IC = } ... {self.label_path_file_IC.text()}')
+            for row_in_range_IC in wb_IC_cells_range:
+                for cell_in_row_IC in row_in_range_IC:
+                    indexR_IC = wb_IC_cells_range.index(row_in_range_IC)
+                    indexC_IC = row_in_range_IC.index(cell_in_row_IC)
+                    print(f'{wb_IC_cells_range[indexR_IC][indexC_IC].value} = '
+                          f'{wb_IC_cells_range[indexR_IC][indexC_IC].value.split(";")}')
+
+            print()
+            print(f'{range_file_GASPS = } ... {self.label_path_file_GASPS.text()}')
+            for row_in_range_GASPS in wb_GASPS_cells_range:
+                for cell_in_row_GASPS in row_in_range_GASPS:
+                    indexR_GASPS = wb_GASPS_cells_range.index(row_in_range_GASPS)
+                    indexC_GASPS = row_in_range_GASPS.index(cell_in_row_GASPS)
+                    print(f'{wb_GASPS_cells_range[indexR_GASPS][indexC_GASPS].value} = '
+                          f' {wb_GASPS_cells_range[indexR_GASPS][indexC_GASPS].value.split(";")}')
+
+
+
         else:
             print()
             print(f'выберите все поля')
@@ -330,8 +355,8 @@ if __name__ == '__main__':
 #
 
 # сохраняю файлы и закрываю их
-# wb_file_IC.save(self.file_IC)
-# wb_file_IC.save(self.file_GASPS)
-# wb_file_IC.close()
-# wb_file_GASPS.close()
+# self.wb_file_IC.save(self.file_IC)
+# self.wb_file_IC.save(self.file_GASPS)
+# self.wb_file_IC.close()
+# self.wb_file_GASPS.close()
 
