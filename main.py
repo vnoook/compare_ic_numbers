@@ -275,13 +275,14 @@ class Window(PyQt5.QtWidgets.QMainWindow):
             wb_IC_cells_range = self.wb_file_IC_s[range_file_IC]
             wb_GASPS_cells_range = self.wb_file_GASPS_s[range_file_GASPS]
 
+            # TODO
             print()
             print(f'{range_file_IC = } ... {self.label_path_file_IC.text()}')
             for row_in_range_IC in wb_IC_cells_range:
                 for cell_in_row_IC in row_in_range_IC:
                     indexR_IC = wb_IC_cells_range.index(row_in_range_IC)
                     indexC_IC = row_in_range_IC.index(cell_in_row_IC)
-                    print(f'{wb_IC_cells_range[indexR_IC][indexC_IC].value} = '
+                    print(f'{wb_IC_cells_range[indexR_IC][indexC_IC].value}  = '
                           f'{wb_IC_cells_range[indexR_IC][indexC_IC].value.split(";")}')
 
             print()
@@ -290,10 +291,8 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 for cell_in_row_GASPS in row_in_range_GASPS:
                     indexR_GASPS = wb_GASPS_cells_range.index(row_in_range_GASPS)
                     indexC_GASPS = row_in_range_GASPS.index(cell_in_row_GASPS)
-                    print(f'{wb_GASPS_cells_range[indexR_GASPS][indexC_GASPS].value} = '
+                    print(f'{wb_GASPS_cells_range[indexR_GASPS][indexC_GASPS].value}  = '
                           f' {wb_GASPS_cells_range[indexR_GASPS][indexC_GASPS].value.split(";")}')
-
-
 
         else:
             print()
@@ -316,8 +315,6 @@ def main_app():
 # запуск основного окна
 if __name__ == '__main__':
     main_app()
-
-# TODO
 
 # self.comboBox_2.clear()
 # self.comboBox_2.addItems(list1)
