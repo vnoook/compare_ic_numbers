@@ -282,8 +282,8 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 for cell_in_row_IC in row_in_range_IC:
                     indexR_IC = wb_IC_cells_range.index(row_in_range_IC)
                     indexC_IC = row_in_range_IC.index(cell_in_row_IC)
-                    print(f'{wb_IC_cells_range[indexR_IC][indexC_IC].value}  = '
-                          f'{wb_IC_cells_range[indexR_IC][indexC_IC].value.split(";")}')
+                    wb_IC_cell_value = wb_IC_cells_range[indexR_IC][indexC_IC].value
+                    print(f'{type(wb_IC_cell_value)}  {wb_IC_cell_value}  =  {(wb_IC_cell_value.split(";"))}')
 
             print()
             print(f'{range_file_GASPS = } ... {self.label_path_file_GASPS.text()}')
@@ -291,8 +291,8 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 for cell_in_row_GASPS in row_in_range_GASPS:
                     indexR_GASPS = wb_GASPS_cells_range.index(row_in_range_GASPS)
                     indexC_GASPS = row_in_range_GASPS.index(cell_in_row_GASPS)
-                    print(f'{wb_GASPS_cells_range[indexR_GASPS][indexC_GASPS].value}  = '
-                          f' {wb_GASPS_cells_range[indexR_GASPS][indexC_GASPS].value.split(";")}')
+                    wb_GASPS_cell_value = wb_GASPS_cells_range[indexR_GASPS][indexC_GASPS].value
+                    print(f'{type(wb_GASPS_cell_value)}  {wb_GASPS_cell_value}  =  {wb_GASPS_cell_value.split(";")}')
 
         else:
             print()
