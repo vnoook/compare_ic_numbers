@@ -255,6 +255,8 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
     # событие - нажатие на кнопку заполнения файла
     def do_fill_data(self):
+        set_data_IC = set()
+        set_data_GASPS = set()
         if self.text_empty_combobox not in (self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex()),
                                             self.comboBox_digit_IC.itemText(self.comboBox_digit_IC.currentIndex()),
                                             self.comboBox_liter_GASPS.itemText(self.comboBox_liter_GASPS.currentIndex()),
@@ -283,7 +285,10 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                     indexR_IC = wb_IC_cells_range.index(row_in_range_IC)
                     indexC_IC = row_in_range_IC.index(cell_in_row_IC)
                     wb_IC_cell_value = wb_IC_cells_range[indexR_IC][indexC_IC].value
-                    print(f'{type(wb_IC_cell_value)}  {wb_IC_cell_value}  =  {(wb_IC_cell_value.split(";"))}')
+                    # print(f'{type(wb_IC_cell_value)}  {wb_IC_cell_value}  =  {wb_IC_cell_value.split(";")}')
+                    for mud in wb_IC_cell_value.split(";"):
+                        set_data_IC.add(mud.strip().replace('.', ''))
+            print(*set_data_IC)
 
             print()
             print(f'{range_file_GASPS = } ... {self.label_path_file_GASPS.text()}')
@@ -292,7 +297,10 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                     indexR_GASPS = wb_GASPS_cells_range.index(row_in_range_GASPS)
                     indexC_GASPS = row_in_range_GASPS.index(cell_in_row_GASPS)
                     wb_GASPS_cell_value = wb_GASPS_cells_range[indexR_GASPS][indexC_GASPS].value
-                    print(f'{type(wb_GASPS_cell_value)}  {wb_GASPS_cell_value}  =  {wb_GASPS_cell_value.split(";")}')
+                    # print(f'{type(wb_GASPS_cell_value)}  {wb_GASPS_cell_value}  =  {wb_GASPS_cell_value.split(";")}')
+                    for mud in wb_GASPS_cell_value.split(";"):
+                        set_data_GASPS.add(mud.strip().replace('.', ''))
+            print(*set_data_GASPS)
 
         else:
             print()
