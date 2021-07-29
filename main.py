@@ -288,7 +288,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                     # print(f'{type(wb_IC_cell_value)}  {wb_IC_cell_value}  =  {wb_IC_cell_value.split(";")}')
                     for mud in wb_IC_cell_value.split(";"):
                         set_data_IC.add(mud.strip().replace('.', ''))
-            print(*set_data_IC)
+            # print(set_data_IC)
 
             print()
             print(f'{range_file_GASPS = } ... {self.label_path_file_GASPS.text()}')
@@ -300,11 +300,12 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                     # print(f'{type(wb_GASPS_cell_value)}  {wb_GASPS_cell_value}  =  {wb_GASPS_cell_value.split(";")}')
                     for mud in wb_GASPS_cell_value.split(";"):
                         set_data_GASPS.add(mud.strip().replace('.', ''))
-            print(*set_data_GASPS)
+            # print(set_data_GASPS)
 
         else:
             print()
             print(f'выберите все поля')
+        print('_'*50)
 
 
     # событие - нажатие на кнопку Выход
