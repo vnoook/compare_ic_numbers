@@ -333,3 +333,29 @@ def main_app():
 # запуск основного окна
 if __name__ == '__main__':
     main_app()
+
+
+# cell = ws.cell(row, data_col2)
+# cell.fill = openpyxl.styles.PatternFill(start_color='878787', end_color='878787', fill_type='solid')
+#
+# # общие значения
+# common_values = set1.intersection(set2)
+# list4 = list(common_values)
+# list4.sort()
+# for list4_value in list4:
+#     ws.cell(start_row + list4.index(list4_value), 6).value = list4_value
+#
+# # пересечение 1
+# diff_set1 = set1.difference(set2)
+# list5 = list(diff_set1)
+# list5.sort()
+# for list5_value in list5:
+#     ws.cell(start_row + list5.index(list5_value), 7).value = list5_value
+#
+# # пересечение 2
+# diff_set2 = set2.difference(set1)
+# list6 = list(diff_set2)
+# list6.sort()
+# for list6_value in list6:
+#     ws.cell(start_row + list6.index(list6_value), 8).value = list6_value
+
