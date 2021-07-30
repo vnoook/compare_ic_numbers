@@ -2,6 +2,8 @@
 # INSTALL
 # pip install openpyxl
 # pip install PyQt5
+# COMPILE
+# pyinstaller -F file.py
 # ...
 
 import PyQt5
@@ -288,7 +290,6 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                     # print(f'{type(wb_IC_cell_value)}  {wb_IC_cell_value}  =  {wb_IC_cell_value.split(";")}')
                     for mud in wb_IC_cell_value.split(";"):
                         set_data_IC.add(mud.strip().replace('.', ''))
-            # print(set_data_IC)
 
             print()
             print(f'{range_file_GASPS = } ... {self.label_path_file_GASPS.text()}')
@@ -300,7 +301,15 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                     # print(f'{type(wb_GASPS_cell_value)}  {wb_GASPS_cell_value}  =  {wb_GASPS_cell_value.split(";")}')
                     for mud in wb_GASPS_cell_value.split(";"):
                         set_data_GASPS.add(mud.strip().replace('.', ''))
+
+            # print(set_data_IC)
             # print(set_data_GASPS)
+
+            # сохраняю файлы и закрываю их
+            # self.wb_file_IC.save(self.file_IC)
+            # self.wb_file_IC.save(self.file_GASPS)
+            # self.wb_file_IC.close()
+            # self.wb_file_GASPS.close()
 
         else:
             print()
@@ -324,45 +333,3 @@ def main_app():
 # запуск основного окна
 if __name__ == '__main__':
     main_app()
-
-# self.comboBox_2.clear()
-# self.comboBox_2.addItems(list1)
-#
-#     content_cell_IC = cell_IC.value
-#     print(f'[{row_IC},{col_IC}]=[{content_cell_IC}]')
-#
-# for row_IC in range(1, max_row_IC + 1):
-#     for col_IC in range(1, max_col_IC + 1):
-#         cell_IC = wb_file_IC_s.cell(row_IC, col_IC)
-#
-#         cell_adr_IC1 = cell_IC.col_idx
-#         cell_adr_IC2 = cell_IC.column_letter
-#         print(f'{cell_adr_IC1 = }', sep='', end=' ... ')
-#         print(f'{cell_adr_IC2 = }', sep='', end=' ... ')
-#
-#         content_cell_IC = cell_IC.value
-#         print(f'[{row_IC},{col_IC}]=[{content_cell_IC}]')
-#     print()
-# print()
-# print()
-# for row_GASPS in range(1, max_row_GASPS + 1):
-#     for col_GASPS in range(1, max_col_GASPS + 1):
-#         cell_GASPS = wb_file_GASPS_s.cell(row_GASPS, col_GASPS)
-#         content_cell_GASPS = cell_GASPS.value
-#         print(f'[{row_GASPS},{col_GASPS}]=[{content_cell_GASPS}]', sep='', end=' ... ')
-#     print()
-#
-# template_cells_range = 'E7:V33'
-# for row_in_range in wb_narush_cells_range:
-#     for cell_in_row in row_in_range:
-#         indexR = wb_narush_cells_range.index(row_in_range)
-#         indexC = row_in_range.index(cell_in_row)
-#         wb_narush_cells_range[indexR][indexC].value = 0
-#
-
-# сохраняю файлы и закрываю их
-# self.wb_file_IC.save(self.file_IC)
-# self.wb_file_IC.save(self.file_GASPS)
-# self.wb_file_IC.close()
-# self.wb_file_GASPS.close()
-
