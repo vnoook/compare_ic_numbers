@@ -265,7 +265,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         set_data_IC = set()
         set_data_GASPS = set()
 
-
+        # проверка на то что все комбобоксы заполнены
         if self.text_empty_combobox not in (self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex()),
                                             self.comboBox_digit_IC.itemText(self.comboBox_digit_IC.currentIndex()),
                                             self.comboBox_liter_GASPS.itemText(self.comboBox_liter_GASPS.currentIndex()),
@@ -283,20 +283,11 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                             self.comboBox_liter_GASPS.itemText(self.comboBox_liter_GASPS.currentIndex()) +\
                             self.comboBox_digit_GASPS.itemText(self.comboBox_digit_GASPS.count()-1)
 
+            # сформированные диапазоны из выбранных комбобоксов
             wb_IC_cells_range = self.wb_file_IC_s[range_file_IC]
             wb_GASPS_cells_range = self.wb_file_GASPS_s[range_file_GASPS]
 
-            # print()
-            # print(f'{range_file_IC = } ... {self.label_path_file_IC.text()}')
-            for row_in_range_IC in wb_IC_cells_range:
-                for cell_in_row_IC in row_in_range_IC:
-                    indexR_IC = wb_IC_cells_range.index(row_in_range_IC)
-                    indexC_IC = row_in_range_IC.index(cell_in_row_IC)
-                    wb_IC_cell_value = wb_IC_cells_range[indexR_IC][indexC_IC].value
-                    # print(f'{type(wb_IC_cell_value)}  {wb_IC_cell_value}  =  {wb_IC_cell_value.split(";")}')
-                    for mud in wb_IC_cell_value.split(";"):
-                        set_data_IC.add(mud.strip().replace('.', ''))
-
+            # формирование множества из обработанных значений ячеек GASPS
             # print()
             # print(f'{range_file_GASPS = } ... {self.label_path_file_GASPS.text()}')
             for row_in_range_GASPS in wb_GASPS_cells_range:
@@ -305,17 +296,23 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                     indexC_GASPS = row_in_range_GASPS.index(cell_in_row_GASPS)
                     wb_GASPS_cell_value = wb_GASPS_cells_range[indexR_GASPS][indexC_GASPS].value
                     # print(f'{type(wb_GASPS_cell_value)}  {wb_GASPS_cell_value}  =  {wb_GASPS_cell_value.split(";")}')
-                    for mud in wb_GASPS_cell_value.split(";"):
-                        set_data_GASPS.add(mud.strip().replace('.', ''))
+                    for ikud in wb_GASPS_cell_value.split(";"):
+                        set_data_GASPS.add(ikud.strip().replace('.', ''))
 
             # TODO
-
             # print(set_data_IC)
             # print(set_data_GASPS)
 
-            for ikud in set_data_GASPS:
-                if ikud in set_data_IC:
-                    print(ikud)
+            for row_in_range_IC in wb_IC_cells_range:
+                for cell_in_row_IC in row_in_range_IC:
+                    indexR_IC = wb_IC_cells_range.index(row_in_range_IC)
+                    indexC_IC = row_in_range_IC.index(cell_in_row_IC)
+                    wb_IC_cell_value = wb_IC_cells_range[indexR_IC][indexC_IC].value
+                    for ikud in wb_IC_cell_value.split(";"):
+                        ikud_split = ikud.strip().replace('.', '').replace(' ', '')
+                        set_data_IC.add(ikud_split)
+                        if ikud_split in set_data_GASPS:
+                            print(ikud)
 
             # сохраняю файлы и закрываю их
             # self.wb_file_IC.save(self.file_IC)
