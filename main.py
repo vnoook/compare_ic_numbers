@@ -312,13 +312,16 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                         ikud_split = ikud.strip().replace('.', '').replace(' ', '')
                         set_data_IC.add(ikud_split)
                         if ikud_split in set_data_GASPS:
-                            print(ikud)
+                            # print()
+                            # print(ikud)
+                            # print(wb_IC_cells_range[indexR_IC][indexC_IC].coordinate)  # wb_narush_cells_range[indexR][indexC].coordinate
+                            wb_IC_cells_range[indexR_IC][indexC_IC].fill = openpyxl.styles.PatternFill(start_color='FF0000', end_color='FF0000', fill_type='solid')
 
             # сохраняю файлы и закрываю их
-            # self.wb_file_IC.save(self.file_IC)
-            # self.wb_file_IC.save(self.file_GASPS)
-            # self.wb_file_IC.close()
-            # self.wb_file_GASPS.close()
+            self.wb_file_IC.save(self.file_IC)
+            self.wb_file_IC.save(self.file_GASPS)
+            self.wb_file_IC.close()
+            self.wb_file_GASPS.close()
 
         else:
             print()
