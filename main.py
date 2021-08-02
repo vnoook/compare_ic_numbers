@@ -199,6 +199,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 self.label_path_file_GASPS.setText(file_name)
                 self.label_path_file_GASPS.adjustSize()
 
+        # активация и деактивация объектов на форме зависящее от выбраны ли все файлы и они разные
         if self.label_path_file_IC.text() != self.label_path_file_GASPS.text():
             if self.text_empty_path_file not in (self.label_path_file_IC.text(), self.label_path_file_GASPS.text()):
                 self.pushButton_do_fill_data.setEnabled(True)
@@ -216,6 +217,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
     # заполнение комбобоксов
     def do_fill_comboboxes(self):
+        # присвоение файлов
         self.file_IC = self.label_path_file_IC.text()
         self.file_GASPS = self.label_path_file_GASPS.text()
 
@@ -226,11 +228,13 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.wb_file_GASPS = openpyxl.load_workbook(self.file_GASPS)
         self.wb_file_GASPS_s = self.wb_file_GASPS.active
 
+        # вычисление максимальных строк и колонок в выбранных файлах
         max_row_IC = self.wb_file_IC_s.max_row
         max_col_IC = self.wb_file_IC_s.max_column
         max_row_GASPS = self.wb_file_GASPS_s.max_row
         max_col_GASPS = self.wb_file_GASPS_s.max_column
 
+        # очистка комбобоксов и заполнение их буквами и числами существующим в файлах
         self.comboBox_liter_IC.clear()
         self.comboBox_liter_IC.addItem(self.text_empty_combobox)
         self.comboBox_liter_IC.adjustSize()
@@ -257,13 +261,16 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
     # событие - нажатие на кнопку заполнения файла
     def do_fill_data(self):
+        # определение множеств
         set_data_IC = set()
         set_data_GASPS = set()
+
+
         if self.text_empty_combobox not in (self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex()),
                                             self.comboBox_digit_IC.itemText(self.comboBox_digit_IC.currentIndex()),
                                             self.comboBox_liter_GASPS.itemText(self.comboBox_liter_GASPS.currentIndex()),
                                             self.comboBox_digit_GASPS.itemText(self.comboBox_digit_GASPS.currentIndex())):
-            # диапазоны для обработки данных в файлах
+            # формируются диапазоны для обработки данных в файлах из комбобоксов
             range_file_IC = self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex()) +\
                             self.comboBox_digit_IC.itemText(self.comboBox_digit_IC.currentIndex()) +\
                             ':' +\
@@ -279,9 +286,8 @@ class Window(PyQt5.QtWidgets.QMainWindow):
             wb_IC_cells_range = self.wb_file_IC_s[range_file_IC]
             wb_GASPS_cells_range = self.wb_file_GASPS_s[range_file_GASPS]
 
-            # TODO
-            print()
-            print(f'{range_file_IC = } ... {self.label_path_file_IC.text()}')
+            # print()
+            # print(f'{range_file_IC = } ... {self.label_path_file_IC.text()}')
             for row_in_range_IC in wb_IC_cells_range:
                 for cell_in_row_IC in row_in_range_IC:
                     indexR_IC = wb_IC_cells_range.index(row_in_range_IC)
@@ -291,8 +297,8 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                     for mud in wb_IC_cell_value.split(";"):
                         set_data_IC.add(mud.strip().replace('.', ''))
 
-            print()
-            print(f'{range_file_GASPS = } ... {self.label_path_file_GASPS.text()}')
+            # print()
+            # print(f'{range_file_GASPS = } ... {self.label_path_file_GASPS.text()}')
             for row_in_range_GASPS in wb_GASPS_cells_range:
                 for cell_in_row_GASPS in row_in_range_GASPS:
                     indexR_GASPS = wb_GASPS_cells_range.index(row_in_range_GASPS)
@@ -302,8 +308,14 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                     for mud in wb_GASPS_cell_value.split(";"):
                         set_data_GASPS.add(mud.strip().replace('.', ''))
 
+            # TODO
+
             # print(set_data_IC)
             # print(set_data_GASPS)
+
+            for ikud in set_data_GASPS:
+                if ikud in set_data_IC:
+                    print(ikud)
 
             # сохраняю файлы и закрываю их
             # self.wb_file_IC.save(self.file_IC)
