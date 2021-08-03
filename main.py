@@ -195,7 +195,6 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 self.label_path_file_GASPS.adjustSize()
             else:
                 old_path_of_selected_file_GASPS = self.label_path_file_GASPS.text()
-
                 self.label_path_file_GASPS.setText(file_name)
                 self.label_path_file_GASPS.adjustSize()
 
@@ -224,7 +223,6 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # открывается файл "приёмник", назначается активный лист, выбирается диапазон ячеек
         self.wb_file_IC = openpyxl.load_workbook(self.file_IC)
         self.wb_file_IC_s = self.wb_file_IC.active
-
         self.wb_file_GASPS = openpyxl.load_workbook(self.file_GASPS)
         self.wb_file_GASPS_s = self.wb_file_GASPS.active
 
@@ -293,10 +291,8 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                     indexR_GASPS = wb_GASPS_cells_range.index(row_in_range_GASPS)
                     indexC_GASPS = row_in_range_GASPS.index(cell_in_row_GASPS)
                     wb_GASPS_cell_value = wb_GASPS_cells_range[indexR_GASPS][indexC_GASPS].value
-                    # print(f'{type(wb_GASPS_cell_value)}  {wb_GASPS_cell_value}  =  {wb_GASPS_cell_value.split(";")}')
                     for ikud in wb_GASPS_cell_value.split(";"):
                         set_data_GASPS.add(ikud.strip().replace('.', ''))
-            # print(f'{set_data_GASPS = }')
 
             for row_in_range_IC in wb_IC_cells_range:
                 for cell_in_row_IC in row_in_range_IC:
@@ -311,7 +307,6 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                             wb_IC_cells_range[indexR_IC][indexC_IC].fill = openpyxl.styles.PatternFill(start_color='FF0000', end_color='FF0000', fill_type='solid')
                         elif ikud_split not in set_data_GASPS:
                             wb_IC_cells_range[indexR_IC][indexC_IC].fill = openpyxl.styles.PatternFill(start_color='878787', end_color='878787', fill_type='solid')
-            # print(f'{set_data_IC = }')
 
             # сохраняю файлы и закрываю их
             self.wb_file_IC.save(self.file_IC)
@@ -341,29 +336,3 @@ def main_app():
 # запуск основного окна
 if __name__ == '__main__':
     main_app()
-
-
-# cell = ws.cell(row, data_col2)
-# cell.fill = openpyxl.styles.PatternFill(start_color='878787', end_color='878787', fill_type='solid')
-#
-# # общие значения
-# common_values = set1.intersection(set2)
-# list4 = list(common_values)
-# list4.sort()
-# for list4_value in list4:
-#     ws.cell(start_row + list4.index(list4_value), 6).value = list4_value
-#
-# # пересечение 1
-# diff_set1 = set1.difference(set2)
-# list5 = list(diff_set1)
-# list5.sort()
-# for list5_value in list5:
-#     ws.cell(start_row + list5.index(list5_value), 7).value = list5_value
-#
-# # пересечение 2
-# diff_set2 = set2.difference(set1)
-# list6 = list(diff_set2)
-# list6.sort()
-# for list6_value in list6:
-#     ws.cell(start_row + list6.index(list6_value), 8).value = list6_value
-
