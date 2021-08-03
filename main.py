@@ -288,8 +288,6 @@ class Window(PyQt5.QtWidgets.QMainWindow):
             wb_GASPS_cells_range = self.wb_file_GASPS_s[range_file_GASPS]
 
             # формирование множества из обработанных значений ячеек GASPS
-            # print()
-            # print(f'{range_file_GASPS = } ... {self.label_path_file_GASPS.text()}')
             for row_in_range_GASPS in wb_GASPS_cells_range:
                 for cell_in_row_GASPS in row_in_range_GASPS:
                     indexR_GASPS = wb_GASPS_cells_range.index(row_in_range_GASPS)
@@ -298,10 +296,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                     # print(f'{type(wb_GASPS_cell_value)}  {wb_GASPS_cell_value}  =  {wb_GASPS_cell_value.split(";")}')
                     for ikud in wb_GASPS_cell_value.split(";"):
                         set_data_GASPS.add(ikud.strip().replace('.', ''))
-
-            # TODO
-            # print(set_data_IC)
-            # print(set_data_GASPS)
+            # print(f'{set_data_GASPS = }')
 
             for row_in_range_IC in wb_IC_cells_range:
                 for cell_in_row_IC in row_in_range_IC:
@@ -312,14 +307,15 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                         ikud_split = ikud.strip().replace('.', '').replace(' ', '')
                         set_data_IC.add(ikud_split)
                         if ikud_split in set_data_GASPS:
-                            # print()
-                            # print(ikud)
-                            # print(wb_IC_cells_range[indexR_IC][indexC_IC].coordinate)  # wb_narush_cells_range[indexR][indexC].coordinate
+                            print(wb_IC_cells_range[indexR_IC][indexC_IC].coordinate)
                             wb_IC_cells_range[indexR_IC][indexC_IC].fill = openpyxl.styles.PatternFill(start_color='FF0000', end_color='FF0000', fill_type='solid')
+                        elif ikud_split not in set_data_GASPS:
+                            wb_IC_cells_range[indexR_IC][indexC_IC].fill = openpyxl.styles.PatternFill(start_color='878787', end_color='878787', fill_type='solid')
+            # print(f'{set_data_IC = }')
 
             # сохраняю файлы и закрываю их
             self.wb_file_IC.save(self.file_IC)
-            self.wb_file_IC.save(self.file_GASPS)
+            # self.wb_file_GASPS.save(self.file_GASPS)
             self.wb_file_IC.close()
             self.wb_file_GASPS.close()
 
