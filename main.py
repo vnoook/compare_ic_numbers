@@ -303,7 +303,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                         ikud_split = ikud.strip().replace('.', '').replace(' ', '')
                         set_data_IC.add(ikud_split)
                         if ikud_split in set_data_GASPS:
-                            print(wb_IC_cells_range[indexR_IC][indexC_IC].coordinate)
+                            print(f'{wb_IC_cells_range[indexR_IC][indexC_IC].coordinate} ... {wb_IC_cell_value} ... {type(wb_IC_cell_value)}')
                             wb_IC_cells_range[indexR_IC][indexC_IC].fill = openpyxl.styles.PatternFill(start_color='FF0000', end_color='FF0000', fill_type='solid')
                         elif ikud_split not in set_data_GASPS:
                             wb_IC_cells_range[indexR_IC][indexC_IC].fill = openpyxl.styles.PatternFill(start_color='878787', end_color='878787', fill_type='solid')
@@ -313,11 +313,11 @@ class Window(PyQt5.QtWidgets.QMainWindow):
             # self.wb_file_GASPS.save(self.file_GASPS)
             self.wb_file_IC.close()
             self.wb_file_GASPS.close()
+            print('_'*20, ' файлы сохранены и закрыты ', '_'*20)
 
         else:
             print()
             print(f'выберите все поля')
-        print('_'*50)
 
 
     # событие - нажатие на кнопку Выход
