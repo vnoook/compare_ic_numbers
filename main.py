@@ -299,11 +299,16 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                     indexR_IC = wb_IC_cells_range.index(row_in_range_IC)
                     indexC_IC = row_in_range_IC.index(cell_in_row_IC)
                     wb_IC_cell_value = wb_IC_cells_range[indexR_IC][indexC_IC].value
+                    print(f'{wb_IC_cells_range[indexR_IC][indexC_IC].coordinate}')
+                    print(f'{wb_IC_cell_value}')
+                    print(f'{type(wb_IC_cell_value)}')
+                    print(f'{wb_IC_cells_range[indexR_IC][indexC_IC].coordinate} ... {wb_IC_cell_value} ... {type(wb_IC_cell_value)}')
+
+                    qweqwe
                     for ikud in wb_IC_cell_value.split(";"):
                         ikud_split = ikud.strip().replace('.', '').replace(' ', '')
                         set_data_IC.add(ikud_split)
                         if ikud_split in set_data_GASPS:
-                            print(f'{wb_IC_cells_range[indexR_IC][indexC_IC].coordinate} ... {wb_IC_cell_value} ... {type(wb_IC_cell_value)}')
                             wb_IC_cells_range[indexR_IC][indexC_IC].fill = openpyxl.styles.PatternFill(start_color='FF0000', end_color='FF0000', fill_type='solid')
                         elif ikud_split not in set_data_GASPS:
                             wb_IC_cells_range[indexR_IC][indexC_IC].fill = openpyxl.styles.PatternFill(start_color='878787', end_color='878787', fill_type='solid')
@@ -313,6 +318,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
             # self.wb_file_GASPS.save(self.file_GASPS)
             self.wb_file_IC.close()
             self.wb_file_GASPS.close()
+
             print('_'*20, ' файлы сохранены и закрыты ', '_'*20)
 
         else:
