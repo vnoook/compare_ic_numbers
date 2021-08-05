@@ -237,12 +237,12 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.comboBox_liter_IC.addItem(self.text_empty_combobox)
         self.comboBox_liter_IC.adjustSize()
 
-        print(f'1')
+        print(f'_1')
         for col_IC in range(1, max_col_IC + 1):
             print(f'{col_IC}', end=' ')
             self.comboBox_liter_IC.addItem(self.wb_file_IC_s.cell(1, col_IC).column_letter)
         print()
-        print(f'4')
+        print(f'_4')
 
         self.comboBox_digit_IC.clear()
         self.comboBox_digit_IC.addItem(self.text_empty_combobox)
