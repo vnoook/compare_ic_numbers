@@ -223,7 +223,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # открывается файл "приёмник", назначается активный лист, выбирается диапазон ячеек
         self.wb_file_IC = openpyxl.load_workbook(self.file_IC)
         self.wb_file_IC_s = self.wb_file_IC.active
-        self.wb_file_GASPS = openpyxl.load_workbook(self.file_GASPS)
+        self.wb_file_GASPS = openpyxl.load_workbook(self.file_GASPS, read_only=True)
         self.wb_file_GASPS_s = self.wb_file_GASPS.active
 
         # вычисление максимальных строк и колонок в выбранных файлах
@@ -237,12 +237,14 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.comboBox_liter_IC.addItem(self.text_empty_combobox)
         self.comboBox_liter_IC.adjustSize()
 
-        print(f'_1')
+        print(f'_____1')
         for col_IC in range(1, max_col_IC + 1):
-            print(f'{col_IC}', end=' ')
+            # print(f'{self.wb_file_IC_s.cell(1, col_IC).column_letter} ...', end=' ')
+            print(f'{self.wb_file_IC_s.cell(1, col_IC)} ...', end=' ')  # <MergedCell 'Лист1'.D1> ... <Worksheet "Лист1">
+            # print(f'{self.wb_file_IC_s}')
             self.comboBox_liter_IC.addItem(self.wb_file_IC_s.cell(1, col_IC).column_letter)
         print()
-        print(f'_4')
+        print(f'_____2')
 
         self.comboBox_digit_IC.clear()
         self.comboBox_digit_IC.addItem(self.text_empty_combobox)
@@ -250,23 +252,17 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         for row_IC in range(1, max_row_IC + 1):
             self.comboBox_digit_IC.addItem(str(self.wb_file_IC_s.cell(row_IC, 1).row))
 
-        print(f'5')
-
         self.comboBox_liter_GASPS.clear()
         self.comboBox_liter_GASPS.addItem(self.text_empty_combobox)
         self.comboBox_liter_GASPS.adjustSize()
         for col_GASPS in range(1, max_col_GASPS + 1):
             self.comboBox_liter_GASPS.addItem(self.wb_file_GASPS_s.cell(1, col_GASPS).column_letter)
 
-        print(f'6')
-
         self.comboBox_digit_GASPS.clear()
         self.comboBox_digit_GASPS.addItem(self.text_empty_combobox)
         self.comboBox_digit_GASPS.adjustSize()
         for row_GASPS in range(1, max_row_GASPS + 1):
             self.comboBox_digit_GASPS.addItem(str(self.wb_file_GASPS_s.cell(row_GASPS, 1).row))
-
-        print(f'7')
 
     # событие - нажатие на кнопку заполнения файла
     def do_fill_data(self):
