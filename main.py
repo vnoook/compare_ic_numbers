@@ -236,8 +236,13 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.comboBox_liter_IC.clear()
         self.comboBox_liter_IC.addItem(self.text_empty_combobox)
         self.comboBox_liter_IC.adjustSize()
+
+        print(f'1')
         for col_IC in range(1, max_col_IC + 1):
+            print(f'{col_IC}', end=' ')
             self.comboBox_liter_IC.addItem(self.wb_file_IC_s.cell(1, col_IC).column_letter)
+        print()
+        print(f'4')
 
         self.comboBox_digit_IC.clear()
         self.comboBox_digit_IC.addItem(self.text_empty_combobox)
@@ -245,17 +250,23 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         for row_IC in range(1, max_row_IC + 1):
             self.comboBox_digit_IC.addItem(str(self.wb_file_IC_s.cell(row_IC, 1).row))
 
+        print(f'5')
+
         self.comboBox_liter_GASPS.clear()
         self.comboBox_liter_GASPS.addItem(self.text_empty_combobox)
         self.comboBox_liter_GASPS.adjustSize()
         for col_GASPS in range(1, max_col_GASPS + 1):
             self.comboBox_liter_GASPS.addItem(self.wb_file_GASPS_s.cell(1, col_GASPS).column_letter)
 
+        print(f'6')
+
         self.comboBox_digit_GASPS.clear()
         self.comboBox_digit_GASPS.addItem(self.text_empty_combobox)
         self.comboBox_digit_GASPS.adjustSize()
         for row_GASPS in range(1, max_row_GASPS + 1):
             self.comboBox_digit_GASPS.addItem(str(self.wb_file_GASPS_s.cell(row_GASPS, 1).row))
+
+        print(f'7')
 
     # событие - нажатие на кнопку заполнения файла
     def do_fill_data(self):
@@ -304,7 +315,6 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                     print(f'{type(wb_IC_cell_value)}')
                     print(f'{wb_IC_cells_range[indexR_IC][indexC_IC].coordinate} ... {wb_IC_cell_value} ... {type(wb_IC_cell_value)}')
 
-                    qweqwe
                     for ikud in wb_IC_cell_value.split(";"):
                         ikud_split = ikud.strip().replace('.', '').replace(' ', '')
                         set_data_IC.add(ikud_split)
