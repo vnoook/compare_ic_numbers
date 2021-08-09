@@ -238,13 +238,17 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.comboBox_liter_IC.adjustSize()
 
         print(f'_____1')
+        print(self.wb_file_IC_s.merged_cells.ranges)
         for col_IC in range(1, max_col_IC + 1):
-            print(self.wb_file_IC_s.cell(1, col_IC).__class__.__name__)
-            if self.wb_file_IC_s.cell(1, col_IC).__class__.__name__ == 'MergedCell':
-                print(self.wb_file_IC_s.cell(max_row_IC+1, col_IC).column)
-            else:
-                print(222)
-                self.comboBox_liter_IC.addItem(self.wb_file_IC_s.cell(1, col_IC).column_letter)
+            print(self.wb_file_IC_s.cell(1, col_IC).coordinate)
+
+            # if self.wb_file_IC_s.cell(1, col_IC).__class__.__name__ == 'MergedCell':
+            #     print(111)
+            #     print(self.wb_file_IC_s.cell(1, col_IC).coordinate)
+            # else:
+            #     print(222)
+            #     print(self.wb_file_IC_s.cell(1, col_IC).coordinate)
+            #     self.comboBox_liter_IC.addItem(self.wb_file_IC_s.cell(1, col_IC).column_letter)
         print()
         print(f'_____2')
 
