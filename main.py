@@ -10,6 +10,7 @@ import PyQt5
 import PyQt5.QtWidgets
 import sys
 import openpyxl
+import openpyxl.utils
 import openpyxl.styles
 
 
@@ -238,19 +239,24 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.comboBox_liter_IC.adjustSize()
 
         print(f'_____1')
-        print(self.wb_file_IC_s.merged_cells.ranges)
+        # print(self.wb_file_IC_s.merged_cells.ranges)
         for col_IC in range(1, max_col_IC + 1):
-            print(self.wb_file_IC_s.cell(1, col_IC).coordinate)
+            # openpyxl.utils.cell.coordinate_from_string(coord_string)
+            # openpyxl.utils.cell.get_column_letter(idx)
 
-            if self.wb_file_IC_s.cell(1, col_IC).__class__.__name__ == 'MergedCell':
-                print(000000000000000000)
-                print(self.wb_file_IC_s.cell(1, col_IC))
-                print(type(self.wb_file_IC_s.cell(1, col_IC)))
-                print(dir(self.wb_file_IC_s.cell(1, col_IC)))
-                print(self.wb_file_IC_s.cell(1, col_IC).coordinate)
-                print(111111111111111111)
-                print(self.wb_file_IC_s.merged_cells)
-                print(self.wb_file_IC_s.merged_cells.ranges)
+            # print(self.wb_file_IC_s.cell(1, col_IC).coordinate)
+            print(openpyxl.utils.cell.coordinate_from_string(self.wb_file_IC_s.cell(1, col_IC).coordinate)[0])
+            self.comboBox_liter_IC.addItem(openpyxl.utils.cell.coordinate_from_string(self.wb_file_IC_s.cell(1, col_IC).coordinate)[0])
+
+            # if self.wb_file_IC_s.cell(1, col_IC).__class__.__name__ == 'MergedCell':
+            #     print(000000000000000000)
+            #     print(self.wb_file_IC_s.cell(1, col_IC))
+            #     print(type(self.wb_file_IC_s.cell(1, col_IC)))
+            #     print(dir(self.wb_file_IC_s.cell(1, col_IC)))
+            #     print(self.wb_file_IC_s.cell(1, col_IC).coordinate)
+            #     print(111111111111111111)
+            #     print(self.wb_file_IC_s.merged_cells)
+            #     print(self.wb_file_IC_s.merged_cells.ranges)
             # else:
             #     print(222)
             #     print(self.wb_file_IC_s.cell(1, col_IC).coordinate)
