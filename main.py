@@ -237,50 +237,28 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.comboBox_liter_IC.clear()
         self.comboBox_liter_IC.addItem(self.text_empty_combobox)
         self.comboBox_liter_IC.adjustSize()
-
-        print(f'_____1')
-        # print(self.wb_file_IC_s.merged_cells.ranges)
         for col_IC in range(1, max_col_IC + 1):
-            # openpyxl.utils.cell.coordinate_from_string(coord_string)
-            # openpyxl.utils.cell.get_column_letter(idx)
-
-            # print(self.wb_file_IC_s.cell(1, col_IC).coordinate)
-            print(openpyxl.utils.cell.coordinate_from_string(self.wb_file_IC_s.cell(1, col_IC).coordinate)[0])
             self.comboBox_liter_IC.addItem(openpyxl.utils.cell.coordinate_from_string(self.wb_file_IC_s.cell(1, col_IC).coordinate)[0])
-
-            # if self.wb_file_IC_s.cell(1, col_IC).__class__.__name__ == 'MergedCell':
-            #     print(000000000000000000)
-            #     print(self.wb_file_IC_s.cell(1, col_IC))
-            #     print(type(self.wb_file_IC_s.cell(1, col_IC)))
-            #     print(dir(self.wb_file_IC_s.cell(1, col_IC)))
-            #     print(self.wb_file_IC_s.cell(1, col_IC).coordinate)
-            #     print(111111111111111111)
-            #     print(self.wb_file_IC_s.merged_cells)
-            #     print(self.wb_file_IC_s.merged_cells.ranges)
-            # else:
-            #     print(222)
-            #     print(self.wb_file_IC_s.cell(1, col_IC).coordinate)
-            #     self.comboBox_liter_IC.addItem(self.wb_file_IC_s.cell(1, col_IC).column_letter)
-        print()
-        print(f'_____2')
 
         self.comboBox_digit_IC.clear()
         self.comboBox_digit_IC.addItem(self.text_empty_combobox)
         self.comboBox_digit_IC.adjustSize()
         for row_IC in range(1, max_row_IC + 1):
-            self.comboBox_digit_IC.addItem(str(self.wb_file_IC_s.cell(row_IC, 1).row))
+            self.comboBox_digit_IC.addItem(str(openpyxl.utils.cell.coordinate_from_string(self.wb_file_IC_s.cell(row_IC, 1).coordinate)[1]))
 
         self.comboBox_liter_GASPS.clear()
         self.comboBox_liter_GASPS.addItem(self.text_empty_combobox)
         self.comboBox_liter_GASPS.adjustSize()
         for col_GASPS in range(1, max_col_GASPS + 1):
-            self.comboBox_liter_GASPS.addItem(self.wb_file_GASPS_s.cell(1, col_GASPS).column_letter)
+            self.comboBox_liter_GASPS.addItem(openpyxl.utils.cell.coordinate_from_string(self.wb_file_GASPS_s.cell(1, col_GASPS).coordinate)[0])
 
         self.comboBox_digit_GASPS.clear()
         self.comboBox_digit_GASPS.addItem(self.text_empty_combobox)
         self.comboBox_digit_GASPS.adjustSize()
         for row_GASPS in range(1, max_row_GASPS + 1):
-            self.comboBox_digit_GASPS.addItem(str(self.wb_file_GASPS_s.cell(row_GASPS, 1).row))
+            # self.comboBox_digit_GASPS.addItem(str(openpyxl.utils.cell.coordinate_from_string(self.wb_file_GASPS_s.cell(row_GASPS, 1).coordinate)[1]))
+            print(openpyxl.utils.cell.coordinate_from_string(self.wb_file_GASPS_s.cell(row_GASPS, 1).coordinate)[1])
+            pass
 
     # событие - нажатие на кнопку заполнения файла
     def do_fill_data(self):
