@@ -242,9 +242,15 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         for col_IC in range(1, max_col_IC + 1):
             print(self.wb_file_IC_s.cell(1, col_IC).coordinate)
 
-            # if self.wb_file_IC_s.cell(1, col_IC).__class__.__name__ == 'MergedCell':
-            #     print(111)
-            #     print(self.wb_file_IC_s.cell(1, col_IC).coordinate)
+            if self.wb_file_IC_s.cell(1, col_IC).__class__.__name__ == 'MergedCell':
+                print(000000000000000000)
+                print(self.wb_file_IC_s.cell(1, col_IC))
+                print(type(self.wb_file_IC_s.cell(1, col_IC)))
+                print(dir(self.wb_file_IC_s.cell(1, col_IC)))
+                print(self.wb_file_IC_s.cell(1, col_IC).coordinate)
+                print(111111111111111111)
+                print(self.wb_file_IC_s.merged_cells)
+                print(self.wb_file_IC_s.merged_cells.ranges)
             # else:
             #     print(222)
             #     print(self.wb_file_IC_s.cell(1, col_IC).coordinate)
