@@ -304,7 +304,9 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                     indexR_IC = wb_IC_cells_range.index(row_in_range_IC)
                     indexC_IC = row_in_range_IC.index(cell_in_row_IC)
                     wb_IC_cell_value = wb_IC_cells_range[indexR_IC][indexC_IC].value
-                    print(f'{wb_IC_cells_range[indexR_IC][indexC_IC].coordinate}')
+                    # TODO
+                    # сделать обработку на значение None
+                    print(f'111 {wb_IC_cells_range[indexR_IC][indexC_IC].coordinate}')
                     print(f'{wb_IC_cell_value}')
                     print(f'{type(wb_IC_cell_value)}')
                     print(f'{wb_IC_cells_range[indexR_IC][indexC_IC].coordinate} ... {wb_IC_cell_value} ... {type(wb_IC_cell_value)}')
