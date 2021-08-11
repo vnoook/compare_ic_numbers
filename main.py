@@ -312,11 +312,12 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                     # print(f'{wb_IC_cell_coord}')
                     # print(f'{wb_IC_cell_value} ... {type(wb_IC_cell_value)}')
                     # print(f'{type(wb_IC_cell_value)}')
-                    # print(f'{wb_IC_cell_coord} ... {wb_IC_cell_value} ... {type(wb_IC_cell_value)}')
+                    print(f'{wb_IC_cell_coord} ... {wb_IC_cell_value} ... {type(wb_IC_cell_value)}')
 
                     for ikud in str(wb_IC_cell_value).split(";"):
-                        print(f'{wb_IC_cell_coord} ... {wb_IC_cell_value} ... {type(wb_IC_cell_value)}')
+                        print(f'{wb_IC_cell_coord} ... {ikud} ... {type(ikud)}')
                         ikud_split = ikud.strip().replace('.', '').replace(' ', '')
+                        print(wb_IC_cell_value, ikud, ikud_split)
                         set_data_IC.add(ikud_split)
                         if ikud_split in set_data_GASPS:
                             wb_IC_cells_range[indexR_IC][indexC_IC].fill = openpyxl.styles.PatternFill(start_color='FF0000', end_color='FF0000', fill_type='solid')
