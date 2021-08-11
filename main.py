@@ -202,14 +202,14 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # активация и деактивация объектов на форме зависящее от выбраны ли все файлы и они разные
         if self.label_path_file_IC.text() != self.label_path_file_GASPS.text():
             if self.text_empty_path_file not in (self.label_path_file_IC.text(), self.label_path_file_GASPS.text()):
-                self.pushButton_do_fill_data.setEnabled(True)
+                # self.pushButton_do_fill_data.setEnabled(True)
                 self.comboBox_liter_IC.setEnabled(True)
                 self.comboBox_digit_IC.setEnabled(True)
                 self.comboBox_liter_GASPS.setEnabled(True)
                 self.comboBox_digit_GASPS.setEnabled(True)
                 self.do_fill_comboboxes()
         else:
-            self.pushButton_do_fill_data.setEnabled(False)
+            # self.pushButton_do_fill_data.setEnabled(False)
             self.comboBox_liter_IC.setEnabled(False)
             self.comboBox_digit_IC.setEnabled(False)
             self.comboBox_liter_GASPS.setEnabled(False)
@@ -224,7 +224,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # открывается файл "приёмник", назначается активный лист, выбирается диапазон ячеек
         self.wb_file_IC = openpyxl.load_workbook(self.file_IC)
         self.wb_file_IC_s = self.wb_file_IC.active
-        self.wb_file_GASPS = openpyxl.load_workbook(self.file_GASPS, read_only=True)
+        self.wb_file_GASPS = openpyxl.load_workbook(self.file_GASPS)  #, read_only=True)
         self.wb_file_GASPS_s = self.wb_file_GASPS.active
 
         # вычисление максимальных строк и колонок в выбранных файлах
@@ -256,9 +256,11 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.comboBox_digit_GASPS.addItem(self.text_empty_combobox)
         self.comboBox_digit_GASPS.adjustSize()
         for row_GASPS in range(1, max_row_GASPS + 1):
-            # self.comboBox_digit_GASPS.addItem(str(openpyxl.utils.cell.coordinate_from_string(self.wb_file_GASPS_s.cell(row_GASPS, 1).coordinate)[1]))
-            # print(openpyxl.utils.cell.coordinate_from_string(self.wb_file_GASPS_s.cell(row_GASPS, 1).coordinate)[1])
-            pass
+            self.comboBox_digit_GASPS.addItem(str(openpyxl.utils.cell.coordinate_from_string(self.wb_file_GASPS_s.cell(row_GASPS, 1).coordinate)[1]))
+
+        # TODO
+        # сделать разблокировку pushButton_do_fill_data
+        self.pushButton_do_fill_data.setEnabled(True)
 
     # событие - нажатие на кнопку заполнения файла
     def do_fill_data(self):
