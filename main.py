@@ -3,7 +3,7 @@
 # pip install openpyxl
 # pip install PyQt5
 # COMPILE
-# pyinstaller -F main.py
+# pyinstaller -F -w main.py
 # ...
 
 import PyQt5
@@ -341,9 +341,6 @@ class Window(PyQt5.QtWidgets.QMainWindow):
             self.window_info.setWindowTitle('Файлы')
             self.window_info.setText(f'Файлы сохранены и закрыты.\n{self.file_IC}')
             self.window_info.exec_()
-
-            # print('_'*20, ' файлы сохранены и закрыты ', '_'*20)
-            # print(self.file_IC)
 
             # очистка переменных от повторного использования
             del set_data_IC
