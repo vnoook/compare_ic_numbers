@@ -317,9 +317,8 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                         wb_IC_cell_value = wb_IC_cells_range[indexR_IC][indexC_IC].value
 
                     set_data_IC.clear()
-                    for ikud in wb_IC_cell_value.split(";"):
+                    for ikud in str(wb_IC_cell_value).split(";"):
                         set_data_IC.add(ikud.strip().replace('.', ''))
-                    print(set_data_IC)
 
                     for ikud in str(wb_IC_cell_value).split(";"):
                         ikud_split = ikud.strip().replace('.', '').replace(' ', '')
@@ -336,6 +335,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
             self.wb_file_GASPS.close()
 
             print('_'*20, ' файлы сохранены и закрыты ', '_'*20)
+            print(self.file_IC)
 
             # очистка переменных от повторного использования
             del set_data_IC
