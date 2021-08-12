@@ -336,8 +336,9 @@ class Window(PyQt5.QtWidgets.QMainWindow):
             self.wb_file_IC.close()
             self.wb_file_GASPS.close()
 
+            # информационное окно о сохранении файлов
             self.window_info = PyQt5.QtWidgets.QMessageBox()
-            self.window_info.setWindowTitle('Информация')
+            self.window_info.setWindowTitle('Файлы')
             self.window_info.setText(f'Файлы сохранены и закрыты.\n{self.file_IC}')
             self.window_info.exec_()
 
@@ -349,8 +350,11 @@ class Window(PyQt5.QtWidgets.QMainWindow):
             del set_data_GASPS
 
         else:
-            print()
-            print(f'выберите все поля')
+            # информационное окно о предупреждении выбора полей
+            self.window_select = PyQt5.QtWidgets.QMessageBox()
+            self.window_select.setWindowTitle('Поля')
+            self.window_select.setText(f'Выберите все поля')
+            self.window_select.exec_()
 
     # событие - нажатие на кнопку Выход
     def click_on_btn_exit(self):
