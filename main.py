@@ -3,11 +3,13 @@
 # pip install openpyxl
 # pip install PyQt5
 # COMPILE
-# pyinstaller -F file.py
+# pyinstaller -F main.py
 # ...
 
 import PyQt5
 import PyQt5.QtWidgets
+import PyQt5.QtCore
+import PyQt5.QtGui
 import sys
 import openpyxl
 import openpyxl.utils
@@ -224,7 +226,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # открывается файл "приёмник", назначается активный лист, выбирается диапазон ячеек
         self.wb_file_IC = openpyxl.load_workbook(self.file_IC)
         self.wb_file_IC_s = self.wb_file_IC.active
-        self.wb_file_GASPS = openpyxl.load_workbook(self.file_GASPS)  #, read_only=True)
+        self.wb_file_GASPS = openpyxl.load_workbook(self.file_GASPS)
         self.wb_file_GASPS_s = self.wb_file_GASPS.active
 
         # вычисление максимальных строк и колонок в выбранных файлах
@@ -275,16 +277,14 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                                             self.comboBox_digit_GASPS.itemText(self.comboBox_digit_GASPS.currentIndex())):
             # формируются диапазоны для обработки данных в файлах из комбобоксов
             range_file_IC = self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex()) +\
-                            self.comboBox_digit_IC.itemText(self.comboBox_digit_IC.currentIndex()) +\
-                            ':' +\
+                            self.comboBox_digit_IC.itemText(self.comboBox_digit_IC.currentIndex()) + ':' +\
                             self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex()) +\
                             self.comboBox_digit_IC.itemText(self.comboBox_digit_IC.count()-1)
 
             range_file_GASPS = self.comboBox_liter_GASPS.itemText(self.comboBox_liter_GASPS.currentIndex()) +\
-                            self.comboBox_digit_GASPS.itemText(self.comboBox_digit_GASPS.currentIndex()) +\
-                            ':' +\
-                            self.comboBox_liter_GASPS.itemText(self.comboBox_liter_GASPS.currentIndex()) +\
-                            self.comboBox_digit_GASPS.itemText(self.comboBox_digit_GASPS.count()-1)
+                               self.comboBox_digit_GASPS.itemText(self.comboBox_digit_GASPS.currentIndex()) + ':' +\
+                               self.comboBox_liter_GASPS.itemText(self.comboBox_liter_GASPS.currentIndex()) +\
+                               self.comboBox_digit_GASPS.itemText(self.comboBox_digit_GASPS.count()-1)
 
             # сформированные диапазоны из выбранных комбобоксов
             wb_IC_cells_range = self.wb_file_IC_s[range_file_IC]
@@ -310,23 +310,25 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                     indexC_IC = row_in_range_IC.index(cell_in_row_IC)
 
                     # получение координаты и значения ячейки IC
-                    wb_IC_cell_coord = wb_IC_cells_range[indexR_IC][indexC_IC].coordinate
+                    # wb_IC_cell_coord = wb_IC_cells_range[indexR_IC][indexC_IC].coordinate
                     if wb_IC_cells_range[indexR_IC][indexC_IC].value == None:
                         wb_IC_cell_value = 'None'
                     else:
                         wb_IC_cell_value = str(wb_IC_cells_range[indexR_IC][indexC_IC].value)
 
                     set_data_IC.clear()
-                    for ikud in str(wb_IC_cell_value).split(";"):
+                    for ikud in wb_IC_cell_value.split(";"):
                         set_data_IC.add(ikud.strip().replace('.', ''))
 
-                    for ikud in str(wb_IC_cell_value).split(";"):
+                    for ikud in wb_IC_cell_value.split(";"):
                         ikud_split = ikud.strip().replace('.', '').replace(' ', '')
 
                         if (ikud_split in set_data_GASPS) and (ikud_split in set_data_IC):
-                            wb_IC_cells_range[indexR_IC][indexC_IC].fill = openpyxl.styles.PatternFill(start_color='FF0000', end_color='FF0000', fill_type='solid')
+                            wb_IC_cells_range[indexR_IC][indexC_IC].fill =\
+                                openpyxl.styles.PatternFill(start_color='FF0000', end_color='FF0000', fill_type='solid')
                         elif ikud_split not in set_data_GASPS:
-                            wb_IC_cells_range[indexR_IC][indexC_IC].fill = openpyxl.styles.PatternFill(start_color='878787', end_color='878787', fill_type='solid')
+                            wb_IC_cells_range[indexR_IC][indexC_IC].fill =\
+                                openpyxl.styles.PatternFill(start_color='878787', end_color='878787', fill_type='solid')
 
             # сохраняю файлы и закрываю их
             self.wb_file_IC.save(self.file_IC)
@@ -350,11 +352,9 @@ class Window(PyQt5.QtWidgets.QMainWindow):
             print()
             print(f'выберите все поля')
 
-
     # событие - нажатие на кнопку Выход
     def click_on_btn_exit(self):
         exit()
-
 
 # создание основного окна
 def main_app():
