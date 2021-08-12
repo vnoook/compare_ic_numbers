@@ -299,7 +299,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                     if wb_GASPS_cells_range[indexR_GASPS][indexC_GASPS].value == None:
                         wb_GASPS_cell_value = 'None'
                     else:
-                        wb_GASPS_cell_value = wb_GASPS_cells_range[indexR_GASPS][indexC_GASPS].value
+                        wb_GASPS_cell_value = str(wb_GASPS_cells_range[indexR_GASPS][indexC_GASPS].value)
 
                     for ikud in wb_GASPS_cell_value.split(";"):
                         set_data_GASPS.add(ikud.strip().replace('.', ''))
@@ -314,7 +314,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                     if wb_IC_cells_range[indexR_IC][indexC_IC].value == None:
                         wb_IC_cell_value = 'None'
                     else:
-                        wb_IC_cell_value = wb_IC_cells_range[indexR_IC][indexC_IC].value
+                        wb_IC_cell_value = str(wb_IC_cells_range[indexR_IC][indexC_IC].value)
 
                     set_data_IC.clear()
                     for ikud in str(wb_IC_cell_value).split(";"):
@@ -334,8 +334,13 @@ class Window(PyQt5.QtWidgets.QMainWindow):
             self.wb_file_IC.close()
             self.wb_file_GASPS.close()
 
-            print('_'*20, ' файлы сохранены и закрыты ', '_'*20)
-            print(self.file_IC)
+            self.window_info = PyQt5.QtWidgets.QMessageBox()
+            self.window_info.setWindowTitle('Информация')
+            self.window_info.setText(f'Файлы сохранены и закрыты.\n{self.file_IC}')
+            self.window_info.exec_()
+
+            # print('_'*20, ' файлы сохранены и закрыты ', '_'*20)
+            # print(self.file_IC)
 
             # очистка переменных от повторного использования
             del set_data_IC
