@@ -264,7 +264,8 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
     # событие - нажатие на кнопку заполнения файла
     def do_fill_data(self):
-        # определение множества
+        # определение множеств
+        set_data_IC = set()
         set_data_GASPS = set()
 
         # проверка на то что все комбобоксы заполнены
@@ -303,9 +304,6 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                     for ikud in wb_GASPS_cell_value.split(";"):
                         set_data_GASPS.add(ikud.strip().replace('.', ''))
 
-            # print(f'{set_data_GASPS = }')
-            # print()
-
             for row_in_range_IC in wb_IC_cells_range:
                 for cell_in_row_IC in row_in_range_IC:
                     indexR_IC = wb_IC_cells_range.index(row_in_range_IC)
@@ -318,12 +316,15 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                     else:
                         wb_IC_cell_value = wb_IC_cells_range[indexR_IC][indexC_IC].value
 
-                    for ikud in str(wb_IC_cell_value).split(";"):
-                        # print(f'{wb_IC_cell_coord} ... {ikud} ... {type(ikud)}')
-                        ikud_split = ikud.strip().replace('.', '').replace(' ', '')
-                        # print(f'{wb_IC_cell_value} ... {ikud} ... {ikud_split}')
+                    set_data_IC.clear()
+                    for ikud in wb_IC_cell_value.split(";"):
+                        set_data_IC.add(ikud.strip().replace('.', ''))
+                    print(set_data_IC)
 
-                        if ikud_split in set_data_GASPS:
+                    for ikud in str(wb_IC_cell_value).split(";"):
+                        ikud_split = ikud.strip().replace('.', '').replace(' ', '')
+
+                        if (ikud_split in set_data_GASPS) and (ikud_split in set_data_IC):
                             wb_IC_cells_range[indexR_IC][indexC_IC].fill = openpyxl.styles.PatternFill(start_color='FF0000', end_color='FF0000', fill_type='solid')
                         elif ikud_split not in set_data_GASPS:
                             wb_IC_cells_range[indexR_IC][indexC_IC].fill = openpyxl.styles.PatternFill(start_color='878787', end_color='878787', fill_type='solid')
@@ -335,6 +336,10 @@ class Window(PyQt5.QtWidgets.QMainWindow):
             self.wb_file_GASPS.close()
 
             print('_'*20, ' файлы сохранены и закрыты ', '_'*20)
+
+            # очистка переменных от повторного использования
+            del set_data_IC
+            del set_data_GASPS
 
         else:
             print()
