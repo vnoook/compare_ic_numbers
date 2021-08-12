@@ -264,8 +264,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
     # событие - нажатие на кнопку заполнения файла
     def do_fill_data(self):
-        # определение множеств
-        set_data_IC = set()
+        # определение множества
         set_data_GASPS = set()
 
         # проверка на то что все комбобоксы заполнены
@@ -295,30 +294,35 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 for cell_in_row_GASPS in row_in_range_GASPS:
                     indexR_GASPS = wb_GASPS_cells_range.index(row_in_range_GASPS)
                     indexC_GASPS = row_in_range_GASPS.index(cell_in_row_GASPS)
-                    wb_GASPS_cell_value = wb_GASPS_cells_range[indexR_GASPS][indexC_GASPS].value
+
+                    if wb_GASPS_cells_range[indexR_GASPS][indexC_GASPS].value == None:
+                        wb_GASPS_cell_value = 'None'
+                    else:
+                        wb_GASPS_cell_value = wb_GASPS_cells_range[indexR_GASPS][indexC_GASPS].value
+
                     for ikud in wb_GASPS_cell_value.split(";"):
                         set_data_GASPS.add(ikud.strip().replace('.', ''))
+
+            # print(f'{set_data_GASPS = }')
+            # print()
 
             for row_in_range_IC in wb_IC_cells_range:
                 for cell_in_row_IC in row_in_range_IC:
                     indexR_IC = wb_IC_cells_range.index(row_in_range_IC)
                     indexC_IC = row_in_range_IC.index(cell_in_row_IC)
-                    wb_IC_cell_value = wb_IC_cells_range[indexR_IC][indexC_IC].value
+
+                    # получение координаты и значения ячейки IC
                     wb_IC_cell_coord = wb_IC_cells_range[indexR_IC][indexC_IC].coordinate
-
-                    # TODO
-                    # сделать обработку на значение None
-
-                    # print(f'{wb_IC_cell_coord}')
-                    # print(f'{wb_IC_cell_value} ... {type(wb_IC_cell_value)}')
-                    # print(f'{type(wb_IC_cell_value)}')
-                    print(f'{wb_IC_cell_coord} ... {wb_IC_cell_value} ... {type(wb_IC_cell_value)}')
+                    if wb_IC_cells_range[indexR_IC][indexC_IC].value == None:
+                        wb_IC_cell_value = 'None'
+                    else:
+                        wb_IC_cell_value = wb_IC_cells_range[indexR_IC][indexC_IC].value
 
                     for ikud in str(wb_IC_cell_value).split(";"):
-                        print(f'{wb_IC_cell_coord} ... {ikud} ... {type(ikud)}')
+                        # print(f'{wb_IC_cell_coord} ... {ikud} ... {type(ikud)}')
                         ikud_split = ikud.strip().replace('.', '').replace(' ', '')
-                        print(wb_IC_cell_value, ikud, ikud_split)
-                        set_data_IC.add(ikud_split)
+                        # print(f'{wb_IC_cell_value} ... {ikud} ... {ikud_split}')
+
                         if ikud_split in set_data_GASPS:
                             wb_IC_cells_range[indexR_IC][indexC_IC].fill = openpyxl.styles.PatternFill(start_color='FF0000', end_color='FF0000', fill_type='solid')
                         elif ikud_split not in set_data_GASPS:
