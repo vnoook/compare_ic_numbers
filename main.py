@@ -315,7 +315,6 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                     indexC_IC = row_in_range_IC.index(cell_in_row_IC)
 
                     # получение координаты и значения ячейки IC
-                    # wb_IC_cell_coord = wb_IC_cells_range[indexR_IC][indexC_IC].coordinate
                     if wb_IC_cells_range[indexR_IC][indexC_IC].value == None:
                         wb_IC_cell_value = 'None'
                     else:
@@ -337,9 +336,8 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                             wb_IC_cells_range[indexR_IC][indexC_IC].fill =\
                                 openpyxl.styles.PatternFill(start_color='878787', end_color='878787', fill_type='solid')
 
-            # сохраняю файлы и закрываю их
+            # сохраняю файл и закрываю оба
             self.wb_file_IC.save(self.file_IC)
-            # self.wb_file_GASPS.save(self.file_GASPS)
             self.wb_file_IC.close()
             self.wb_file_GASPS.close()
 
