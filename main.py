@@ -6,11 +6,12 @@
 # pyinstaller -F -w main.py
 # ...
 
+import sys
+import time
 import PyQt5
 import PyQt5.QtWidgets
 import PyQt5.QtCore
 import PyQt5.QtGui
-import sys
 import openpyxl
 import openpyxl.utils
 import openpyxl.styles
@@ -187,7 +188,6 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 self.label_path_file_IC.adjustSize()
             else:
                 old_path_of_selected_file_IC = self.label_path_file_IC.text()
-
                 self.label_path_file_IC.setText(file_name)
                 self.label_path_file_IC.adjustSize()
 
@@ -266,6 +266,9 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
     # событие - нажатие на кнопку заполнения файла
     def do_fill_data(self):
+        # считаю время заливки
+        time_start = time.time()
+
         # определение множеств
         set_data_IC = set()
         set_data_GASPS = set()
@@ -304,6 +307,8 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                     for ikud in wb_GASPS_cell_value.split(";"):
                         set_data_GASPS.add(ikud.strip().replace('.', ''))
 
+                    tuple_data_GASPS = tuple(set_data_GASPS)
+
             for row_in_range_IC in wb_IC_cells_range:
                 for cell_in_row_IC in row_in_range_IC:
                     indexR_IC = wb_IC_cells_range.index(row_in_range_IC)
@@ -320,13 +325,15 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                     for ikud in wb_IC_cell_value.split(";"):
                         set_data_IC.add(ikud.strip().replace('.', ''))
 
+                    tuple_data_IC = tuple(set_data_IC)
+
                     for ikud in wb_IC_cell_value.split(";"):
                         ikud_split = ikud.strip().replace('.', '').replace(' ', '')
 
-                        if (ikud_split in set_data_GASPS) and (ikud_split in set_data_IC):
+                        if (ikud_split in tuple_data_GASPS) and (ikud_split in tuple_data_IC):
                             wb_IC_cells_range[indexR_IC][indexC_IC].fill =\
                                 openpyxl.styles.PatternFill(start_color='FF0000', end_color='FF0000', fill_type='solid')
-                        elif ikud_split not in set_data_GASPS:
+                        elif ikud_split not in tuple_data_GASPS:
                             wb_IC_cells_range[indexR_IC][indexC_IC].fill =\
                                 openpyxl.styles.PatternFill(start_color='878787', end_color='878787', fill_type='solid')
 
@@ -336,10 +343,14 @@ class Window(PyQt5.QtWidgets.QMainWindow):
             self.wb_file_IC.close()
             self.wb_file_GASPS.close()
 
+            # считаю время скрипта
+            time_finish = time.time()
+            '\n' + '.' * 30 + 'закончено за', round(time_finish - time_start, 3), 'секунд'
+
             # информационное окно о сохранении файлов
             self.window_info = PyQt5.QtWidgets.QMessageBox()
             self.window_info.setWindowTitle('Файлы')
-            self.window_info.setText(f'Файлы сохранены и закрыты.\n{self.file_IC}')
+            self.window_info.setText(f'Файлы сохранены и закрыты.\n{self.file_IC}\nзакончено за {round(time_finish - time_start, 3)} секунд')
             self.window_info.exec_()
 
             # очистка переменных от повторного использования
