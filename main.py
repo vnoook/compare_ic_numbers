@@ -244,7 +244,6 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.comboBox_digit_IC.addItem(self.text_empty_combobox)
         self.comboBox_digit_IC.adjustSize()
         for row_IC in range(1, max_row_IC + 1):
-            # self.comboBox_digit_IC.addItem(str(openpyxl.utils.cell.coordinate_from_string(self.wb_file_IC_s.cell(row_IC, 1).coordinate)[1]))
             self.comboBox_digit_IC.addItem(str(row_IC))
 
         self.comboBox_liter_GASPS.clear()
@@ -257,14 +256,13 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.comboBox_digit_GASPS.addItem(self.text_empty_combobox)
         self.comboBox_digit_GASPS.adjustSize()
         for row_GASPS in range(1, max_row_GASPS + 1):
-            # self.comboBox_digit_GASPS.addItem(str(openpyxl.utils.cell.coordinate_from_string(self.wb_file_GASPS_s.cell(row_GASPS, 1).coordinate)[1]))
             self.comboBox_digit_GASPS.addItem(str(row_GASPS))
 
         self.pushButton_do_fill_data.setEnabled(True)
 
     # событие - нажатие на кнопку заполнения файла
     def do_fill_data(self):
-        # считаю время заливки
+        # считаю время заполнения
         time_start = time.time()
 
         # определение множеств
@@ -339,7 +337,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
             self.wb_file_IC.close()
             self.wb_file_GASPS.close()
 
-            # считаю время скрипта
+            # считаю время заполнения
             time_finish = time.time()
             '\n' + '.' * 30 + 'закончено за', round(time_finish - time_start, 1), 'секунд'
 
