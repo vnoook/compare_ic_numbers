@@ -246,7 +246,8 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.comboBox_digit_IC.addItem(self.text_empty_combobox)
         self.comboBox_digit_IC.adjustSize()
         for row_IC in range(1, max_row_IC + 1):
-            self.comboBox_digit_IC.addItem(str(openpyxl.utils.cell.coordinate_from_string(self.wb_file_IC_s.cell(row_IC, 1).coordinate)[1]))
+            # self.comboBox_digit_IC.addItem(str(openpyxl.utils.cell.coordinate_from_string(self.wb_file_IC_s.cell(row_IC, 1).coordinate)[1]))
+            self.comboBox_digit_IC.addItem(str(row_IC))
 
         self.comboBox_liter_GASPS.clear()
         self.comboBox_liter_GASPS.addItem(self.text_empty_combobox)
@@ -258,7 +259,8 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.comboBox_digit_GASPS.addItem(self.text_empty_combobox)
         self.comboBox_digit_GASPS.adjustSize()
         for row_GASPS in range(1, max_row_GASPS + 1):
-            self.comboBox_digit_GASPS.addItem(str(openpyxl.utils.cell.coordinate_from_string(self.wb_file_GASPS_s.cell(row_GASPS, 1).coordinate)[1]))
+            # self.comboBox_digit_GASPS.addItem(str(openpyxl.utils.cell.coordinate_from_string(self.wb_file_GASPS_s.cell(row_GASPS, 1).coordinate)[1]))
+            self.comboBox_digit_GASPS.addItem(str(row_GASPS))
 
         # TODO
         # сделать разблокировку pushButton_do_fill_data
@@ -343,7 +345,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
             # считаю время скрипта
             time_finish = time.time()
-            '\n' + '.' * 30 + 'закончено за', round(time_finish - time_start, 3), 'секунд'
+            '\n' + '.' * 30 + 'закончено за', round(time_finish - time_start, 1), 'секунд'
 
             # информационное окно о сохранении файлов
             self.window_info = PyQt5.QtWidgets.QMessageBox()
