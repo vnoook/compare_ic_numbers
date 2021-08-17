@@ -204,14 +204,12 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # активация и деактивация объектов на форме зависящее от выбраны ли все файлы и они разные
         if self.label_path_file_IC.text() != self.label_path_file_GASPS.text():
             if self.text_empty_path_file not in (self.label_path_file_IC.text(), self.label_path_file_GASPS.text()):
-                # self.pushButton_do_fill_data.setEnabled(True)
                 self.comboBox_liter_IC.setEnabled(True)
                 self.comboBox_digit_IC.setEnabled(True)
                 self.comboBox_liter_GASPS.setEnabled(True)
                 self.comboBox_digit_GASPS.setEnabled(True)
                 self.do_fill_comboboxes()
         else:
-            # self.pushButton_do_fill_data.setEnabled(False)
             self.comboBox_liter_IC.setEnabled(False)
             self.comboBox_digit_IC.setEnabled(False)
             self.comboBox_liter_GASPS.setEnabled(False)
@@ -262,8 +260,6 @@ class Window(PyQt5.QtWidgets.QMainWindow):
             # self.comboBox_digit_GASPS.addItem(str(openpyxl.utils.cell.coordinate_from_string(self.wb_file_GASPS_s.cell(row_GASPS, 1).coordinate)[1]))
             self.comboBox_digit_GASPS.addItem(str(row_GASPS))
 
-        # TODO
-        # сделать разблокировку pushButton_do_fill_data
         self.pushButton_do_fill_data.setEnabled(True)
 
     # событие - нажатие на кнопку заполнения файла
@@ -350,7 +346,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
             # информационное окно о сохранении файлов
             self.window_info = PyQt5.QtWidgets.QMessageBox()
             self.window_info.setWindowTitle('Файлы')
-            self.window_info.setText(f'Файлы сохранены и закрыты.\n{self.file_IC}\nзакончено за {round(time_finish - time_start, 3)} секунд')
+            self.window_info.setText(f'Файлы сохранены и закрыты.\n{self.file_IC}\nЗаполнение сделано за {round(time_finish - time_start, 1)} секунд')
             self.window_info.exec_()
 
             # очистка переменных от повторного использования
