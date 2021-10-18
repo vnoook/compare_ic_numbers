@@ -90,6 +90,35 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.comboBox_digit_IC.adjustSize()
         self.comboBox_digit_IC.setToolTip(self.comboBox_digit_IC.objectName())
 
+        # checkBox_digit_IC
+        self.checkBox_digit_IC = PyQt5.QtWidgets.QCheckBox(self)
+        self.checkBox_digit_IC.setObjectName('checkBox_digit_IC')
+        self.checkBox_digit_IC.setGeometry(PyQt5.QtCore.QRect(215, 70, 20, 20))
+        self.checkBox_digit_IC.setText('с преступлениями')
+        self.checkBox_digit_IC.setEnabled(True)
+        self.checkBox_digit_IC.adjustSize()
+        self.checkBox_digit_IC.setToolTip(self.checkBox_digit_IC.objectName())
+
+        # comboBox_liter_prest
+        self.comboBox_liter_prest = PyQt5.QtWidgets.QComboBox(self)
+        self.comboBox_liter_prest.setObjectName('comboBox_liter_prest')
+        self.comboBox_liter_prest.setGeometry(PyQt5.QtCore.QRect(350, 70, 20, 20))
+        self.comboBox_liter_prest.addItem('пусто')
+        self.comboBox_liter_prest.setEnabled(False)
+        self.comboBox_liter_prest.setVisible(False)
+        self.comboBox_liter_prest.adjustSize()
+        self.comboBox_liter_prest.setToolTip(self.comboBox_liter_prest.objectName())
+
+        # comboBox_digit_prest
+        self.comboBox_digit_prest = PyQt5.QtWidgets.QComboBox(self)
+        self.comboBox_digit_prest.setObjectName('comboBox_digit_prest')
+        self.comboBox_digit_prest.setGeometry(PyQt5.QtCore.QRect(440, 70, 70, 20))
+        self.comboBox_digit_prest.addItem('пусто')
+        self.comboBox_digit_prest.setEnabled(False)
+        self.comboBox_digit_prest.setVisible(False)
+        self.comboBox_digit_prest.adjustSize()
+        self.comboBox_digit_prest.setToolTip(self.comboBox_digit_prest.objectName())
+
         # label_select_file_GASPS
         self.label_select_file_GASPS = PyQt5.QtWidgets.QLabel(self)
         self.label_select_file_GASPS.setObjectName('label_select_file_GASPS')
