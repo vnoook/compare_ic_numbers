@@ -90,14 +90,15 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.comboBox_digit_IC.adjustSize()
         self.comboBox_digit_IC.setToolTip(self.comboBox_digit_IC.objectName())
 
-        # checkBox_digit_IC
-        self.checkBox_digit_IC = PyQt5.QtWidgets.QCheckBox(self)
-        self.checkBox_digit_IC.setObjectName('checkBox_digit_IC')
-        self.checkBox_digit_IC.setGeometry(PyQt5.QtCore.QRect(215, 70, 20, 20))
-        self.checkBox_digit_IC.setText('с преступлениями')
-        self.checkBox_digit_IC.setEnabled(True)
-        self.checkBox_digit_IC.adjustSize()
-        self.checkBox_digit_IC.setToolTip(self.checkBox_digit_IC.objectName())
+        # checkBox_prest_IC
+        self.checkBox_prest_IC = PyQt5.QtWidgets.QCheckBox(self)
+        self.checkBox_prest_IC.setObjectName('checkBox_prest_IC')
+        self.checkBox_prest_IC.setGeometry(PyQt5.QtCore.QRect(215, 70, 20, 20))
+        self.checkBox_prest_IC.setText('с преступлениями')
+        self.checkBox_prest_IC.setEnabled(False)
+        self.checkBox_prest_IC.adjustSize()
+        self.checkBox_prest_IC.clicked.connect(self.click_on_checkbox_prest)
+        self.checkBox_prest_IC.setToolTip(self.checkBox_prest_IC.objectName())
 
         # comboBox_liter_prest
         self.comboBox_liter_prest = PyQt5.QtWidgets.QComboBox(self)
@@ -235,12 +236,14 @@ class Window(PyQt5.QtWidgets.QMainWindow):
             if self.text_empty_path_file not in (self.label_path_file_IC.text(), self.label_path_file_GASPS.text()):
                 self.comboBox_liter_IC.setEnabled(True)
                 self.comboBox_digit_IC.setEnabled(True)
+                self.checkBox_prest_IC.setEnabled(True)
                 self.comboBox_liter_GASPS.setEnabled(True)
                 self.comboBox_digit_GASPS.setEnabled(True)
                 self.do_fill_comboboxes()
         else:
             self.comboBox_liter_IC.setEnabled(False)
             self.comboBox_digit_IC.setEnabled(False)
+            self.checkBox_prest_IC.setEnabled(False)
             self.comboBox_liter_GASPS.setEnabled(False)
             self.comboBox_digit_GASPS.setEnabled(False)
 
@@ -386,6 +389,19 @@ class Window(PyQt5.QtWidgets.QMainWindow):
             self.window_select.setWindowTitle('Поля')
             self.window_select.setText(f'Выберите все поля')
             self.window_select.exec_()
+
+    # событие - нажатие на кнопку Выход
+    def click_on_checkbox_prest(self):
+        if self.checkBox_prest_IC.isChecked():
+            self.comboBox_digit_prest.setEnabled(True)
+            self.comboBox_digit_prest.setVisible(True)
+            self.comboBox_liter_prest.setEnabled(True)
+            self.comboBox_liter_prest.setVisible(True)
+        else:
+            self.comboBox_digit_prest.setEnabled(False)
+            self.comboBox_digit_prest.setVisible(False)
+            self.comboBox_liter_prest.setEnabled(False)
+            self.comboBox_liter_prest.setVisible(False)
 
     # событие - нажатие на кнопку Выход
     def click_on_btn_exit(self):
