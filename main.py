@@ -390,7 +390,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
             self.window_select.setText(f'Выберите все поля')
             self.window_select.exec_()
 
-    # событие - нажатие на кнопку Выход
+    # событие - нажатие на чекбокс
     def click_on_checkbox_prest(self):
         if self.checkBox_prest_IC.isChecked():
             self.comboBox_digit_prest.setEnabled(True)
