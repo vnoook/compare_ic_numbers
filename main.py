@@ -103,22 +103,22 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # comboBox_liter_prest
         self.comboBox_liter_prest = PyQt5.QtWidgets.QComboBox(self)
         self.comboBox_liter_prest.setObjectName('comboBox_liter_prest')
-        self.comboBox_liter_prest.setGeometry(PyQt5.QtCore.QRect(350, 70, 20, 20))
+        self.comboBox_liter_prest.setGeometry(PyQt5.QtCore.QRect(350, 70, 70, 20))
         self.comboBox_liter_prest.addItem('пусто')
         self.comboBox_liter_prest.setEnabled(False)
         self.comboBox_liter_prest.setVisible(False)
         self.comboBox_liter_prest.adjustSize()
         self.comboBox_liter_prest.setToolTip(self.comboBox_liter_prest.objectName())
 
-        # comboBox_digit_prest
-        self.comboBox_digit_prest = PyQt5.QtWidgets.QComboBox(self)
-        self.comboBox_digit_prest.setObjectName('comboBox_digit_prest')
-        self.comboBox_digit_prest.setGeometry(PyQt5.QtCore.QRect(440, 70, 70, 20))
-        self.comboBox_digit_prest.addItem('пусто')
-        self.comboBox_digit_prest.setEnabled(False)
-        self.comboBox_digit_prest.setVisible(False)
-        self.comboBox_digit_prest.adjustSize()
-        self.comboBox_digit_prest.setToolTip(self.comboBox_digit_prest.objectName())
+        # # comboBox_digit_prest
+        # self.comboBox_digit_prest = PyQt5.QtWidgets.QComboBox(self)
+        # self.comboBox_digit_prest.setObjectName('comboBox_digit_prest')
+        # self.comboBox_digit_prest.setGeometry(PyQt5.QtCore.QRect(440, 70, 70, 20))
+        # self.comboBox_digit_prest.addItem('пусто')
+        # self.comboBox_digit_prest.setEnabled(False)
+        # self.comboBox_digit_prest.setVisible(False)
+        # self.comboBox_digit_prest.adjustSize()
+        # self.comboBox_digit_prest.setToolTip(self.comboBox_digit_prest.objectName())
 
         # label_select_file_GASPS
         self.label_select_file_GASPS = PyQt5.QtWidgets.QLabel(self)
@@ -272,6 +272,20 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         for col_IC in range(1, max_col_IC + 1):
             self.comboBox_liter_IC.addItem(openpyxl.utils.cell.coordinate_from_string(self.wb_file_IC_s.cell(1, col_IC).coordinate)[0])
 
+        self.comboBox_liter_prest.clear()
+        self.comboBox_liter_prest.addItem(self.text_empty_combobox)
+        self.comboBox_liter_prest.adjustSize()
+        for col_IC in range(1, max_col_IC + 1):
+            self.comboBox_liter_prest.addItem(openpyxl.utils.cell.coordinate_from_string(self.wb_file_IC_s.cell(1, col_IC).coordinate)[0])
+
+
+
+
+
+
+
+
+
         self.comboBox_digit_IC.clear()
         self.comboBox_digit_IC.addItem(self.text_empty_combobox)
         self.comboBox_digit_IC.adjustSize()
@@ -393,13 +407,13 @@ class Window(PyQt5.QtWidgets.QMainWindow):
     # событие - нажатие на чекбокс
     def click_on_checkbox_prest(self):
         if self.checkBox_prest_IC.isChecked():
-            self.comboBox_digit_prest.setEnabled(True)
-            self.comboBox_digit_prest.setVisible(True)
+            # self.comboBox_digit_prest.setEnabled(True)
+            # self.comboBox_digit_prest.setVisible(True)
             self.comboBox_liter_prest.setEnabled(True)
             self.comboBox_liter_prest.setVisible(True)
         else:
-            self.comboBox_digit_prest.setEnabled(False)
-            self.comboBox_digit_prest.setVisible(False)
+            # self.comboBox_digit_prest.setEnabled(False)
+            # self.comboBox_digit_prest.setVisible(False)
             self.comboBox_liter_prest.setEnabled(False)
             self.comboBox_liter_prest.setVisible(False)
 
