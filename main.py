@@ -94,7 +94,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.checkBox_prest_IC = PyQt5.QtWidgets.QCheckBox(self)
         self.checkBox_prest_IC.setObjectName('checkBox_prest_IC')
         self.checkBox_prest_IC.setGeometry(PyQt5.QtCore.QRect(215, 70, 20, 20))
-        self.checkBox_prest_IC.setText('с преступлениями')
+        self.checkBox_prest_IC.setText('с преступлениями в колонке: ')
         self.checkBox_prest_IC.setEnabled(False)
         self.checkBox_prest_IC.adjustSize()
         self.checkBox_prest_IC.clicked.connect(self.click_on_checkbox_prest)
@@ -103,7 +103,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # comboBox_liter_prest_IC
         self.comboBox_liter_prest_IC = PyQt5.QtWidgets.QComboBox(self)
         self.comboBox_liter_prest_IC.setObjectName('comboBox_liter_prest_IC')
-        self.comboBox_liter_prest_IC.setGeometry(PyQt5.QtCore.QRect(350, 70, 70, 20))
+        self.comboBox_liter_prest_IC.setGeometry(PyQt5.QtCore.QRect(390, 70, 70, 20))
         self.comboBox_liter_prest_IC.addItem('пусто')
         self.comboBox_liter_prest_IC.setEnabled(False)
         self.comboBox_liter_prest_IC.setVisible(False)
@@ -315,7 +315,8 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         if self.text_empty_combobox not in (self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex()),
                                             self.comboBox_digit_IC.itemText(self.comboBox_digit_IC.currentIndex()),
                                             self.comboBox_liter_GASPS.itemText(self.comboBox_liter_GASPS.currentIndex()),
-                                            self.comboBox_digit_GASPS.itemText(self.comboBox_digit_GASPS.currentIndex())):
+                                            self.comboBox_digit_GASPS.itemText(self.comboBox_digit_GASPS.currentIndex()),
+                                            ):
             # формируются диапазоны для обработки данных в файлах из комбобоксов
             range_file_IC = self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex()) + \
                             self.comboBox_digit_IC.itemText(self.comboBox_digit_IC.currentIndex()) + ':' + \
