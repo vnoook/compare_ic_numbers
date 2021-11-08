@@ -261,26 +261,18 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         max_row_GASPS = self.wb_file_GASPS_s.max_row
         max_col_GASPS = self.wb_file_GASPS_s.max_column
 
-        # очистка комбобоксов и заполнение их буквами и числами существующим в файлах
+        # очистка комбобоксов и заполнение их буквами колонок и числами строк из файлов
         self.comboBox_liter_IC.clear()
         self.comboBox_liter_IC.addItem(self.text_empty_combobox)
         self.comboBox_liter_IC.adjustSize()
+        for col_IC in range(1, max_col_IC + 1):
+            self.comboBox_liter_IC.addItem(openpyxl.utils.cell.coordinate_from_string(self.wb_file_IC_s.cell(1, col_IC).coordinate)[0])
 
         self.comboBox_liter_prest_IC.clear()
         self.comboBox_liter_prest_IC.addItem(self.text_empty_combobox)
         self.comboBox_liter_prest_IC.adjustSize()
-
         for col_IC in range(1, max_col_IC + 1):
-            self.comboBox_liter_IC.addItem(openpyxl.utils.cell.coordinate_from_string(self.wb_file_IC_s.cell(1, col_IC).coordinate)[0])
             self.comboBox_liter_prest_IC.addItem(openpyxl.utils.cell.coordinate_from_string(self.wb_file_IC_s.cell(1, col_IC).coordinate)[0])
-
-
-
-
-
-
-
-
 
         self.comboBox_digit_IC.clear()
         self.comboBox_digit_IC.addItem(self.text_empty_combobox)
@@ -404,10 +396,13 @@ class Window(PyQt5.QtWidgets.QMainWindow):
     # событие - нажатие на чекбокс
     def click_on_checkbox_prest(self):
         if self.checkBox_prest_IC.isChecked():
+            # включение комбо
             self.comboBox_liter_prest_IC.setEnabled(True)
             self.comboBox_liter_prest_IC.setVisible(True)
             self.comboBox_liter_prest_IC.adjustSize()
+            self.comboBox_liter_prest_IC.setCurrentIndex(0)
         else:
+            # выключение комбо
             self.comboBox_liter_prest_IC.setEnabled(False)
             self.comboBox_liter_prest_IC.setVisible(False)
             self.comboBox_liter_prest_IC.adjustSize()
