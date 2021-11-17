@@ -266,13 +266,17 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.comboBox_liter_IC.addItem(self.text_empty_combobox)
         self.comboBox_liter_IC.adjustSize()
         for col_IC in range(1, max_col_IC + 1):
-            self.comboBox_liter_IC.addItem(openpyxl.utils.cell.coordinate_from_string(self.wb_file_IC_s.cell(1, col_IC).coordinate)[0])
+            self.comboBox_liter_IC.addItem(
+                openpyxl.utils.cell.coordinate_from_string(self.wb_file_IC_s.cell(1, col_IC).coordinate)[0]
+                )
 
         self.comboBox_liter_prest_IC.clear()
         self.comboBox_liter_prest_IC.addItem(self.text_empty_combobox)
         self.comboBox_liter_prest_IC.adjustSize()
         for col_IC in range(1, max_col_IC + 1):
-            self.comboBox_liter_prest_IC.addItem(openpyxl.utils.cell.coordinate_from_string(self.wb_file_IC_s.cell(1, col_IC).coordinate)[0])
+            self.comboBox_liter_prest_IC.addItem(
+                openpyxl.utils.cell.coordinate_from_string(self.wb_file_IC_s.cell(1, col_IC).coordinate)[0]
+                )
 
         self.comboBox_digit_IC.clear()
         self.comboBox_digit_IC.addItem(self.text_empty_combobox)
@@ -284,7 +288,9 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.comboBox_liter_GASPS.addItem(self.text_empty_combobox)
         self.comboBox_liter_GASPS.adjustSize()
         for col_GASPS in range(1, max_col_GASPS + 1):
-            self.comboBox_liter_GASPS.addItem(openpyxl.utils.cell.coordinate_from_string(self.wb_file_GASPS_s.cell(1, col_GASPS).coordinate)[0])
+            self.comboBox_liter_GASPS.addItem(
+                openpyxl.utils.cell.coordinate_from_string(self.wb_file_GASPS_s.cell(1, col_GASPS).coordinate)[0]
+                )
 
         self.comboBox_digit_GASPS.clear()
         self.comboBox_digit_GASPS.addItem(self.text_empty_combobox)
@@ -338,7 +344,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 # информационное окно о предупреждении выбора полей
                 self.window_select = PyQt5.QtWidgets.QMessageBox()
                 self.window_select.setWindowTitle('Поля')
-                self.window_select.setText(f'Выберите пустые поля или уберите галолку "с преступлениями"')
+                self.window_select.setText(f'Выберите пустые поля или уберите галочку "с преступлениями"')
                 self.window_select.exec_()
                 flag_edit_prest = False
 
