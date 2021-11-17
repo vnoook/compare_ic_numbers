@@ -377,68 +377,72 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
             # TODO
             # сделать обработку колонки
+            if (self.checkBox_prest_IC.checkState() == 0) or (self.checkBox_prest_IC.checkState() == 2 and flag_edit_prest):
+                # формирование множества из обработанных значений ячеек GASPS
+                for row_in_range_GASPS in wb_GASPS_cells_range:
+                    for cell_in_row_GASPS in row_in_range_GASPS:
+                        indexR_GASPS = wb_GASPS_cells_range.index(row_in_range_GASPS)
+                        indexC_GASPS = row_in_range_GASPS.index(cell_in_row_GASPS)
 
-            # формирование множества из обработанных значений ячеек GASPS
-            for row_in_range_GASPS in wb_GASPS_cells_range:
-                for cell_in_row_GASPS in row_in_range_GASPS:
-                    indexR_GASPS = wb_GASPS_cells_range.index(row_in_range_GASPS)
-                    indexC_GASPS = row_in_range_GASPS.index(cell_in_row_GASPS)
+                        if wb_GASPS_cells_range[indexR_GASPS][indexC_GASPS].value == None:
+                            wb_GASPS_cell_value = 'None'
+                        else:
+                            wb_GASPS_cell_value = str(wb_GASPS_cells_range[indexR_GASPS][indexC_GASPS].value)
 
-                    if wb_GASPS_cells_range[indexR_GASPS][indexC_GASPS].value == None:
-                        wb_GASPS_cell_value = 'None'
-                    else:
-                        wb_GASPS_cell_value = str(wb_GASPS_cells_range[indexR_GASPS][indexC_GASPS].value)
+                        for ikud in wb_GASPS_cell_value.split(";"):
+                            set_data_GASPS.add(ikud.strip().replace('.', ''))
 
-                    for ikud in wb_GASPS_cell_value.split(";"):
-                        set_data_GASPS.add(ikud.strip().replace('.', ''))
+                        tuple_data_GASPS = tuple(set_data_GASPS)
 
-                    tuple_data_GASPS = tuple(set_data_GASPS)
+                for row_in_range_IC in wb_IC_cells_range:
+                    for cell_in_row_IC in row_in_range_IC:
+                        indexR_IC = wb_IC_cells_range.index(row_in_range_IC)
+                        indexC_IC = row_in_range_IC.index(cell_in_row_IC)
 
-            for row_in_range_IC in wb_IC_cells_range:
-                for cell_in_row_IC in row_in_range_IC:
-                    indexR_IC = wb_IC_cells_range.index(row_in_range_IC)
-                    indexC_IC = row_in_range_IC.index(cell_in_row_IC)
+                        # получение координаты и значения ячейки IC
+                        if wb_IC_cells_range[indexR_IC][indexC_IC].value == None:
+                            wb_IC_cell_value = 'None'
+                        else:
+                            wb_IC_cell_value = str(wb_IC_cells_range[indexR_IC][indexC_IC].value)
 
-                    # получение координаты и значения ячейки IC
-                    if wb_IC_cells_range[indexR_IC][indexC_IC].value == None:
-                        wb_IC_cell_value = 'None'
-                    else:
-                        wb_IC_cell_value = str(wb_IC_cells_range[indexR_IC][indexC_IC].value)
+                        set_data_IC.clear()
+                        for ikud in wb_IC_cell_value.split(";"):
+                            set_data_IC.add(ikud.strip().replace('.', ''))
 
-                    set_data_IC.clear()
-                    for ikud in wb_IC_cell_value.split(";"):
-                        set_data_IC.add(ikud.strip().replace('.', ''))
+                        tuple_data_IC = tuple(set_data_IC)
 
-                    tuple_data_IC = tuple(set_data_IC)
+                        for ikud in wb_IC_cell_value.split(";"):
+                            ikud_split = ikud.strip().replace('.', '').replace(' ', '')
 
-                    for ikud in wb_IC_cell_value.split(";"):
-                        ikud_split = ikud.strip().replace('.', '').replace(' ', '')
+                            if (ikud_split in tuple_data_GASPS) and (ikud_split in tuple_data_IC):
+                                wb_IC_cells_range[indexR_IC][indexC_IC].fill = \
+                                    openpyxl.styles.PatternFill(start_color='FF0000', end_color='FF0000',
+                                                                fill_type='solid')
+                            elif ikud_split not in tuple_data_GASPS:
+                                wb_IC_cells_range[indexR_IC][indexC_IC].fill = \
+                                    openpyxl.styles.PatternFill(start_color='878787', end_color='878787',
+                                                                fill_type='solid')
 
-                        if (ikud_split in tuple_data_GASPS) and (ikud_split in tuple_data_IC):
-                            wb_IC_cells_range[indexR_IC][indexC_IC].fill =\
-                                openpyxl.styles.PatternFill(start_color='FF0000', end_color='FF0000', fill_type='solid')
-                        elif ikud_split not in tuple_data_GASPS:
-                            wb_IC_cells_range[indexR_IC][indexC_IC].fill =\
-                                openpyxl.styles.PatternFill(start_color='878787', end_color='878787', fill_type='solid')
+                # сохраняю файл и закрываю оба
+                self.wb_file_IC.save(self.file_IC)
+                self.wb_file_IC.close()
+                self.wb_file_GASPS.close()
 
-            # сохраняю файл и закрываю оба
-            self.wb_file_IC.save(self.file_IC)
-            self.wb_file_IC.close()
-            self.wb_file_GASPS.close()
+                # считаю время заполнения
+                time_finish = time.time()
+                '\n' + '.' * 30 + 'закончено за', round(time_finish - time_start, 1), 'секунд'
 
-            # считаю время заполнения
-            time_finish = time.time()
-            '\n' + '.' * 30 + 'закончено за', round(time_finish - time_start, 1), 'секунд'
+                # информационное окно о сохранении файлов
+                self.window_info = PyQt5.QtWidgets.QMessageBox()
+                self.window_info.setWindowTitle('Файлы')
+                self.window_info.setText(
+                    f'Файлы сохранены и закрыты.\n{self.file_IC}\nЗаполнение сделано за {round(time_finish - time_start, 1)} секунд')
+                self.window_info.exec_()
 
-            # информационное окно о сохранении файлов
-            self.window_info = PyQt5.QtWidgets.QMessageBox()
-            self.window_info.setWindowTitle('Файлы')
-            self.window_info.setText(f'Файлы сохранены и закрыты.\n{self.file_IC}\nЗаполнение сделано за {round(time_finish - time_start, 1)} секунд')
-            self.window_info.exec_()
+                # очистка переменных от повторного использования
+                del set_data_IC
+                del set_data_GASPS
 
-            # очистка переменных от повторного использования
-            del set_data_IC
-            del set_data_GASPS
 
         else:
             # информационное окно о предупреждении выбора полей
