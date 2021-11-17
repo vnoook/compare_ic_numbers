@@ -327,19 +327,35 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                                             self.comboBox_digit_GASPS.itemText(self.comboBox_digit_GASPS.currentIndex()),
                                             ):
 
-            # проверяю чекбокс "с преступлениями"
-            if (self.checkBox_prest_IC.checkState() == 2) and\
-                    (self.comboBox_liter_prest_IC.itemText(self.comboBox_liter_prest_IC.currentIndex()) != self.text_empty_combobox) and\
-                    (self.comboBox_liter_prest_IC.itemText(self.comboBox_liter_prest_IC.currentIndex()) !=\
-                                                self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex())):
+            # проверяю чекбокс "с преступлениями" и другими условиями
+            if self.checkBox_prest_IC.checkState() == 2 and\
+                    (self.comboBox_liter_prest_IC.itemText(self.comboBox_liter_prest_IC.currentIndex()) not in
+                     (self.text_empty_combobox, self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex()))):
                 flag_edit_prest = True
-            if flag_edit_prest:
-                print(self.checkBox_prest_IC.checkState())
-                print(self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex()))
-                print(self.comboBox_liter_prest_IC.itemText(self.comboBox_liter_prest_IC.currentIndex()))
-                print()
 
+            elif (self.checkBox_prest_IC.checkState() == 2) and\
+                    (self.comboBox_liter_prest_IC.itemText(self.comboBox_liter_prest_IC.currentIndex()) == self.text_empty_combobox):
+                # информационное окно о предупреждении выбора полей
+                self.window_select = PyQt5.QtWidgets.QMessageBox()
+                self.window_select.setWindowTitle('Поля')
+                self.window_select.setText(f'Выберите пустые поля')
+                self.window_select.exec_()
+                # TODO
+                # сделать чтобы не проиводился процесс заполнения файла
+                exit()
 
+            elif (self.checkBox_prest_IC.checkState() == 2) and\
+                    (self.comboBox_liter_prest_IC.itemText(self.comboBox_liter_prest_IC.currentIndex()) == self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex())):
+                # информационное окно о предупреждении выбора полей
+                self.window_select = PyQt5.QtWidgets.QMessageBox()
+                self.window_select.setWindowTitle('Сравнение')
+                self.window_select.setText(f'Поля в строке ИЦ не должны совпадать')
+                self.window_select.exec_()
+                # TODO
+                # сделать чтобы не проиводился процесс заполнения файла
+
+            else:
+                print(111)
 
 
 
