@@ -294,21 +294,57 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
         self.pushButton_do_fill_data.setEnabled(True)
 
+    # событие - нажатие на чекбокс
+    def click_on_checkbox_prest(self):
+        if self.checkBox_prest_IC.isChecked():
+            # включение комбо
+            self.comboBox_liter_prest_IC.setEnabled(True)
+            self.comboBox_liter_prest_IC.setVisible(True)
+            self.comboBox_liter_prest_IC.adjustSize()
+            self.comboBox_liter_prest_IC.setCurrentIndex(0)
+        else:
+            # выключение комбо
+            self.comboBox_liter_prest_IC.setEnabled(False)
+            self.comboBox_liter_prest_IC.setVisible(False)
+            self.comboBox_liter_prest_IC.adjustSize()
+
     # событие - нажатие на кнопку заполнения файла
     def do_fill_data(self):
         # считаю время заполнения
         time_start = time.time()
 
+        # флаг определения редактировать ли колонку с преступлениями
+        flag_edit_prest = False
+
         # определение множеств
         set_data_IC = set()
         set_data_GASPS = set()
 
-        # проверка на то что все комбобоксы заполнены
+        # проверка на то что четыре "главные" комбобокса заполнены
         if self.text_empty_combobox not in (self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex()),
                                             self.comboBox_digit_IC.itemText(self.comboBox_digit_IC.currentIndex()),
                                             self.comboBox_liter_GASPS.itemText(self.comboBox_liter_GASPS.currentIndex()),
                                             self.comboBox_digit_GASPS.itemText(self.comboBox_digit_GASPS.currentIndex()),
                                             ):
+
+            # проверяю чекбокс "с преступлениями"
+            if (self.checkBox_prest_IC.checkState() == 2) and\
+                    (self.comboBox_liter_prest_IC.itemText(self.comboBox_liter_prest_IC.currentIndex()) != self.text_empty_combobox) and\
+                    (self.comboBox_liter_prest_IC.itemText(self.comboBox_liter_prest_IC.currentIndex()) !=\
+                                                self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex())):
+                flag_edit_prest = True
+            if flag_edit_prest:
+                print(self.checkBox_prest_IC.checkState())
+                print(self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex()))
+                print(self.comboBox_liter_prest_IC.itemText(self.comboBox_liter_prest_IC.currentIndex()))
+                print()
+
+
+
+
+
+
+
             # формируются диапазоны для обработки данных в файлах из комбобоксов
             range_file_IC = self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex()) + \
                             self.comboBox_digit_IC.itemText(self.comboBox_digit_IC.currentIndex()) + ':' + \
@@ -393,19 +429,6 @@ class Window(PyQt5.QtWidgets.QMainWindow):
             self.window_select.setText(f'Выберите все поля')
             self.window_select.exec_()
 
-    # событие - нажатие на чекбокс
-    def click_on_checkbox_prest(self):
-        if self.checkBox_prest_IC.isChecked():
-            # включение комбо
-            self.comboBox_liter_prest_IC.setEnabled(True)
-            self.comboBox_liter_prest_IC.setVisible(True)
-            self.comboBox_liter_prest_IC.adjustSize()
-            self.comboBox_liter_prest_IC.setCurrentIndex(0)
-        else:
-            # выключение комбо
-            self.comboBox_liter_prest_IC.setEnabled(False)
-            self.comboBox_liter_prest_IC.setVisible(False)
-            self.comboBox_liter_prest_IC.adjustSize()
 
     # событие - нажатие на кнопку Выход
     def click_on_btn_exit(self):
