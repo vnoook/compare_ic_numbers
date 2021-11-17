@@ -338,28 +338,21 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 # информационное окно о предупреждении выбора полей
                 self.window_select = PyQt5.QtWidgets.QMessageBox()
                 self.window_select.setWindowTitle('Поля')
-                self.window_select.setText(f'Выберите пустые поля')
+                self.window_select.setText(f'Выберите пустые поля или уберите галолку "с преступлениями"')
                 self.window_select.exec_()
-                # TODO
-                # сделать чтобы не проиводился процесс заполнения файла
-                exit()
+                flag_edit_prest = False
 
             elif (self.checkBox_prest_IC.checkState() == 2) and\
-                    (self.comboBox_liter_prest_IC.itemText(self.comboBox_liter_prest_IC.currentIndex()) == self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex())):
-                # информационное окно о предупреждении выбора полей
+                    (self.comboBox_liter_prest_IC.itemText(self.comboBox_liter_prest_IC.currentIndex()) ==
+                     self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex())):
+                # информационное окно о сравнении значений двух комбо
                 self.window_select = PyQt5.QtWidgets.QMessageBox()
                 self.window_select.setWindowTitle('Сравнение')
                 self.window_select.setText(f'Поля в строке ИЦ не должны совпадать')
                 self.window_select.exec_()
-                # TODO
-                # сделать чтобы не проиводился процесс заполнения файла
-
+                flag_edit_prest = False
             else:
-                print(111)
-
-
-
-
+                flag_edit_prest = False
 
             # формируются диапазоны для обработки данных в файлах из комбобоксов
             range_file_IC = self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex()) + \
@@ -375,6 +368,9 @@ class Window(PyQt5.QtWidgets.QMainWindow):
             # сформированные диапазоны из выбранных комбобоксов
             wb_IC_cells_range = self.wb_file_IC_s[range_file_IC]
             wb_GASPS_cells_range = self.wb_file_GASPS_s[range_file_GASPS]
+
+            # TODO
+            # сделать обработку колонки
 
             # формирование множества из обработанных значений ячеек GASPS
             for row_in_range_GASPS in wb_GASPS_cells_range:
