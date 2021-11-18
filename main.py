@@ -420,11 +420,11 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                             ikud_split = ikud.strip().replace('.', '').replace(' ', '')
 
                             if (ikud_split in tuple_data_GASPS) and (ikud_split in tuple_data_IC):
-                                wb_IC_cells_range[indexR_IC][indexC_IC].fill = \
+                                wb_IC_cells_range[indexR_IC][indexC_IC].fill =\
                                     openpyxl.styles.PatternFill(start_color='FF0000', end_color='FF0000',
                                                                 fill_type='solid')
                             elif ikud_split not in tuple_data_GASPS:
-                                wb_IC_cells_range[indexR_IC][indexC_IC].fill = \
+                                wb_IC_cells_range[indexR_IC][indexC_IC].fill =\
                                     openpyxl.styles.PatternFill(start_color='878787', end_color='878787',
                                                                 fill_type='solid')
 
