@@ -35,6 +35,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         self.wb_file_IC_s = ''
         self.wb_file_GASPS = ''
         self.wb_file_GASPS_s = ''
+        self.flag_edit_prest = None
 
         # главное окно, надпись на нём и размеры
         self.setWindowTitle('Сравнение номеров дел')
@@ -233,6 +234,8 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 self.comboBox_liter_GASPS.setEnabled(True)
                 self.comboBox_digit_GASPS.setEnabled(True)
                 self.do_fill_comboboxes()
+
+                self.flag_edit_prest = None
         else:
             self.comboBox_liter_IC.setEnabled(False)
             self.comboBox_digit_IC.setEnabled(False)
@@ -242,6 +245,8 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
             self.comboBox_liter_GASPS.setEnabled(False)
             self.comboBox_digit_GASPS.setEnabled(False)
+
+            self.flag_edit_prest = None
 
     # заполнение комбобоксов
     def do_fill_comboboxes(self):
@@ -308,11 +313,13 @@ class Window(PyQt5.QtWidgets.QMainWindow):
             self.comboBox_liter_prest_IC.setVisible(True)
             self.comboBox_liter_prest_IC.adjustSize()
             self.comboBox_liter_prest_IC.setCurrentIndex(0)
+            self.flag_edit_prest = None
         else:
             # выключение комбо
             self.comboBox_liter_prest_IC.setEnabled(False)
             self.comboBox_liter_prest_IC.setVisible(False)
             self.comboBox_liter_prest_IC.adjustSize()
+            self.flag_edit_prest = False
 
     # событие - нажатие на кнопку заполнения файла
     def do_fill_data(self):
@@ -320,7 +327,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         time_start = time.time()
 
         # флаг определения редактировать ли колонку с преступлениями
-        flag_edit_prest = False
+        self.flag_edit_prest = False
 
         # определение множеств
         set_data_IC = set()
@@ -329,24 +336,28 @@ class Window(PyQt5.QtWidgets.QMainWindow):
         # проверка на то что четыре "главные" комбобокса заполнены
         if self.text_empty_combobox not in (self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex()),
                                             self.comboBox_digit_IC.itemText(self.comboBox_digit_IC.currentIndex()),
-                                            self.comboBox_liter_GASPS.itemText(self.comboBox_liter_GASPS.currentIndex()),
-                                            self.comboBox_digit_GASPS.itemText(self.comboBox_digit_GASPS.currentIndex()),
+                                            self.comboBox_liter_GASPS.itemText(
+                                                self.comboBox_liter_GASPS.currentIndex()),
+                                            self.comboBox_digit_GASPS.itemText(
+                                                self.comboBox_digit_GASPS.currentIndex()),
                                             ):
 
             # проверяю чекбокс "с преступлениями" и другими условиями
             if self.checkBox_prest_IC.checkState() == 2 and\
                     (self.comboBox_liter_prest_IC.itemText(self.comboBox_liter_prest_IC.currentIndex()) not in
-                     (self.text_empty_combobox, self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex()))):
-                flag_edit_prest = True
+                     (self.text_empty_combobox, self.comboBox_liter_IC.itemText(
+                         self.comboBox_liter_IC.currentIndex()))):
+                self.flag_edit_prest = True
 
             elif (self.checkBox_prest_IC.checkState() == 2) and\
-                    (self.comboBox_liter_prest_IC.itemText(self.comboBox_liter_prest_IC.currentIndex()) == self.text_empty_combobox):
+                    (self.comboBox_liter_prest_IC.itemText(
+                        self.comboBox_liter_prest_IC.currentIndex()) == self.text_empty_combobox):
                 # информационное окно о предупреждении выбора полей
                 self.window_select = PyQt5.QtWidgets.QMessageBox()
                 self.window_select.setWindowTitle('Поля')
                 self.window_select.setText(f'Выберите пустые поля или уберите галочку "с преступлениями"')
                 self.window_select.exec_()
-                flag_edit_prest = False
+                self.flag_edit_prest = False
 
             elif (self.checkBox_prest_IC.checkState() == 2) and\
                     (self.comboBox_liter_prest_IC.itemText(self.comboBox_liter_prest_IC.currentIndex()) ==
@@ -356,9 +367,9 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 self.window_select.setWindowTitle('Сравнение')
                 self.window_select.setText(f'Поля в строке ИЦ не должны совпадать')
                 self.window_select.exec_()
-                flag_edit_prest = False
+                self.flag_edit_prest = False
             else:
-                flag_edit_prest = False
+                self.flag_edit_prest = False
 
             # формируются диапазоны для обработки данных в файлах из комбобоксов
             range_file_IC = self.comboBox_liter_IC.itemText(self.comboBox_liter_IC.currentIndex()) +\
@@ -373,11 +384,23 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                                self.comboBox_liter_GASPS.itemText(self.comboBox_liter_GASPS.currentIndex()) +\
                                self.comboBox_digit_GASPS.itemText(self.comboBox_digit_GASPS.count()-1)
 
+            if self.flag_edit_prest:
+                # формируется диапазон для обработки колонки преступлений
+                range_file_IC_prest = self.comboBox_liter_prest_IC.itemText(
+                    self.comboBox_liter_prest_IC.currentIndex()) + \
+                                      self.comboBox_digit_IC.itemText(self.comboBox_digit_IC.currentIndex()) + \
+                                      ':' + \
+                                      self.comboBox_liter_prest_IC.itemText(
+                                          self.comboBox_liter_prest_IC.currentIndex()) + \
+                                      self.comboBox_digit_IC.itemText(self.comboBox_digit_IC.count() - 1)
+                wb_IC_cells_range_prest = self.wb_file_IC_s[range_file_IC_prest]
+
             # сформированные диапазоны из выбранных комбобоксов
             wb_IC_cells_range = self.wb_file_IC_s[range_file_IC]
             wb_GASPS_cells_range = self.wb_file_GASPS_s[range_file_GASPS]
 
-            if (self.checkBox_prest_IC.checkState() == 0) or (self.checkBox_prest_IC.checkState() == 2 and flag_edit_prest):
+            if (self.checkBox_prest_IC.checkState() == 0) or\
+                    (self.checkBox_prest_IC.checkState() == 2 and self.flag_edit_prest):
                 # формирование множества из обработанных значений ячеек GASPS
                 for row_in_range_GASPS in wb_GASPS_cells_range:
                     for cell_in_row_GASPS in row_in_range_GASPS:
@@ -415,7 +438,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 
                         tuple_data_IC = tuple(set_data_IC)
 
-                        # раскраска колонок в ИЦ файле
+                        # раскраска колонок УД в ИЦ файле
                         for ikud in wb_IC_cell_value.split(";"):
                             ikud_split = ikud.strip().replace('.', '').replace(' ', '')
 
@@ -428,43 +451,10 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                                     openpyxl.styles.PatternFill(start_color='878787', end_color='878787',
                                                                 fill_type='solid')
 
-                            # TODO
-                            # сделать обработку колонки преступности
-                            # ikud_split
-                            # openpyxl.utils.cell.coordinate_from_string(self.wb_file_IC_s.cell(1, col_IC).coordinate)[0]
-                            if flag_edit_prest:
-                                # формируется диапазон для обработки колонки преступлений
-                                range_file_IC_prest = self.comboBox_liter_prest_IC.itemText(self.comboBox_liter_prest_IC.currentIndex()) +\
-                                                      self.comboBox_digit_IC.itemText(self.comboBox_digit_IC.currentIndex()) +\
-                                                      ':' +\
-                                                      self.comboBox_liter_prest_IC.itemText(self.comboBox_liter_prest_IC.currentIndex()) +\
-                                                      self.comboBox_digit_IC.itemText(self.comboBox_digit_IC.count() - 1)
-                                print(range_file_IC_prest)
-                                print()
-
-                                print(wb_IC_cells_range[indexR_IC][indexC_IC],
-                                      wb_IC_cells_range[indexR_IC][indexC_IC].value,
-                                      wb_IC_cells_range[indexR_IC][indexC_IC].coordinate,
-                                      wb_IC_cells_range[indexR_IC][indexC_IC].column_letter,
-                                      wb_IC_cells_range[indexR_IC][indexC_IC].column,
-                                      wb_IC_cells_range[indexR_IC][indexC_IC].col_idx
-                                      )
-                                print(wb_IC_cell_value)
-                                print()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                            # обработка колонки преступности - добавляется номер УД к номеру преступления
+                            if self.flag_edit_prest:
+                                wb_IC_cells_range_prest[indexR_IC][indexC_IC].value =\
+                                    ikud_split + wb_IC_cells_range_prest[indexR_IC][indexC_IC].value
 
                 # сохраняю файл и закрываю оба
                 self.wb_file_IC.save(self.file_IC)
@@ -478,14 +468,14 @@ class Window(PyQt5.QtWidgets.QMainWindow):
                 # информационное окно о сохранении файлов
                 self.window_info = PyQt5.QtWidgets.QMessageBox()
                 self.window_info.setWindowTitle('Файлы')
-                self.window_info.setText(
-                    f'Файлы сохранены и закрыты.\n{self.file_IC}\nЗаполнение сделано за {round(time_finish - time_start, 1)} секунд')
+                self.window_info.setText(f'Файлы сохранены и закрыты.\n{self.file_IC}\n'
+                                         f'Заполнение сделано за {round(time_finish - time_start, 1)} секунд')
                 self.window_info.exec_()
 
                 # очистка переменных от повторного использования
                 del set_data_IC
                 del set_data_GASPS
-
+                self.flag_edit_prest = None
 
         else:
             # информационное окно о предупреждении выбора полей
@@ -493,7 +483,6 @@ class Window(PyQt5.QtWidgets.QMainWindow):
             self.window_select.setWindowTitle('Поля')
             self.window_select.setText(f'Выберите все поля')
             self.window_select.exec_()
-
 
     # событие - нажатие на кнопку Выход
     def click_on_btn_exit(self):
