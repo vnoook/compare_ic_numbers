@@ -492,6 +492,7 @@ class Window(PyQt5.QtWidgets.QMainWindow):
 # создание основного окна
 def main_app():
     app = PyQt5.QtWidgets.QApplication(sys.argv)
+    # app.setStyle('Fusion')
     app_window_main = Window()
     app_window_main.show()
     sys.exit(app.exec_())
