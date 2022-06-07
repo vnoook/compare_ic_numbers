@@ -1,12 +1,3 @@
 /.idea/
 /data/
-/222.xlsx
-/111.xlsx
-/~$111.xlsx
-/~$222.xlsx
-/1111.xlsx
-/2222.xlsx
-/~$1111.xlsx
-/~$2222.xlsx
-/ИЦ.xlsx
-/ГАСПС.xlsx
+*.xlsx
